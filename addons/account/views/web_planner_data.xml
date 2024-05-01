@@ -122,13 +122,13 @@
                 <t t-call="web_planner.page">
                     <t t-set="page_title">Your Bank Accounts</t>
                     <p>
-                        Once your company information is correct, you should 
+                        Once your company information is correct, you should
                         <strong><a t-att-href="prepare_backend_url('account.action_account_bank_journal_form')">
                             setup your bank accounts.
                         </a></strong>
                     </p><p>
-                        Once your bank accounts are registered, you will be able 
-                        to access your statements from the Accounting Dashboard. 
+                        Once your bank accounts are registered, you will be able
+                        to access your statements from the Accounting Dashboard.
                         The available methods for synchronization are as follows.
                     </p>
                     <ul>
@@ -183,8 +183,8 @@
                 <t t-call="web_planner.page">
                     <t t-set="page_title">Multi Currency</t>
                     <p>
-                        The multi-currency option allows you to send or receive invoices 
-                        in difference currencies, set up foreign bank accounts 
+                        The multi-currency option allows you to send or receive invoices
+                        in difference currencies, set up foreign bank accounts
                         and run reports on your foreign financial activities.
                     </p>
                     <p>To use the <strong>multi-currency option:</strong>
@@ -263,7 +263,7 @@
                 <t t-call="web_planner.page">
                     <t t-set="page_title">Your Products</t>
                     <p>
-                        A product in Odoo is something you sell or buy 
+                        A product in Odoo is something you sell or buy
                         whether or not it is goods, consumables, or services.
                         Choose how you want to create your products:
                     </p>
@@ -327,10 +327,10 @@
                     <div class="alert alert-info info_icon" role="alert">
                         <span class="fa fa-lightbulb-o fa-lg"/>
                         <p>
-                            It's common practice to change your accounting software 
-                            at the end of a fiscal year. This allows you to have less 
-                            data to import and balances to set. If you plan to do so, 
-                            we recommend you start using Odoo for invoicing and payments 
+                            It's common practice to change your accounting software
+                            at the end of a fiscal year. This allows you to have less
+                            data to import and balances to set. If you plan to do so,
+                            we recommend you start using Odoo for invoicing and payments
                             now, and then move all other accounting transactions at a later time.
                         </p>
                     </div>
@@ -339,12 +339,12 @@
                 <t t-call="web_planner.page">
                     <t t-set="page_title">Outstanding Transactions</t>
                     <p class="text-muted">
-                        If you want to be able to send your customers their statements 
-                        from Odoo, you first need to record all outstanding transactions 
-                        in the payable and receivable accounts. These would be invoices 
+                        If you want to be able to send your customers their statements
+                        from Odoo, you first need to record all outstanding transactions
+                        in the payable and receivable accounts. These would be invoices
                         that have not been paid or payments that have not been reconciled.
                     </p><p>
-                        Registering outstanding invoices and payments can be a huge undertaking, 
+                        Registering outstanding invoices and payments can be a huge undertaking,
                         but you can start using Odoo without it by:
                     </p>
                     <ul>
@@ -461,7 +461,7 @@
                 <t t-call="web_planner.page">
                     <t t-set="page_title">Invite Users</t>
                     <p>
-                        When inviting users, you will need to define which access rights they are allowed to have. 
+                        When inviting users, you will need to define which access rights they are allowed to have.
                         This is done by assigning a role to each user.
                     </p>
                     <p><strong>There are three different levels of access rights in Odoo:</strong></p>
@@ -487,7 +487,7 @@
                                  </div>
                                  <div class="panel-body">
                                     <p>
-                                        The Advisors have full access to the Accounting application, 
+                                        The Advisors have full access to the Accounting application,
                                         plus access to miscellaneous operations such as salary and asset management.
                                     </p>
                                 </div>

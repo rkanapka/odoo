@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 import base64
 import io
@@ -7,95 +6,100 @@ import logging
 import os
 import re
 import time
-import werkzeug.wrappers
-from PIL import Image, ImageFont, ImageDraw
-from lxml import etree, html
 
-from odoo.http import request
+import werkzeug.wrappers
+from lxml import etree
+from PIL import Image, ImageDraw, ImageFont
+
 from odoo import http, tools
+from odoo.http import request
+from odoo.modules.module import get_module_path, get_resource_path
 from odoo.tools import pycompat
-from odoo.modules.module import get_resource_path, get_module_path
 
 logger = logging.getLogger(__name__)
 
-class Web_Editor(http.Controller):
-    #------------------------------------------------------
-    # Backend snippet
-    #------------------------------------------------------
-    @http.route('/web_editor/snippets', type='json', auth="user")
-    def snippets(self, **kwargs):
-        return request.env.ref('web_editor.snippets').render(None)
 
-    #------------------------------------------------------
+class Web_Editor(http.Controller):
+    # ------------------------------------------------------
+    # Backend snippet
+    # ------------------------------------------------------
+    @http.route("/web_editor/snippets", type="json", auth="user")
+    def snippets(self, **kwargs):
+        return request.env.ref("web_editor.snippets").render(None)
+
+    # ------------------------------------------------------
     # Backend html field
-    #------------------------------------------------------
-    @http.route('/web_editor/field/html', type='http', auth="user")
+    # ------------------------------------------------------
+    @http.route("/web_editor/field/html", type="http", auth="user")
     def FieldTextHtml(self, model=None, res_id=None, field=None, callback=None, **kwargs):
-        kwargs.update(
-            model=model,
-            res_id=res_id,
-            field=field,
-            debug=request.debug)
+        kwargs.update(model=model, res_id=res_id, field=field, debug=request.debug)
 
         for k in kwargs:
             if isinstance(kwargs[k], pycompat.string_types) and kwargs[k].isdigit():
                 kwargs[k] = int(kwargs[k])
 
         trans = dict(
-            lang=kwargs.get('lang', request.env.context.get('lang')),
-            translatable=kwargs.get('translatable'),
-            edit_translations=kwargs.get('edit_translations'),
-            editable=kwargs.get('enable_editor'))
+            lang=kwargs.get("lang", request.env.context.get("lang")),
+            translatable=kwargs.get("translatable"),
+            edit_translations=kwargs.get("edit_translations"),
+            editable=kwargs.get("enable_editor"),
+        )
 
         kwargs.update(trans)
 
         content = None
         if model:
             Model = request.env[model].with_context(trans)
-            if kwargs.get('res_id'):
-                record = Model.browse(kwargs.get('res_id'))
+            if kwargs.get("res_id"):
+                record = Model.browse(kwargs.get("res_id"))
                 content = record and getattr(record, field)
             else:
                 content = Model.default_get([field]).get(field)
 
-        kwargs.update(content=content or '')
+        kwargs.update(content=content or "")
 
         return request.render(kwargs.get("template") or "web_editor.FieldTextHtml", kwargs, uid=request.uid)
 
-    #------------------------------------------------------
+    # ------------------------------------------------------
     # Backend html field in inline mode
-    #------------------------------------------------------
-    @http.route('/web_editor/field/html/inline', type='http', auth="user")
+    # ------------------------------------------------------
+    @http.route("/web_editor/field/html/inline", type="http", auth="user")
     def FieldTextHtmlInline(self, model=None, res_id=None, field=None, callback=None, **kwargs):
-        kwargs['inline_mode'] = True
-        kwargs['dont_load_assets'] = not kwargs.get('enable_editor') and not kwargs.get('edit_translations')
+        kwargs["inline_mode"] = True
+        kwargs["dont_load_assets"] = not kwargs.get("enable_editor") and not kwargs.get("edit_translations")
         return self.FieldTextHtml(model, res_id, field, callback, **kwargs)
 
-    #------------------------------------------------------
+    # ------------------------------------------------------
     # convert font into picture
-    #------------------------------------------------------
-    @http.route([
-        '/web_editor/font_to_img/<icon>',
-        '/web_editor/font_to_img/<icon>/<color>',
-        '/web_editor/font_to_img/<icon>/<color>/<int:size>',
-        '/web_editor/font_to_img/<icon>/<color>/<int:size>/<int:alpha>',
-        ], type='http', auth="none")
-    def export_icon_to_png(self, icon, color='#000', size=100, alpha=255, font='/web/static/lib/fontawesome/fonts/fontawesome-webfont.ttf'):
-        """ This method converts an unicode character to an image (using Font
-            Awesome font by default) and is used only for mass mailing because
-            custom fonts are not supported in mail.
-            :param icon : decimal encoding of unicode character
-            :param color : RGB code of the color
-            :param size : Pixels in integer
-            :param alpha : transparency of the image from 0 to 255
-            :param font : font path
+    # ------------------------------------------------------
+    @http.route(
+        [
+            "/web_editor/font_to_img/<icon>",
+            "/web_editor/font_to_img/<icon>/<color>",
+            "/web_editor/font_to_img/<icon>/<color>/<int:size>",
+            "/web_editor/font_to_img/<icon>/<color>/<int:size>/<int:alpha>",
+        ],
+        type="http",
+        auth="none",
+    )
+    def export_icon_to_png(
+        self, icon, color="#000", size=100, alpha=255, font="/web/static/lib/fontawesome/fonts/fontawesome-webfont.ttf"
+    ):
+        """This method converts an unicode character to an image (using Font
+        Awesome font by default) and is used only for mass mailing because
+        custom fonts are not supported in mail.
+        :param icon : decimal encoding of unicode character
+        :param color : RGB code of the color
+        :param size : Pixels in integer
+        :param alpha : transparency of the image from 0 to 255
+        :param font : font path
 
-            :returns PNG image converted from given font
+        :returns PNG image converted from given font
         """
         # Make sure we have at least size=1
         size = max(1, size)
         # Initialize font
-        with tools.file_open(font.lstrip('/'), 'rb') as f:
+        with tools.file_open(font.lstrip("/"), "rb") as f:
             font_obj = ImageFont.truetype(f, size)
 
         # if received character is not a number, keep old behaviour (icon is character)
@@ -115,9 +119,9 @@ class Web_Editor(http.Controller):
         drawmask.text((-left, -top), icon, font=font_obj, fill=alpha)
 
         # Create a solid color image and apply the mask
-        if color.startswith('rgba'):
-            color = color.replace('rgba', 'rgb')
-            color = ','.join(color.split(',')[:-1])+')'
+        if color.startswith("rgba"):
+            color = color.replace("rgba", "rgb")
+            color = ",".join(color.split(",")[:-1]) + ")"
         iconimage = Image.new("RGBA", (boxw, boxh), color)
         iconimage.putalpha(imagemask)
 
@@ -129,95 +133,105 @@ class Web_Editor(http.Controller):
         output = io.BytesIO()
         outimage.save(output, format="PNG")
         response = werkzeug.wrappers.Response()
-        response.mimetype = 'image/png'
+        response.mimetype = "image/png"
         response.data = output.getvalue()
-        response.headers['Cache-Control'] = 'public, max-age=604800'
-        response.headers['Access-Control-Allow-Origin'] = '*'
-        response.headers['Access-Control-Allow-Methods'] = 'GET, POST'
-        response.headers['Connection'] = 'close'
-        response.headers['Date'] = time.strftime("%a, %d-%b-%Y %T GMT", time.gmtime())
-        response.headers['Expires'] = time.strftime("%a, %d-%b-%Y %T GMT", time.gmtime(time.time()+604800*60))
+        response.headers["Cache-Control"] = "public, max-age=604800"
+        response.headers["Access-Control-Allow-Origin"] = "*"
+        response.headers["Access-Control-Allow-Methods"] = "GET, POST"
+        response.headers["Connection"] = "close"
+        response.headers["Date"] = time.strftime("%a, %d-%b-%Y %T GMT", time.gmtime())
+        response.headers["Expires"] = time.strftime("%a, %d-%b-%Y %T GMT", time.gmtime(time.time() + 604800 * 60))
 
         return response
 
-    #------------------------------------------------------
+    # ------------------------------------------------------
     # add attachment (images or link)
-    #------------------------------------------------------
-    @http.route('/web_editor/attachment/add', type='http', auth='user', methods=['POST'])
+    # ------------------------------------------------------
+    @http.route("/web_editor/attachment/add", type="http", auth="user", methods=["POST"])
     def attach(self, func, upload=None, url=None, disable_optimization=None, **kwargs):
         # the upload argument doesn't allow us to access the files if more than
         # one file is uploaded, as upload references the first file
         # therefore we have to recover the files from the request object
-        Attachments = request.env['ir.attachment']  # registry for the attachment table
+        Attachments = request.env["ir.attachment"]  # registry for the attachment table
 
-        res_model = kwargs.get('res_model', 'ir.ui.view')
-        if res_model != 'ir.ui.view' and kwargs.get('res_id'):
-            res_id = int(kwargs['res_id'])
+        res_model = kwargs.get("res_model", "ir.ui.view")
+        if res_model != "ir.ui.view" and kwargs.get("res_id"):
+            res_id = int(kwargs["res_id"])
         else:
             res_id = None
 
         uploads = []
         message = None
-        if not upload: # no image provided, storing the link and the image name
-            name = url.split("/").pop()                       # recover filename
-            attachment = Attachments.create({
-                'name': name,
-                'type': 'url',
-                'url': url,
-                'public': res_model == 'ir.ui.view',
-                'res_id': res_id,
-                'res_model': res_model,
-            })
+        if not upload:  # no image provided, storing the link and the image name
+            name = url.split("/").pop()  # recover filename
+            attachment = Attachments.create(
+                {
+                    "name": name,
+                    "type": "url",
+                    "url": url,
+                    "public": res_model == "ir.ui.view",
+                    "res_id": res_id,
+                    "res_model": res_model,
+                }
+            )
             attachment.generate_access_token()
-            uploads += attachment.read(['name', 'mimetype', 'checksum', 'url', 'res_id', 'res_model', 'access_token'])
-        else:                                                  # images provided
+            uploads += attachment.read(["name", "mimetype", "checksum", "url", "res_id", "res_model", "access_token"])
+        else:  # images provided
             try:
-                attachments = request.env['ir.attachment']
-                for c_file in request.httprequest.files.getlist('upload'):
+                attachments = request.env["ir.attachment"]
+                for c_file in request.httprequest.files.getlist("upload"):
                     data = c_file.read()
                     try:
                         image = Image.open(io.BytesIO(data))
                         w, h = image.size
-                        if w*h > 42e6: # Nokia Lumia 1020 photo resolution
+                        if w * h > 42e6:  # Nokia Lumia 1020 photo resolution
                             raise ValueError(
-                                u"Image size excessive, uploaded images must be smaller "
-                                u"than 42 million pixel")
-                        if not disable_optimization and image.format in ('PNG', 'JPEG'):
+                                "Image size excessive, uploaded images must be smaller " "than 42 million pixel"
+                            )
+                        if not disable_optimization and image.format in ("PNG", "JPEG"):
                             data = tools.image_save_for_web(image)
-                    except IOError as e:
+                    except OSError:
                         pass
 
-                    attachment = Attachments.create({
-                        'name': c_file.filename,
-                        'datas': base64.b64encode(data),
-                        'datas_fname': c_file.filename,
-                        'public': res_model == 'ir.ui.view',
-                        'res_id': res_id,
-                        'res_model': res_model,
-                    })
+                    attachment = Attachments.create(
+                        {
+                            "name": c_file.filename,
+                            "datas": base64.b64encode(data),
+                            "datas_fname": c_file.filename,
+                            "public": res_model == "ir.ui.view",
+                            "res_id": res_id,
+                            "res_model": res_model,
+                        }
+                    )
                     attachment.generate_access_token()
                     attachments += attachment
-                uploads += attachments.read(['name', 'mimetype', 'checksum', 'url', 'res_id', 'res_model', 'access_token'])
+                uploads += attachments.read(
+                    ["name", "mimetype", "checksum", "url", "res_id", "res_model", "access_token"]
+                )
             except Exception as e:
                 logger.exception("Failed to upload image to attachment")
                 message = pycompat.text_type(e)
 
         return """<script type='text/javascript'>
             window.parent['%s'](%s, %s);
-        </script>""" % (func, json.dumps(uploads), json.dumps(message))
+        </script>""" % (
+            func,
+            json.dumps(uploads),
+            json.dumps(message),
+        )
 
-    #------------------------------------------------------
+    # ------------------------------------------------------
     # remove attachment (images or link)
-    #------------------------------------------------------
-    @http.route('/web_editor/attachment/remove', type='json', auth='user')
+    # ------------------------------------------------------
+    @http.route("/web_editor/attachment/remove", type="json", auth="user")
     def remove(self, ids, **kwargs):
-        """ Removes a web-based image attachment if it is used by no view (template)
+        """Removes a web-based image attachment if it is used by no view (template)
 
         Returns a dict mapping attachments which would not be removed (if any)
         mapped to the views preventing their removal
         """
-        Attachment = attachments_to_remove = request.env['ir.attachment']
-        Views = request.env['ir.ui.view']
+        Attachment = attachments_to_remove = request.env["ir.attachment"]
+        Views = request.env["ir.ui.view"]
 
         # views blocking removal of the attachment
         removal_blocked_by = {}
@@ -226,14 +240,10 @@ class Web_Editor(http.Controller):
             # in-document URLs are html-escaped, a straight search will not
             # find them
             url = tools.html_escape(attachment.local_url)
-            views = Views.search([
-                "|",
-                ('arch_db', 'like', '"%s"' % url),
-                ('arch_db', 'like', "'%s'" % url)
-            ])
+            views = Views.search(["|", ("arch_db", "like", '"%s"' % url), ("arch_db", "like", "'%s'" % url)])
 
             if views:
-                removal_blocked_by[attachment.id] = views.read(['name'])
+                removal_blocked_by[attachment.id] = views.read(["name"])
             else:
                 attachments_to_remove += attachment
         if attachments_to_remove:
@@ -252,7 +262,7 @@ class Web_Editor(http.Controller):
     def get_assets_editor_resources(self, key, get_views=True, get_less=True, bundles=False, bundles_restriction=[]):
         # Related views must be fetched if the user wants the views and/or the style
         views = request.env["ir.ui.view"].get_related_views(key, bundles=bundles)
-        views = views.read(['name', 'id', 'key', 'xml_id', 'arch', 'active', 'inherit_id'])
+        views = views.read(["name", "id", "key", "xml_id", "arch", "active", "inherit_id"])
 
         less_files_data_by_bundle = []
 
@@ -263,7 +273,9 @@ class Web_Editor(http.Controller):
             excluded_url_matcher = re.compile("^(.+/lib/.+)|(.+import_bootstrap.less)$")
 
             # Load already customized less files attachments
-            custom_attachments = request.env["ir.attachment"].search([("url", "=like", self._make_custom_less_file_url("%%.%%", "%%"))])
+            custom_attachments = request.env["ir.attachment"].search(
+                [("url", "=like", self._make_custom_less_file_url("%%.%%", "%%"))]
+            )
 
             # First check the t-call-assets used in the related views
             url_infos = dict()
@@ -295,7 +307,9 @@ class Web_Editor(http.Controller):
 
                     # Less data is returned sorted by bundle, with the bundles names and xmlids
                     if len(less_files_data):
-                        less_files_data_by_bundle.append([dict(xmlid=asset_name, name=request.env.ref(asset_name).name), less_files_data])
+                        less_files_data_by_bundle.append(
+                            [dict(xmlid=asset_name, name=request.env.ref(asset_name).name), less_files_data]
+                        )
 
             # Filter bundles/files:
             # - A file which appears in multiple bundles only appears in the first one (the first in the DOM)
@@ -309,14 +323,15 @@ class Web_Editor(http.Controller):
                         bundle_1[1] = [item_1 for item_1 in bundle_1[1] if item_1 in bundle_2[1]]
             for i in range(0, len(less_files_data_by_bundle)):
                 bundle_1 = less_files_data_by_bundle[i]
-                for j in range(i+1, len(less_files_data_by_bundle)):
+                for j in range(i + 1, len(less_files_data_by_bundle)):
                     bundle_2 = less_files_data_by_bundle[j]
                     # In every bundle, keep only the files which were not found in previous bundles
                     bundle_2[1] = [item_2 for item_2 in bundle_2[1] if item_2 not in bundle_1[1]]
 
             # Only keep bundles which still have files and that were requested
             less_files_data_by_bundle = [
-                data for data in less_files_data_by_bundle
+                data
+                for data in less_files_data_by_bundle
                 if (len(data[1]) > 0 and (not bundles_restriction or data[0]["xmlid"] in bundles_restriction))
             ]
 
@@ -336,21 +351,23 @@ class Web_Editor(http.Controller):
                         module_path = get_module_path(module)
                         module_resource_path = get_resource_path(module, url_info["resource_path"])
                         if module_path and module_resource_path:
-                            module_path = os.path.join(os.path.normpath(module_path), '') # join ensures the path ends with '/'
+                            module_path = os.path.join(
+                                os.path.normpath(module_path), ""
+                            )  # join ensures the path ends with '/'
                             module_resource_path = os.path.normpath(module_resource_path)
                             if module_resource_path.startswith(module_path):
                                 with open(module_resource_path, "rb") as f:
                                     content = f.read()
 
                     bundle_data[1][i] = dict(
-                        url = "/%s/%s" % (url_info["module"], url_info["resource_path"]),
-                        arch = content,
-                        customized = url_info["customized"],
+                        url="/%s/%s" % (url_info["module"], url_info["resource_path"]),
+                        arch=content,
+                        customized=url_info["customized"],
                     )
 
         return dict(
-            views = get_views and views or [],
-            less = get_less and less_files_data_by_bundle or [],
+            views=get_views and views or [],
+            less=get_less and less_files_data_by_bundle or [],
         )
 
     ## The save_less route is in charge of saving a given modification of a LESS file.
@@ -371,16 +388,18 @@ class Web_Editor(http.Controller):
             custom_attachment.write({"datas": datas})
         else:
             # If not, create a new attachment to copy the original LESS file content, with its modifications
-            IrAttachment.create(dict(
-                name = custom_url,
-                type = "binary",
-                mimetype = "text/less",
-                datas = datas,
-                datas_fname = url.split("/")[-1],
-                url = custom_url, # Having an attachment of "binary" type with an non empty "url" field
-                                  # is quite of an hack. This allows to fetch the "datas" field by adding
-                                  # a <link/> with the "url" content in the bundle template (see qweb)
-            ))
+            IrAttachment.create(
+                dict(
+                    name=custom_url,
+                    type="binary",
+                    mimetype="text/less",
+                    datas=datas,
+                    datas_fname=url.split("/")[-1],
+                    url=custom_url,  # Having an attachment of "binary" type with an non empty "url" field
+                    # is quite of an hack. This allows to fetch the "datas" field by adding
+                    # a <link/> with the "url" content in the bundle template (see qweb)
+                )
+            )
 
             # Create a view to extend the template which adds the original file to link the new modified version instead
             IrUiView = request.env["ir.ui.view"]
@@ -395,23 +414,26 @@ class Web_Editor(http.Controller):
 
             view_to_xpath = IrUiView.get_related_views(bundle_xmlid, bundles=True).filtered(views_linking_url)
 
-            IrUiView.create(dict(
-                name = custom_url,
-                mode = "extension",
-                inherit_id = view_to_xpath.id,
-                arch = """
+            IrUiView.create(
+                dict(
+                    name=custom_url,
+                    mode="extension",
+                    inherit_id=view_to_xpath.id,
+                    arch="""
                     <data inherit_id="%(inherit_xml_id)s" name="%(name)s">
                         <xpath expr="//link[@href='%(url_to_replace)s']" position="attributes">
                             <attribute name="href">%(new_url)s</attribute>
                         </xpath>
                     </data>
-                """ % dict(
-                    inherit_xml_id = view_to_xpath.xml_id,
-                    name = custom_url,
-                    url_to_replace = url,
-                    new_url = custom_url,
+                """
+                    % dict(
+                        inherit_xml_id=view_to_xpath.xml_id,
+                        name=custom_url,
+                        url_to_replace=url,
+                        new_url=custom_url,
+                    ),
                 )
-            ))
+            )
 
         request.env["ir.qweb"].clear_caches()
 
@@ -433,14 +455,15 @@ class Web_Editor(http.Controller):
         parts = url.rsplit(".", 1)
         return "%s.custom.%s.%s" % (parts[0], bundle, parts[1])
 
-    _match_less_file_url_regex = re.compile("^/(\w+)/(.+?)(\.custom\.(.+))?\.(\w+)$")
+    _match_less_file_url_regex = re.compile(r"^/(\w+)/(.+?)(\.custom\.(.+))?\.(\w+)$")
+
     def _match_less_file_url(self, url):
         m = self._match_less_file_url_regex.match(url)
         if not m:
             return False
         return dict(
-            module = m.group(1),
-            resource_path = "%s.%s" % (m.group(2), m.group(5)),
-            customized = bool(m.group(3)),
-            bundle = m.group(4) or False
+            module=m.group(1),
+            resource_path="%s.%s" % (m.group(2), m.group(5)),
+            customized=bool(m.group(3)),
+            bundle=m.group(4) or False,
         )

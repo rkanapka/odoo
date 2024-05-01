@@ -57,4 +57,3 @@ SystrayMenu.Items = [];
 return SystrayMenu;
 
 });
-

@@ -120,5 +120,3 @@ var PivotView = AbstractView.extend({
 return PivotView;
 
 });
-
-

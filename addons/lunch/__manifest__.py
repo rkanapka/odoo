@@ -1,13 +1,11 @@
-# -*- coding: utf-8 -*-
-
 {
-    'name': 'Lunch',
-    'sequence': 120,
-    'version': '1.0',
-    'depends': ['base', 'web', 'decimal_precision'],
-    'category': 'Human Resources',
-    'summary': 'Lunch Order, Meal, Food',
-    'description': """
+    "name": "Lunch",
+    "sequence": 120,
+    "version": "1.0",
+    "depends": ["base", "web", "decimal_precision"],
+    "category": "Human Resources",
+    "summary": "Lunch Order, Meal, Food",
+    "description": """
 The base module to manage lunch.
 ================================
 
@@ -21,19 +19,21 @@ In addition to a full meal and vendor management, this module offers the possibi
 
 If you want to save your employees' time and avoid them to always have coins in their pockets, this module is essential.
     """,
-    'data': [
-        'security/lunch_security.xml',
-        'security/ir.model.access.csv',
-        'report/lunch_order_views.xml',
-        'report/lunch_order_templates.xml',
-        'views/lunch_templates.xml',
-        'wizard/lucky_order_view.xml',
-        'views/lunch_views.xml',
-        'data/lunch_data.xml',
+    "data": [
+        "security/lunch_security.xml",
+        "security/ir.model.access.csv",
+        "report/lunch_order_views.xml",
+        "report/lunch_order_templates.xml",
+        "views/lunch_templates.xml",
+        "wizard/lucky_order_view.xml",
+        "views/lunch_views.xml",
+        "data/lunch_data.xml",
     ],
-    'demo': ['data/lunch_demo.xml'],
-    'qweb': ['static/src/xml/lunch.xml', ],
-    'installable': True,
-    'application': True,
-    'certificate': '001292377792581874189',
+    "demo": ["data/lunch_demo.xml"],
+    "qweb": [
+        "static/src/xml/lunch.xml",
+    ],
+    "installable": True,
+    "application": True,
+    "certificate": "001292377792581874189",
 }

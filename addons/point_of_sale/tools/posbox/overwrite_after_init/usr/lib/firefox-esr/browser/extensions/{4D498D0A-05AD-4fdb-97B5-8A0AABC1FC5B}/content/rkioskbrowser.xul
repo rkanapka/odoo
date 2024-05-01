@@ -3,7 +3,7 @@
 <overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
 <window id="main-window"
-        onload="RkioskBrowserStartup()"> 
+        onload="RkioskBrowserStartup()">
 </window>
 
 <script type="application/x-javascript" src="rkioskbrowser.js"/>
@@ -55,8 +55,8 @@
     <command id="Browser:ForwardOrForwardDuplicate" disabled="true"/>
     <command id="Browser:ReloadOrDuplicate" disabled="true"/>
     <command id="Browser:NextTab" disabled="true"/>
-    <command id="Browser:PrevTab" disabled="true"/>     
-    <command id="Browser:ShowAllTabs" disabled="true"/>     
+    <command id="Browser:PrevTab" disabled="true"/>
+    <command id="Browser:ShowAllTabs" disabled="true"/>
     <command id="Browser:ToggleTabView" disabled="true"/>
     <command id="Browser:ToggleAddonBar" disabled="true"/>
     <command id="cmd_fullZoomReduce" disabled="true"/>

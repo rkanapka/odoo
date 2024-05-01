@@ -1,52 +1,61 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo import fields, models, tools, api
+from odoo import api, fields, models, tools
 
 from ..models import crm_stage
 
+
 class OpportunityReport(models.Model):
-    """ CRM Opportunity Analysis """
+    """CRM Opportunity Analysis"""
 
     _name = "crm.opportunity.report"
     _auto = False
     _description = "CRM Opportunity Analysis"
-    _rec_name = 'date_deadline'
+    _rec_name = "date_deadline"
 
-    date_deadline = fields.Date('Expected Closing', readonly=True)
-    create_date = fields.Datetime('Creation Date', readonly=True)
-    opening_date = fields.Datetime('Assignation Date', readonly=True)
-    date_closed = fields.Datetime('Close Date', readonly=True)
-    date_last_stage_update = fields.Datetime('Last Stage Update', readonly=True)
-    active = fields.Boolean('Active', readonly=True)
+    date_deadline = fields.Date("Expected Closing", readonly=True)
+    create_date = fields.Datetime("Creation Date", readonly=True)
+    opening_date = fields.Datetime("Assignation Date", readonly=True)
+    date_closed = fields.Datetime("Close Date", readonly=True)
+    date_last_stage_update = fields.Datetime("Last Stage Update", readonly=True)
+    active = fields.Boolean("Active", readonly=True)
 
     # durations
-    delay_open = fields.Float('Delay to Assign', digits=(16, 2), readonly=True, group_operator="avg", help="Number of Days to open the case")
-    delay_close = fields.Float('Delay to Close', digits=(16, 2), readonly=True, group_operator="avg", help="Number of Days to close the case")
-    delay_expected = fields.Float('Overpassed Deadline', digits=(16, 2), readonly=True, group_operator="avg")
+    delay_open = fields.Float(
+        "Delay to Assign", digits=(16, 2), readonly=True, group_operator="avg", help="Number of Days to open the case"
+    )
+    delay_close = fields.Float(
+        "Delay to Close", digits=(16, 2), readonly=True, group_operator="avg", help="Number of Days to close the case"
+    )
+    delay_expected = fields.Float("Overpassed Deadline", digits=(16, 2), readonly=True, group_operator="avg")
 
-    user_id = fields.Many2one('res.users', string='User', readonly=True)
-    team_id = fields.Many2one('crm.team', 'Sales Channel', oldname='section_id', readonly=True)
-    nbr_activities = fields.Integer('# of Activities', readonly=True)
-    city = fields.Char('City')
-    country_id = fields.Many2one('res.country', string='Country', readonly=True)
-    probability = fields.Float(string='Probability', digits=(16, 2), readonly=True, group_operator="avg")
-    total_revenue = fields.Float(string='Total Revenue', digits=(16, 2), readonly=True)
-    expected_revenue = fields.Float(string='Probable Turnover', digits=(16, 2), readonly=True)
-    stage_id = fields.Many2one('crm.stage', string='Stage', readonly=True, domain="['|', ('team_id', '=', False), ('team_id', '=', team_id)]")
-    stage_name = fields.Char(string='Stage Name', readonly=True)
-    partner_id = fields.Many2one('res.partner', string='Partner', readonly=True)
-    company_id = fields.Many2one('res.company', string='Company', readonly=True)
-    priority = fields.Selection(crm_stage.AVAILABLE_PRIORITIES, string='Priority', group_operator="avg")
-    type = fields.Selection([
-        ('lead', 'Lead'),
-        ('opportunity', 'Opportunity'),
-    ], help="Type is used to separate Leads and Opportunities")
-    lost_reason = fields.Many2one('crm.lost.reason', string='Lost Reason', readonly=True)
-    date_conversion = fields.Datetime(string='Conversion Date', readonly=True)
-    campaign_id = fields.Many2one('utm.campaign', string='Campaign', readonly=True)
-    source_id = fields.Many2one('utm.source', string='Source', readonly=True)
-    medium_id = fields.Many2one('utm.medium', string='Medium', readonly=True)
+    user_id = fields.Many2one("res.users", string="User", readonly=True)
+    team_id = fields.Many2one("crm.team", "Sales Channel", oldname="section_id", readonly=True)
+    nbr_activities = fields.Integer("# of Activities", readonly=True)
+    city = fields.Char("City")
+    country_id = fields.Many2one("res.country", string="Country", readonly=True)
+    probability = fields.Float(string="Probability", digits=(16, 2), readonly=True, group_operator="avg")
+    total_revenue = fields.Float(string="Total Revenue", digits=(16, 2), readonly=True)
+    expected_revenue = fields.Float(string="Probable Turnover", digits=(16, 2), readonly=True)
+    stage_id = fields.Many2one(
+        "crm.stage", string="Stage", readonly=True, domain="['|', ('team_id', '=', False), ('team_id', '=', team_id)]"
+    )
+    stage_name = fields.Char(string="Stage Name", readonly=True)
+    partner_id = fields.Many2one("res.partner", string="Partner", readonly=True)
+    company_id = fields.Many2one("res.company", string="Company", readonly=True)
+    priority = fields.Selection(crm_stage.AVAILABLE_PRIORITIES, string="Priority", group_operator="avg")
+    type = fields.Selection(
+        [
+            ("lead", "Lead"),
+            ("opportunity", "Opportunity"),
+        ],
+        help="Type is used to separate Leads and Opportunities",
+    )
+    lost_reason = fields.Many2one("crm.lost.reason", string="Lost Reason", readonly=True)
+    date_conversion = fields.Datetime(string="Conversion Date", readonly=True)
+    campaign_id = fields.Many2one("utm.campaign", string="Campaign", readonly=True)
+    source_id = fields.Many2one("utm.source", string="Source", readonly=True)
+    medium_id = fields.Many2one("utm.medium", string="Medium", readonly=True)
 
     def _select(self):
         select_str = """
@@ -114,10 +123,13 @@ class OpportunityReport(models.Model):
     @api.model_cr
     def init(self):
         tools.drop_view_if_exists(self.env.cr, self._table)
-        self.env.cr.execute("""CREATE VIEW %s AS (
+        self.env.cr.execute(
+            """CREATE VIEW %s AS (
             %s
             %s
             %s
             %s
             %s
-        )""" % (self._table, self._select(), self._from(), self._join(), self._where(), self._group_by()))
+        )"""
+            % (self._table, self._select(), self._from(), self._join(), self._where(), self._group_by())
+        )

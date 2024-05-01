@@ -13,9 +13,9 @@ silently fail.  Decide carefully whether this is what you want.
 ## Tests
 
 The tests are written with the Jasmine BDD test framework.
-To run the tests, navigate to <root-folder>/tests/. 
+To run the tests, navigate to <root-folder>/tests/.
 
-In order to run against the shim-code, the tests attempt to kill the current 
+In order to run against the shim-code, the tests attempt to kill the current
 implementation of the missing methods. This happens in <root-folder>/tests/helpers/h-kill.js.
 So in order to run the tests against the built-in methods, invalidate that file somehow
 (comment-out, delete the file, delete the script-tag, etc.).
@@ -107,7 +107,7 @@ So in order to run the tests against the built-in methods, invalidate that file 
 ### May fail
 
 * :warning: Object.getOwnPropertyDescriptor
-    
+
     The behavior of this shim does not conform to ES5.  It should
     probably not be used at this time, until its behavior has been
     reviewed and been confirmed to be useful in legacy engines.
@@ -121,7 +121,7 @@ So in order to run the tests against the built-in methods, invalidate that file 
 
     In slightly better circumstances, this method will silently fail to
     set "writable", "enumerable", and "configurable" properties.
-    
+
     Providing a getter or setter with "get" or "set" on a descriptor
     will silently fail on engines that lack "__defineGetter__" and
     "__defineSetter__", which include all versions of IE.
@@ -152,4 +152,3 @@ So in order to run the tests against the built-in methods, invalidate that file 
     fine unless you are depending on the safety and security
     provisions of this method, which you cannot possibly
     obtain in legacy engines.
-

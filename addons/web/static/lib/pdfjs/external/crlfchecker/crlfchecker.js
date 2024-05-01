@@ -26,4 +26,3 @@ function checkIfCrlfIsPresent(files) {
 }
 
 exports.checkIfCrlfIsPresent = checkIfCrlfIsPresent;
-

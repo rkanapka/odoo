@@ -80,4 +80,3 @@ QUnit.module('core', {}, function () {
 });
 
 });
-

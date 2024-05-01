@@ -322,7 +322,7 @@ QUnit.module('Views', {
                     return $.when(false);
                 }
                 if (route === '/web/dataset/call_kw/instrument/create') {
-                    assert.deepEqual(args.args, [{badassery: [[6, false, [1]]], name: false}], 
+                    assert.deepEqual(args.args, [{badassery: [[6, false, [1]]], name: false}],
                         'The method create should have been called with the right arguments');
                     return $.when(false);
                 }

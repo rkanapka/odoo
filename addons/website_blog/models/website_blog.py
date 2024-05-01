@@ -1,53 +1,51 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from datetime import datetime
 import random
+from datetime import datetime
 
-import itertools
-
-from odoo import api, models, fields, _
 from odoo.addons.http_routing.models.ir_http import slug
-from odoo.tools.translate import html_translate
+
+from odoo import _, api, fields, models
 from odoo.tools import html2plaintext
+from odoo.tools.translate import html_translate
 
 
 class Blog(models.Model):
-    _name = 'blog.blog'
-    _description = 'Blogs'
-    _inherit = ['mail.thread', 'website.seo.metadata']
-    _order = 'name'
+    _name = "blog.blog"
+    _description = "Blogs"
+    _inherit = ["mail.thread", "website.seo.metadata"]
+    _order = "name"
 
-    name = fields.Char('Blog Name', required=True, translate=True)
-    subtitle = fields.Char('Blog Subtitle', translate=True)
-    active = fields.Boolean('Active', default=True)
+    name = fields.Char("Blog Name", required=True, translate=True)
+    subtitle = fields.Char("Blog Subtitle", translate=True)
+    active = fields.Boolean("Active", default=True)
 
     @api.multi
     def write(self, vals):
-        res = super(Blog, self).write(vals)
-        if 'active' in vals:
+        res = super().write(vals)
+        if "active" in vals:
             # archiving/unarchiving a blog does it on its posts, too
-            post_ids = self.env['blog.post'].with_context(active_test=False).search([
-                ('blog_id', 'in', self.ids)
-            ])
+            post_ids = self.env["blog.post"].with_context(active_test=False).search([("blog_id", "in", self.ids)])
             for blog_post in post_ids:
-                blog_post.active = vals['active']
+                blog_post.active = vals["active"]
         return res
 
     @api.multi
-    @api.returns('self', lambda value: value.id)
+    @api.returns("self", lambda value: value.id)
     def message_post(self, parent_id=False, subtype=None, **kwargs):
-        """ Temporary workaround to avoid spam. If someone replies on a channel
+        """Temporary workaround to avoid spam. If someone replies on a channel
         through the 'Presentation Published' email, it should be considered as a
-        note as we don't want all channel followers to be notified of this answer. """
+        note as we don't want all channel followers to be notified of this answer."""
         self.ensure_one()
         if parent_id:
-            parent_message = self.env['mail.message'].sudo().browse(parent_id)
-            if parent_message.subtype_id and parent_message.subtype_id == self.env.ref('website_blog.mt_blog_blog_published'):
-                if kwargs.get('subtype_id'):
-                    kwargs['subtype_id'] = False
-                subtype = 'mail.mt_note'
-        return super(Blog, self).message_post(parent_id=parent_id, subtype=subtype, **kwargs)
+            parent_message = self.env["mail.message"].sudo().browse(parent_id)
+            if parent_message.subtype_id and parent_message.subtype_id == self.env.ref(
+                "website_blog.mt_blog_blog_published"
+            ):
+                if kwargs.get("subtype_id"):
+                    kwargs["subtype_id"] = False
+                subtype = "mail.mt_note"
+        return super().message_post(parent_id=parent_id, subtype=subtype, **kwargs)
 
     @api.multi
     def all_tags(self, min_limit=1):
@@ -71,41 +69,41 @@ class Blog(models.Model):
             if freq >= min_limit:
                 tag_by_blog[blog_id].append(tag_id)
 
-        BlogTag = self.env['blog.tag']
+        BlogTag = self.env["blog.tag"]
         for blog_id in tag_by_blog:
             tag_by_blog[blog_id] = BlogTag.browse(tag_by_blog[blog_id])
         return tag_by_blog
 
 
 class BlogTag(models.Model):
-    _name = 'blog.tag'
-    _description = 'Blog Tag'
-    _inherit = ['website.seo.metadata']
-    _order = 'name'
+    _name = "blog.tag"
+    _description = "Blog Tag"
+    _inherit = ["website.seo.metadata"]
+    _order = "name"
 
-    name = fields.Char('Name', required=True, translate=True)
-    post_ids = fields.Many2many('blog.post', string='Posts')
+    name = fields.Char("Name", required=True, translate=True)
+    post_ids = fields.Many2many("blog.post", string="Posts")
 
     _sql_constraints = [
-        ('name_uniq', 'unique (name)', "Tag name already exists !"),
+        ("name_uniq", "unique (name)", "Tag name already exists !"),
     ]
 
 
 class BlogPost(models.Model):
     _name = "blog.post"
     _description = "Blog Post"
-    _inherit = ['mail.thread', 'website.seo.metadata', 'website.published.mixin']
-    _order = 'id DESC'
-    _mail_post_access = 'read'
+    _inherit = ["mail.thread", "website.seo.metadata", "website.published.mixin"]
+    _order = "id DESC"
+    _mail_post_access = "read"
 
     @api.multi
     def _compute_website_url(self):
-        super(BlogPost, self)._compute_website_url()
+        super()._compute_website_url()
         for blog_post in self:
             blog_post.website_url = "/blog/%s/post/%s" % (slug(blog_post.blog_id), slug(blog_post))
 
     @api.multi
-    @api.depends('post_date', 'visits')
+    @api.depends("post_date", "visits")
     def _compute_ranking(self):
         res = {}
         for blog_post in self:
@@ -115,54 +113,66 @@ class BlogPost(models.Model):
         return res
 
     def _default_content(self):
-        return '''
+        return (
+            """
             <section class="s_text_block">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12 mb16 mt16">
-                            <p class="o_default_snippet_text">''' + _("Start writing here...") + '''</p>
+                            <p class="o_default_snippet_text">"""
+            + _("Start writing here...")
+            + """</p>
                         </div>
                     </div>
                 </div>
             </section>
-        '''
+        """
+        )
 
-    name = fields.Char('Title', required=True, translate=True, default='')
-    subtitle = fields.Char('Sub Title', translate=True)
-    author_id = fields.Many2one('res.partner', 'Author', default=lambda self: self.env.user.partner_id)
-    active = fields.Boolean('Active', default=True)
+    name = fields.Char("Title", required=True, translate=True, default="")
+    subtitle = fields.Char("Sub Title", translate=True)
+    author_id = fields.Many2one("res.partner", "Author", default=lambda self: self.env.user.partner_id)
+    active = fields.Boolean("Active", default=True)
     cover_properties = fields.Text(
-        'Cover Properties',
-        default='{"background-image": "none", "background-color": "oe_black", "opacity": "0.2", "resize_class": ""}')
-    blog_id = fields.Many2one('blog.blog', 'Blog', required=True, ondelete='cascade')
-    tag_ids = fields.Many2many('blog.tag', string='Tags')
-    content = fields.Html('Content', default=_default_content, translate=html_translate, sanitize=False)
-    teaser = fields.Text('Teaser', compute='_compute_teaser', inverse='_set_teaser')
-    teaser_manual = fields.Text(string='Teaser Content')
+        "Cover Properties",
+        default='{"background-image": "none", "background-color": "oe_black", "opacity": "0.2", "resize_class": ""}',
+    )
+    blog_id = fields.Many2one("blog.blog", "Blog", required=True, ondelete="cascade")
+    tag_ids = fields.Many2many("blog.tag", string="Tags")
+    content = fields.Html("Content", default=_default_content, translate=html_translate, sanitize=False)
+    teaser = fields.Text("Teaser", compute="_compute_teaser", inverse="_set_teaser")
+    teaser_manual = fields.Text(string="Teaser Content")
 
-    website_message_ids = fields.One2many(domain=lambda self: [('model', '=', self._name), ('message_type', '=', 'comment'), ('path', '=', False)])
+    website_message_ids = fields.One2many(
+        domain=lambda self: [("model", "=", self._name), ("message_type", "=", "comment"), ("path", "=", False)]
+    )
 
     # creation / update stuff
-    create_date = fields.Datetime('Created on', index=True, readonly=True)
-    published_date = fields.Datetime('Published Date')
-    post_date = fields.Datetime('Publishing date', compute='_compute_post_date', inverse='_set_post_date', store=True,
-                                help="The blog post will be visible for your visitors as of this date on the website if it is set as published.")
-    create_uid = fields.Many2one('res.users', 'Created by', index=True, readonly=True)
-    write_date = fields.Datetime('Last Modified on', index=True, readonly=True)
-    write_uid = fields.Many2one('res.users', 'Last Contributor', index=True, readonly=True)
-    author_avatar = fields.Binary(related='author_id.image_small', string="Avatar")
-    visits = fields.Integer('No of Views', copy=False)
-    ranking = fields.Float(compute='_compute_ranking', string='Ranking')
+    create_date = fields.Datetime("Created on", index=True, readonly=True)
+    published_date = fields.Datetime("Published Date")
+    post_date = fields.Datetime(
+        "Publishing date",
+        compute="_compute_post_date",
+        inverse="_set_post_date",
+        store=True,
+        help="The blog post will be visible for your visitors as of this date on the website if it is set as published.",
+    )
+    create_uid = fields.Many2one("res.users", "Created by", index=True, readonly=True)
+    write_date = fields.Datetime("Last Modified on", index=True, readonly=True)
+    write_uid = fields.Many2one("res.users", "Last Contributor", index=True, readonly=True)
+    author_avatar = fields.Binary(related="author_id.image_small", string="Avatar")
+    visits = fields.Integer("No of Views", copy=False)
+    ranking = fields.Float(compute="_compute_ranking", string="Ranking")
 
     @api.multi
-    @api.depends('content', 'teaser_manual')
+    @api.depends("content", "teaser_manual")
     def _compute_teaser(self):
         for blog_post in self:
             if blog_post.teaser_manual:
                 blog_post.teaser = blog_post.teaser_manual
             else:
-                content = html2plaintext(blog_post.content).replace('\n', ' ')
-                blog_post.teaser = content[:150] + '...'
+                content = html2plaintext(blog_post.content).replace("\n", " ")
+                blog_post.teaser = content[:150] + "..."
 
     @api.multi
     def _set_teaser(self):
@@ -170,7 +180,7 @@ class BlogPost(models.Model):
             blog_post.teaser_manual = blog_post.teaser
 
     @api.multi
-    @api.depends('create_date', 'published_date')
+    @api.depends("create_date", "published_date")
     def _compute_post_date(self):
         for blog_post in self:
             if blog_post.published_date:
@@ -183,16 +193,17 @@ class BlogPost(models.Model):
         for blog_post in self:
             blog_post.published_date = blog_post.post_date
             if not blog_post.published_date:
-                blog_post._write(dict(post_date=blog_post.create_date)) # dont trigger inverse function
+                blog_post._write(dict(post_date=blog_post.create_date))  # dont trigger inverse function
 
     def _check_for_publication(self, vals):
-        if vals.get('website_published'):
+        if vals.get("website_published"):
             for post in self:
                 post.blog_id.message_post_with_view(
-                    'website_blog.blog_post_template_new_post',
+                    "website_blog.blog_post_template_new_post",
                     subject=post.name,
-                    values={'post': post},
-                    subtype_id=self.env['ir.model.data'].xmlid_to_res_id('website_blog.mt_blog_blog_published'))
+                    values={"post": post},
+                    subtype_id=self.env["ir.model.data"].xmlid_to_res_id("website_blog.mt_blog_blog_published"),
+                )
             return True
         return False
 
@@ -207,44 +218,48 @@ class BlogPost(models.Model):
         result = True
         for post in self:
             copy_vals = dict(vals)
-            if 'website_published' in vals and 'published_date' not in vals and (post.published_date or '') <= fields.Datetime.now():
-                copy_vals['published_date'] = vals['website_published'] and fields.Datetime.now() or False
-            result &= super(BlogPost, self).write(copy_vals)
+            if (
+                "website_published" in vals
+                and "published_date" not in vals
+                and (post.published_date or "") <= fields.Datetime.now()
+            ):
+                copy_vals["published_date"] = vals["website_published"] and fields.Datetime.now() or False
+            result &= super().write(copy_vals)
         self._check_for_publication(vals)
         return result
 
     @api.multi
     def get_access_action(self, access_uid=None):
-        """ Instead of the classic form view, redirect to the post on website
-        directly if user is an employee or if the post is published. """
+        """Instead of the classic form view, redirect to the post on website
+        directly if user is an employee or if the post is published."""
         self.ensure_one()
-        user = access_uid and self.env['res.users'].sudo().browse(access_uid) or self.env.user
+        user = access_uid and self.env["res.users"].sudo().browse(access_uid) or self.env.user
         if user.share and not self.sudo().website_published:
-            return super(BlogPost, self).get_access_action(access_uid)
+            return super().get_access_action(access_uid)
         return {
-            'type': 'ir.actions.act_url',
-            'url': self.website_url,
-            'target': 'self',
-            'target_type': 'public',
-            'res_id': self.id,
+            "type": "ir.actions.act_url",
+            "url": self.website_url,
+            "target": "self",
+            "target_type": "public",
+            "res_id": self.id,
         }
 
     @api.multi
     def _notification_recipients(self, message, groups):
-        groups = super(BlogPost, self)._notification_recipients(message, groups)
+        groups = super()._notification_recipients(message, groups)
 
         for group_name, group_method, group_data in groups:
-            group_data['has_button_access'] = True
+            group_data["has_button_access"] = True
 
         return groups
 
     @api.multi
     def message_get_message_notify_values(self, message, message_values):
-        """ Override to avoid keeping all notified recipients of a comment.
+        """Override to avoid keeping all notified recipients of a comment.
         We avoid tracking needaction on post comments. Only emails should be
-        sufficient. """
-        if message.message_type == 'comment':
+        sufficient."""
+        if message.message_type == "comment":
             return {
-                'needaction_partner_ids': [],
+                "needaction_partner_ids": [],
             }
         return {}

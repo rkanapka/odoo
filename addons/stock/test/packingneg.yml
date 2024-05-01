@@ -1,6 +1,6 @@
 -
-  Create a new "negative" stockable product 
-- 
+  Create a new "negative" stockable product
+-
   !record {model: product.product, id: product_neg, view: False}:
     name: Negative product
     type: product
@@ -13,9 +13,9 @@
         min_qty: 2.0
     uom_id: product.product_uom_unit
     uom_po_id: product.product_uom_unit
-- 
+-
   Create an incoming picking for this product of 300 PCE from suppliers to stock
-- 
+-
   !record {model: stock.picking, id: pick_neg}:
     name: Incoming picking (negative product)
     partner_id: base.res_partner_2
@@ -25,15 +25,15 @@
         product_uom_qty: 300.00
         location_id: stock_location_suppliers
         location_dest_id: stock_location_stock
-- 
+-
   Confirm and assign picking
-- 
+-
   !python {model: stock.picking, id: pick_neg}: |
     self.action_confirm()
     self.action_assign()
 -
   Put 120 pieces on Palneg 1 (package), 120 pieces on Palneg 2 with lot A and 60 pieces on Palneg 3
-- 
+-
   !python {model: stock.picking, id: pick_neg}: |
     #Change quantity of first to 120 and create 2 others quant operations
     stock_pack = self.env['stock.move.line']
@@ -66,14 +66,14 @@
       'location_id': ref('stock_location_suppliers'),
       'location_dest_id': ref('stock_location_stock')
     })
-- 
+-
   Transfer the receipt
-- 
+-
   !python {model: stock.picking, id: pick_neg}: |
     self.do_transfer()
-- 
+-
   Make a delivery order of 300 pieces to the customer
-- 
+-
   !record {model: stock.picking, id: delivery_order_neg}:
     name: outgoing picking (negative product)
     partner_id: base.res_partner_4
@@ -151,7 +151,7 @@
   Check the negative quant was reconciled
 -
   !python {model: stock.quant, id: False}: |
-    neg_quants = self.search([('product_id','=', ref('product_neg')), ('quantity', '<', 0), ('location_id.id', '!=',                      
+    neg_quants = self.search([('product_id','=', ref('product_neg')), ('quantity', '<', 0), ('location_id.id', '!=',
     ref('stock_location_suppliers'))])
     assert len(neg_quants) == 0, "Negative quants should have been reconciled"
     pick = self.env['stock.picking'].browse(ref('delivery_reconcile'))

@@ -60,7 +60,7 @@
                         Track history during import
                     </label>
                 </div>
-                <div title="If the model uses parent/child relations, computing the 
+                <div title="If the model uses parent/child relations, computing the
                     parent / child relation occurs on every line, and lead to a slower import.
                     Defering it can speed up import."
                     class="oe_import_deferparentstore">

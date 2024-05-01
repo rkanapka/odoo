@@ -33,7 +33,7 @@
                                 <t t-if="line.position === 'before'">
                                     <t t-esc="line.currency"/>
                                 </t>
-                                <t t-esc="line.amount"></t> 
+                                <t t-esc="line.amount"></t>
                                 <t t-if="line.position === 'after'">
                                     <t t-esc="line.currency"/>
                                 </t>
@@ -70,7 +70,7 @@
                         <t t-if="position === 'before'">
                             <t t-esc="currency"/>
                         </t>
-                        <t t-esc="amount"></t> 
+                        <t t-esc="amount"></t>
                         <t t-if="position === 'after'">
                             <t t-esc="currency"/>
                         </t>

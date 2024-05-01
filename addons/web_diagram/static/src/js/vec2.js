@@ -1,33 +1,33 @@
 
 (function(window){
-    
+
     // A Javascript 2D vector library
     // conventions :
     // method that returns a float value do not modify the vector
     // method that implement operators return a new vector with the modifications without
     // modifying the calling vector or the parameters.
-    // 
+    //
     //      v3 = v1.add(v2); // v3 is set to v1 + v2, v1, v2 are not modified
     //
     // methods that take a single vector as a parameter are usually also available with
     // q '_xy' suffix. Those method takes two floats representing the x,y coordinates of
-    // the vector parameter and allow you to avoid to needlessly create a vector object : 
+    // the vector parameter and allow you to avoid to needlessly create a vector object :
     //
     //      v2 = v1.add(new Vec2(3,4));
     //      v2 = v1.add_xy(3,4);             //equivalent to previous line
     //
-    // angles are in radians by default but method that takes angle as parameters 
+    // angles are in radians by default but method that takes angle as parameters
     // or return angle values usually have a variant with a '_deg' suffix that works in degrees
     //
-     
-    // The 2D vector object 
+
+    // The 2D vector object
     function Vec2(x,y){
         this.x = x;
         this.y = y;
     }
 
     window.Vec2 = Vec2;
-    
+
     // Multiply a number expressed in radiant by rad2deg to convert it in degrees
     var rad2deg = 57.29577951308232;
     // Multiply a number expressed in degrees by deg2rad to convert it to radiant
@@ -88,7 +88,7 @@
     Vec2.prototype.dot_xy = function(x,y){
         return this.x*x + this.y*y;
     };
-    // return a new vector with the same coordinates as this 
+    // return a new vector with the same coordinates as this
     Vec2.prototype.clone = function(){
         return new Vec2(this.x,this.y);
     };
@@ -209,7 +209,7 @@
     // rx,ry : radius of the ellipse
     function BEllipse(cx,cy,rx,ry){
         this.type = 'ellipse';
-        this.x = cx-rx;     // minimum x coordinate contained in the ellipse     
+        this.x = cx-rx;     // minimum x coordinate contained in the ellipse
         this.y = cy-ry;     // minimum y coordinate contained in the ellipse
         this.sx = 2*rx;     // width of the ellipse on the x axis
         this.sy = 2*ry;     // width of the ellipse on the y axis
@@ -228,11 +228,11 @@
         // http://paulbourke.net/geometry/sphereline/
         var collisions = [];
 
-        if(a.equals(b)){  //we do not compute the intersection in this case. TODO ?     
+        if(a.equals(b)){  //we do not compute the intersection in this case. TODO ?
             return collisions;
         }
 
-        // make all computations in a space where the ellipse is a circle 
+        // make all computations in a space where the ellipse is a circle
         // centered on zero
         var c = new Vec2(this.cx,this.cy);
         a = a.sub(c).mult_xy(1/this.hx,1/this.hy);
@@ -249,7 +249,7 @@
         var B = 2*( ab.x*a.x + ab.y*a.y);
         var C = a.x*a.x + a.y*a.y - 1;
         var u  = B * B - 4*A*C;
-        
+
         if(u < 0){
             return collisions;
         }
@@ -272,13 +272,13 @@
         }
         return collisions;
     };
-    
+
     // A bounding rectangle
     // x,y the minimum coordinate contained in the rectangle
     // sx,sy the size of the rectangle along the x,y axis
     function BRect(x,y,sx,sy){
         this.type = 'rect';
-        this.x = x;              // minimum x coordinate contained in the rectangle  
+        this.x = x;              // minimum x coordinate contained in the rectangle
         this.y = y;              // minimum y coordinate contained in the rectangle
         this.sx = sx;            // width of the rectangle on the x axis
         this.sy = sy;            // width of the rectangle on the y axis
@@ -298,7 +298,7 @@
     //intersect line a,b with line c,d, returns null if no intersection
     function line_intersect(a,b,c,d){
         // http://paulbourke.net/geometry/lineline2d/
-        var f = ((d.y - c.y)*(b.x - a.x) - (d.x - c.x)*(b.y - a.y)); 
+        var f = ((d.y - c.y)*(b.x - a.x) - (d.x - c.x)*(b.y - a.y));
         if(f == 0){
             return null;
         }
@@ -319,7 +319,7 @@
 
     BRect.prototype.collide_segment = function(a,b){
         var collisions = [];
-        var corners = [ new Vec2(this.x,this.y), new Vec2(this.x,this.my), 
+        var corners = [ new Vec2(this.x,this.y), new Vec2(this.x,this.my),
                         new Vec2(this.mx,this.my), new Vec2(this.mx,this.y) ];
         var pos = line_intersect(a,b,corners[0],corners[1]);
         if(pos) collisions.push(pos);
@@ -334,12 +334,12 @@
 
     // returns true if the rectangle contains the position defined by the vector 'vec'
     BRect.prototype.contains_vec = function(vec){
-        return ( vec.x >= this.x && vec.x <= this.mx && 
+        return ( vec.x >= this.x && vec.x <= this.mx &&
                  vec.y >= this.y && vec.y <= this.my  );
     };
-    // returns true if the rectangle contains the position (x,y) 
+    // returns true if the rectangle contains the position (x,y)
     BRect.prototype.contains_xy = function(x,y){
-        return ( x >= this.x && x <= this.mx && 
+        return ( x >= this.x && x <= this.mx &&
                  y >= this.y && y <= this.my  );
     };
     // returns true if the ellipse contains the position defined by the vector 'vec'
@@ -347,12 +347,10 @@
         v = v.mult_xy(this.hx,this.hy);
         return v.len_sq() <= 1;
     };
-    // returns true if the ellipse contains the position (x,y) 
+    // returns true if the ellipse contains the position (x,y)
     BEllipse.prototype.contains_xy = function(x,y){
         return this.contains(new Vec2(x,y));
     };
 
 
 })(window);
-        
-

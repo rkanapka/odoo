@@ -220,7 +220,7 @@ QUnit.test('html_frame does not crash when saving in readonly', function (assert
     });
 
     form.saveRecord(); // before the fix done in this commit, it crashed here
-    
+
     assert.verifySteps(['read']);
 
     form.destroy();
@@ -288,7 +288,7 @@ QUnit.test('html_frame saving in edit mode (editor and content fully loaded)', f
             if (args.method) {
                 assert.step(args.method);
                 if (args.method === 'write') {
-                    writeDeferred.resolve();    
+                    writeDeferred.resolve();
                 }
             }
             if (_.str.startsWith(route, '/logo')) {

@@ -71,7 +71,7 @@ define([
     };
 
     /**
-     * get button in toolbar 
+     * get button in toolbar
      *
      * @param {jQuery} $editable
      * @param {String} name

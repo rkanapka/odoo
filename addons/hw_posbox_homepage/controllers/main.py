@@ -1,10 +1,8 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 import logging
 import os
 import subprocess
-import werkzeug
 
 import odoo
 from odoo import http
@@ -26,12 +24,15 @@ index_style = """
             }
         </style>
 """
-index_template = """
+index_template = (
+    """
 <!DOCTYPE HTML>
 <html>
     <head>
         <title>Odoo's PosBox</title>
-""" + index_style + """
+"""
+    + index_style
+    + """
     </head>
     <body>
         <h1>Your PosBox is up and running</h1>
@@ -47,7 +48,7 @@ index_template = """
         <a href='https://www.odoo.com/documentation/user/point_of_sale/posbox/index.html'>the manual</a>.
         </p>
         <p>
-        To see the status of the connected hardware, please refer 
+        To see the status of the connected hardware, please refer
         to the <a href='/hw_proxy/status'>hardware status page</a>.
         </p>
         <p>
@@ -68,6 +69,7 @@ index_template = """
 </html>
 
 """
+)
 
 
 class PosboxHomepage(odoo.addons.web.controllers.main.Home):
@@ -82,19 +84,22 @@ class PosboxHomepage(odoo.addons.web.controllers.main.Home):
 </p>
 """
 
-    @http.route('/', type='http', auth='none', website=True)
+    @http.route("/", type="http", auth="none", website=True)
     def index(self):
-        #return request.render('hw_posbox_homepage.index',mimetype='text/html')
+        # return request.render('hw_posbox_homepage.index',mimetype='text/html')
         return index_template % self.get_hw_screen_message()
 
-    @http.route('/wifi', type='http', auth='none', website=True)
+    @http.route("/wifi", type="http", auth="none", website=True)
     def wifi(self):
-        wifi_template = """
+        wifi_template = (
+            """
 <!DOCTYPE HTML>
 <html>
     <head>
         <title>Wifi configuration</title>
-""" + index_style + """
+"""
+            + index_style
+            + """
     </head>
     <body>
         <h1>Configure wifi</h1>
@@ -112,14 +117,15 @@ class PosboxHomepage(odoo.addons.web.controllers.main.Home):
                     <td>
                         <select name="essid">
 """
+        )
         try:
-            f = open('/tmp/scanned_networks.txt', 'r')
+            f = open("/tmp/scanned_networks.txt")
             for line in f:
                 line = line.rstrip()
                 line = misc.html_escape(line)
-                wifi_template += '<option value="' + line + '">' + line + '</option>\n'
+                wifi_template += '<option value="' + line + '">' + line + "</option>\n"
             f.close()
-        except IOError:
+        except OSError:
             _logger.warning("No /tmp/scanned_networks.txt")
         wifi_template += """
                         </select>
@@ -161,24 +167,32 @@ class PosboxHomepage(odoo.addons.web.controllers.main.Home):
 """
         return wifi_template
 
-    @http.route('/wifi_connect', type='http', auth='none', cors='*', csrf=False)
+    @http.route("/wifi_connect", type="http", auth="none", cors="*", csrf=False)
     def connect_to_wifi(self, essid, password, persistent=False):
         if persistent:
-                persistent = "1"
+            persistent = "1"
         else:
-                persistent = ""
+            persistent = ""
 
-        subprocess.call(['/home/pi/odoo/addons/point_of_sale/tools/posbox/configuration/connect_to_wifi.sh', essid, password, persistent])
+        subprocess.call(
+            [
+                "/home/pi/odoo/addons/point_of_sale/tools/posbox/configuration/connect_to_wifi.sh",
+                essid,
+                password,
+                persistent,
+            ]
+        )
         return "connecting to " + essid
 
-    @http.route('/wifi_clear', type='http', auth='none', cors='*', csrf=False)
+    @http.route("/wifi_clear", type="http", auth="none", cors="*", csrf=False)
     def clear_wifi_configuration(self):
-        os.system('/home/pi/odoo/addons/point_of_sale/tools/posbox/configuration/clear_wifi_configuration.sh')
+        os.system("/home/pi/odoo/addons/point_of_sale/tools/posbox/configuration/clear_wifi_configuration.sh")
         return "configuration cleared"
 
-    @http.route('/remote_connect', type='http', auth='none', cors='*')
+    @http.route("/remote_connect", type="http", auth="none", cors="*")
     def remote_connect(self):
-        ngrok_template = """
+        ngrok_template = (
+            """
 <!DOCTYPE HTML>
 <html>
     <head>
@@ -211,7 +225,9 @@ class PosboxHomepage(odoo.addons.web.controllers.main.Home):
                });
            });
         </script>
-""" + index_style + """
+"""
+            + index_style
+            + """
         <style>
             #enable_debug {
                 padding: 10px;
@@ -242,12 +258,13 @@ class PosboxHomepage(odoo.addons.web.controllers.main.Home):
     </body>
 </html>
 """
+        )
         return ngrok_template
 
-    @http.route('/enable_ngrok', type='http', auth='none', cors='*', csrf=False)
+    @http.route("/enable_ngrok", type="http", auth="none", cors="*", csrf=False)
     def enable_ngrok(self, auth_token):
-        if subprocess.call(['pgrep', 'ngrok']) == 1:
-            subprocess.Popen(['ngrok', 'tcp', '-authtoken', auth_token, '-log', '/tmp/ngrok.log', '22'])
-            return 'starting with ' + auth_token
+        if subprocess.call(["pgrep", "ngrok"]) == 1:
+            subprocess.Popen(["ngrok", "tcp", "-authtoken", auth_token, "-log", "/tmp/ngrok.log", "22"])
+            return "starting with " + auth_token
         else:
-            return 'already running'
+            return "already running"

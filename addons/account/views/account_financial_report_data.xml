@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="1">
-        <!-- 
+        <!--
             Financial Reports
         -->
         <record id="account_financial_report_profitandloss0" model="account.financial.report">

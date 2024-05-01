@@ -15,4 +15,3 @@
           accounts = self.env['account.account'].search([('code', 'like', account_template.code)])
           if accounts:
               accounts.write({'tag_ids': [(4,ref(tag))]})
-

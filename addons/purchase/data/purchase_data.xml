@@ -34,7 +34,7 @@
             <field name="sequence">5</field>
         </record>
 
-        <!-- Sequences for purchase.order --> 
+        <!-- Sequences for purchase.order -->
         <record id="seq_purchase_order" model="ir.sequence">
             <field name="name">Purchase Order</field>
             <field name="code">purchase.order</field>

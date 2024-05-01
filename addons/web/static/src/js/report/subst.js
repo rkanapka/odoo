@@ -10,5 +10,5 @@ function subst() {
         var y = document.getElementsByClassName(x[i]);
         for (var j=0; j<y.length; ++j)
             y[j].textContent = vars[x[i]];
-    }   
+    }
 }

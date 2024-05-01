@@ -66,7 +66,7 @@
             <field name="view_mode">tree,form</field>
         </record>
 
-        <menuitem action="action_report_intrastat_code_tree" id="menu_report_intrastat_code" 
+        <menuitem action="action_report_intrastat_code_tree" id="menu_report_intrastat_code"
                 parent="account.account_account_menu" sequence="10" groups="account.group_account_manager"/>
 
 
@@ -145,6 +145,6 @@
             <field name="search_view_id" ref="view_report_intrastat_search"/>
         </record>
 
-        <menuitem action="action_report_intrastat_tree_all" id="menu_report_intrastat_all" 
+        <menuitem action="action_report_intrastat_tree_all" id="menu_report_intrastat_all"
                 parent="account.account_reports_management_menu" sequence="19"/>
 </odoo>

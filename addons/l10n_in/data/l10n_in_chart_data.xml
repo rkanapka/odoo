@@ -174,7 +174,7 @@
             <field name="user_type_id" ref="account.data_account_type_payable"/>
             <field name="reconcile" eval="True"/>
             <field name="chart_template_id" ref="indian_chart_template_standard"/>
-        </record> 
+        </record>
         <record model="account.account.template" id="p11221">
             <field name="name">Bank OD Account</field>
             <field name="code">11221</field>

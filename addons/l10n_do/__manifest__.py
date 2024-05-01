@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # Author: Gustavo Valverde <gvalverde@iterativo.do> iterativo | Consultores
 # Contributors: Edser Solis - iterativo
 
@@ -12,10 +10,10 @@
 # All rights reserved.
 
 {
-    'name': 'Dominican Republic - Accounting',
-    'version': '2.0',
-    'category': 'Localization',
-    'description': """
+    "name": "Dominican Republic - Accounting",
+    "version": "2.0",
+    "category": "Localization",
+    "description": """
 
 Localization Module for Dominican Republic
 ===========================================
@@ -82,25 +80,23 @@ en Odoo):
 110101- Caja
 11010101 Caja General
     """,
-    'author': 'Gustavo Valverde - iterativo | Consultores de Odoo',
-    'website': 'http://iterativo.do',
-    'depends': ['account',
-                'base_iban'
-                ],
-    'data': [
+    "author": "Gustavo Valverde - iterativo | Consultores de Odoo",
+    "website": "http://iterativo.do",
+    "depends": ["account", "base_iban"],
+    "data": [
         # Basic accounting data
-        'data/account_group.xml',
-        'data/l10n_do_chart_data.xml',
-        'data/account_account_tag_data.xml',
-        'data/account.account.template.csv',
-        'data/account_chart_template_data.xml',
-        'data/account_data.xml',
-        'data/account.tax.template.xml',
+        "data/account_group.xml",
+        "data/l10n_do_chart_data.xml",
+        "data/account_account_tag_data.xml",
+        "data/account.account.template.csv",
+        "data/account_chart_template_data.xml",
+        "data/account_data.xml",
+        "data/account.tax.template.xml",
         # Country States
-        'data/l10n_do_state_data.xml',
+        "data/l10n_do_state_data.xml",
         # Adds fiscal position
-        'data/fiscal_position_template.xml',
+        "data/fiscal_position_template.xml",
         # configuration wizard, views, reports...
-        'data/account_chart_template_data.yml',
+        "data/account_chart_template_data.yml",
     ],
 }

@@ -1,34 +1,34 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 import copy
 import logging
+
 from lxml import etree, html
 
+from odoo import api, models
 from odoo.exceptions import AccessError
-from odoo import api, fields, models
 from odoo.tools import pycompat
 
 _logger = logging.getLogger(__name__)
 
 
 class IrUiView(models.Model):
-    _inherit = 'ir.ui.view'
+    _inherit = "ir.ui.view"
 
     @api.multi
-    def render(self, values=None, engine='ir.qweb'):
-        if values and values.get('editable'):
+    def render(self, values=None, engine="ir.qweb"):
+        if values and values.get("editable"):
             try:
-                self.check_access_rights('write')
-                self.check_access_rule('write')
+                self.check_access_rights("write")
+                self.check_access_rule("write")
             except AccessError:
-                values['editable'] = False
+                values["editable"] = False
 
-        return super(IrUiView, self).render(values=values, engine=engine)
+        return super().render(values=values, engine=engine)
 
-    #------------------------------------------------------
+    # ------------------------------------------------------
     # Save from html
-    #------------------------------------------------------
+    # ------------------------------------------------------
 
     @api.model
     def extract_embedded_fields(self, arch):
@@ -40,19 +40,21 @@ class IrUiView(models.Model):
 
     @api.model
     def save_embedded_field(self, el):
-        Model = self.env[el.get('data-oe-model')]
-        field = el.get('data-oe-field')
+        Model = self.env[el.get("data-oe-model")]
+        field = el.get("data-oe-field")
 
-        model = 'ir.qweb.field.' + el.get('data-oe-type')
-        converter = self.env[model] if model in self.env else self.env['ir.qweb.field']
+        model = "ir.qweb.field." + el.get("data-oe-type")
+        converter = self.env[model] if model in self.env else self.env["ir.qweb.field"]
         value = converter.from_html(Model, Model._fields[field], el)
 
         if value is not None:
             # TODO: batch writes?
-            if not self.env.context.get('lang') and self.get_default_lang_code():
-                Model.browse(int(el.get('data-oe-id'))).with_context(lang=self.get_default_lang_code()).write({field: value})
+            if not self.env.context.get("lang") and self.get_default_lang_code():
+                Model.browse(int(el.get("data-oe-id"))).with_context(lang=self.get_default_lang_code()).write(
+                    {field: value}
+                )
             else:
-                Model.browse(int(el.get('data-oe-id'))).write({field: value})
+                Model.browse(int(el.get("data-oe-id"))).write({field: value})
 
     def _pretty_arch(self, arch):
         # remove_blank_string does not seem to work on HTMLParser, and
@@ -61,17 +63,16 @@ class IrUiView(models.Model):
         # so serialize to XML, parse as XML (remove whitespace) then serialize
         # as XML (pretty print)
         arch_no_whitespace = etree.fromstring(
-            etree.tostring(arch, encoding='utf-8'),
-            parser=etree.XMLParser(encoding='utf-8', remove_blank_text=True))
-        return etree.tostring(
-            arch_no_whitespace, encoding='unicode', pretty_print=True)
+            etree.tostring(arch, encoding="utf-8"), parser=etree.XMLParser(encoding="utf-8", remove_blank_text=True)
+        )
+        return etree.tostring(arch_no_whitespace, encoding="unicode", pretty_print=True)
 
     @api.multi
     def replace_arch_section(self, section_xpath, replacement):
         # the root of the arch section shouldn't actually be replaced as it's
         # not really editable itself, only the content truly is editable.
         self.ensure_one()
-        arch = etree.fromstring(self.arch.encode('utf-8'))
+        arch = etree.fromstring(self.arch.encode("utf-8"))
         # => get the replacement root
         if not section_xpath:
             root = arch
@@ -91,9 +92,8 @@ class IrUiView(models.Model):
     @api.model
     def to_field_ref(self, el):
         # filter out meta-information inserted in the document
-        attributes = {k: v for k, v in el.attrib.items()
-                           if not k.startswith('data-oe-')}
-        attributes['t-field'] = el.get('data-oe-expression')
+        attributes = {k: v for k, v in el.attrib.items() if not k.startswith("data-oe-")}
+        attributes["t-field"] = el.get("data-oe-expression")
 
         out = html.html_parser.makeelement(el.tag, attrib=attributes)
         out.tail = el.tail
@@ -101,12 +101,11 @@ class IrUiView(models.Model):
 
     @api.multi
     def save(self, value, xpath=None):
-        """ Update a view section. The view section may embed fields to write
+        """Update a view section. The view section may embed fields to write
 
         :param str xpath: valid xpath to the tag to replace
         """
-        arch_section = html.fromstring(
-            value, parser=html.HTMLParser(encoding='utf-8'))
+        arch_section = html.fromstring(value, parser=html.HTMLParser(encoding="utf-8"))
 
         if xpath is None:
             # value is an embedded field on its own, not a view section
@@ -121,9 +120,9 @@ class IrUiView(models.Model):
 
         for view in self:
             arch = view.replace_arch_section(xpath, arch_section)
-            view.write({'arch': view._pretty_arch(arch)})
+            view.write({"arch": view._pretty_arch(arch)})
 
-        self.sudo().mapped('model_data_id').write({'noupdate': True})
+        self.sudo().mapped("model_data_id").write({"noupdate": True})
 
     @api.model
     def _view_obj(self, view_id):
@@ -139,12 +138,12 @@ class IrUiView(models.Model):
 
     @api.model
     def _views_get(self, view_id, options=True, bundles=False, root=True):
-        """ For a given view ``view_id``, should return:
-                * the view itself
-                * all views inheriting from it, enabled or not
-                  - but not the optional children of a non-enabled child
-                * all views called from it (via t-call)
-            :returns recordset of ir.ui.view
+        """For a given view ``view_id``, should return:
+            * the view itself
+            * all views inheriting from it, enabled or not
+              - but not the optional children of a non-enabled child
+            * all views called from it (via t-call)
+        :returns recordset of ir.ui.view
         """
         try:
             view = self._view_obj(view_id)
@@ -163,7 +162,7 @@ class IrUiView(models.Model):
             xpath += "| //t[@t-call-assets]"
         for child in node.xpath(xpath):
             try:
-                called_view = self._view_obj(child.get('t-call', child.get('t-call-assets')))
+                called_view = self._view_obj(child.get("t-call", child.get("t-call-assets")))
             except ValueError:
                 continue
             if called_view not in views_to_return:
@@ -184,9 +183,9 @@ class IrUiView(models.Model):
 
     @api.model
     def get_related_views(self, key, bundles=False):
-        """ Get inherit view's informations of the template ``key``.
-            returns templates info (which can be active or not)
-            ``bundles=True`` returns also the asset bundles
+        """Get inherit view's informations of the template ``key``.
+        returns templates info (which can be active or not)
+        ``bundles=True`` returns also the asset bundles
         """
         user_groups = set(self.env.user.groups_id)
         View = self.with_context(active_test=False, lang=None)

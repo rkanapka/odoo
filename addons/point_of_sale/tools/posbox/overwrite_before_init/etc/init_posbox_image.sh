@@ -8,7 +8,7 @@ __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 __file="${__dir}/$(basename "${BASH_SOURCE[0]}")"
 __base="$(basename ${__file} .sh)"
 
-# Since we are emulating, the real /boot is not mounted, 
+# Since we are emulating, the real /boot is not mounted,
 # leading to mismatch between kernel image and modules.
 mount /dev/sda1 /boot
 

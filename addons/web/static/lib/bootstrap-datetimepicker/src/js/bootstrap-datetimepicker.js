@@ -481,7 +481,7 @@
             notifyEvent = function (e) {
                 if (e.type === 'dp.change') {
                     // check _isUTC flag to ensure that we are not comparing apples and oranges
-                    var bothUTC = e.date && e.oldDate && e.date._isUTC === e.oldDate._isUTC; 
+                    var bothUTC = e.date && e.oldDate && e.date._isUTC === e.oldDate._isUTC;
                     if ((bothUTC && e.date.isSame(e.oldDate)) || (!e.date && !e.oldDate)) {
                         return;
                     }

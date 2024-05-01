@@ -5,18 +5,18 @@
             model="hr.payslip"
             string="PaySlip Details"
             report_type="qweb-pdf"
-            name="l10n_in_hr_payroll.report_payslipdetails" 
+            name="l10n_in_hr_payroll.report_payslipdetails"
             file="l10n_in_hr_payroll.report_payslipdetails" />
 
         <report
             id="payroll_advice"
-            model="hr.payroll.advice" 
+            model="hr.payroll.advice"
             string="Print Advice"
             report_type="qweb-pdf"
-            name="l10n_in_hr_payroll.report_payrolladvice" 
+            name="l10n_in_hr_payroll.report_payrolladvice"
             file="l10n_in_hr_payroll.report_payrolladvice"/>
 
-        <report 
+        <report
             id="action_report_hrsalarybymonth"
             string="Yearly Salary by Head"
             model="hr.salary.employee.month"
@@ -26,9 +26,9 @@
 
         <report
             id="action_report_hryearlysalary"
-            model="yearly.salary.detail" 
-            name="l10n_in_hr_payroll.report_hryearlysalary" 
+            model="yearly.salary.detail"
+            name="l10n_in_hr_payroll.report_hryearlysalary"
             file="l10n_in_hr_payroll.report_hryearlysalary"
             report_type="qweb-pdf"
-            string="Yearly Salary by Employee" /> 
+            string="Yearly Salary by Employee" />
 </odoo>

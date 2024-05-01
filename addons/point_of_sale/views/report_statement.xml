@@ -19,11 +19,11 @@
                         </div>
                         <div class="col-xs-3">
                             <strong>Company</strong>:<br/>
-                            <span t-field="o.company_id"/>                            
+                            <span t-field="o.company_id"/>
                         </div>
                         <div class="col-xs-3">
                             <strong>User</strong>:<br/>
-                            <span t-field="o.user_id"/>                            
+                            <span t-field="o.user_id"/>
                         </div>
                     </div>
 
@@ -55,12 +55,12 @@
                                 <td><span t-field="line.name"/></td>
                                 <td><span t-esc="line.partner_id.name"/></td>
                                 <td class="text-right">
-                                    <span t-field="line.amount" 
+                                    <span t-field="line.amount"
                                         t-options='{"widget": "monetary", "display_currency": res_company.currency_id}'/>
                                 </td>
                             </tr>
                         </tbody>
-                    </table>           
+                    </table>
 
                     <div class="row">
                         <div class="col-xs-4 pull-right">

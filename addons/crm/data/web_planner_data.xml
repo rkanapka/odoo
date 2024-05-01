@@ -503,7 +503,7 @@
                             <div class="col-md-12 col-xs-12">
                                 <div class="well well-lg">
                                     <strong>For complex imports</strong> (&gt;5000 items, product variants, pictures, etc.):
-                        
+
                                     <li>Online users: we do it for you! <a href="https://www.odoo.com/help" target="_blank"><i class="fa fa-envelope-o"/> Ask Our Experts</a></li>
                                     <li>Community &amp; Enterprise users: <a href="https://www.odoo.com/documentation/11.0/webservices/odoo.html" target="_blank">use Odoo API to import through scripts</a></li>
                                 </div>
@@ -560,8 +560,8 @@
                                         <li>additional 10% during summer sales</li>
                                     </p>
                                 </div>
-                            </div>                        
-                        </div>   
+                            </div>
+                        </div>
                     </div>
                     <div class="alert alert-info info_icon" role="alert">
                             <span class="fa fa-lightbulb-o fa-2x"></span><p>To stimulate your customers, show them the public price and the discount applied to it. This is settable in the pricelist configuration if you allow discounts.</p>

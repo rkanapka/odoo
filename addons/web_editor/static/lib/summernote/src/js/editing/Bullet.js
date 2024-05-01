@@ -232,4 +232,3 @@ define([
 
   return Bullet;
 });
-

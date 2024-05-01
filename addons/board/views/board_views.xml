@@ -37,10 +37,10 @@
                   </p>
               </div>
             </field>
-        </record> 
+        </record>
 
         <!--My Dashboard Menu-->
-        <menuitem 
+        <menuitem
             id="menu_board_my_dash"
             parent="base.menu_board_root"
             action="open_board_my_dash_action"

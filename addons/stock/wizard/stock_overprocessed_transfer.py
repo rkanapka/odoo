@@ -1,16 +1,13 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo import api, fields, models, _
-from odoo.exceptions import UserError
+from odoo import api, fields, models
 
 
 class StockOverProcessedTransfer(models.TransientModel):
-    _name = 'stock.overprocessed.transfer'
+    _name = "stock.overprocessed.transfer"
 
-    picking_id = fields.Many2one('stock.picking')
-    overprocessed_product_name = fields.Char(compute='_compute_overprocessed_product_name',
-                                             readonly=True)
+    picking_id = fields.Many2one("stock.picking")
+    overprocessed_product_name = fields.Char(compute="_compute_overprocessed_product_name", readonly=True)
 
     @api.multi
     def _compute_overprocessed_product_name(self):

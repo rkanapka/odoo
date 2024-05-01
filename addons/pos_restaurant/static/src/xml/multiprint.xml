@@ -18,14 +18,14 @@
     </t>
 
     <t t-name="OrderChangeReceipt">
-        <receipt 
-            align='center' 
-            width='40' 
-            size='double-height' 
-            line-ratio='0.4' 
-            value-decimals='3' 
+        <receipt
+            align='center'
+            width='40'
+            size='double-height'
+            line-ratio='0.4'
+            value-decimals='3'
             value-thousands-separator=''
-            value-autoint='on' 
+            value-autoint='on'
         >
             <div size='normal' ><t t-esc="changes.name" /></div>
             <t t-if="changes.floor || changes.table">

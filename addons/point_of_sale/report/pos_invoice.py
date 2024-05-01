@@ -1,16 +1,15 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo import api, models, _
+from odoo import _, api, models
 from odoo.exceptions import UserError
 
 
 class PosInvoiceReport(models.AbstractModel):
-    _name = 'report.point_of_sale.report_invoice'
+    _name = "report.point_of_sale.report_invoice"
 
     @api.model
     def get_report_values(self, docids, data=None):
-        PosOrder = self.env['pos.order']
+        PosOrder = self.env["pos.order"]
         ids_to_print = []
         invoiced_posorders_ids = []
         selected_orders = PosOrder.browse(docids)
@@ -21,6 +20,6 @@ class PosInvoiceReport(models.AbstractModel):
         if not_invoiced_orders_ids:
             not_invoiced_posorders = PosOrder.browse(not_invoiced_orders_ids)
             not_invoiced_orders_names = [a.name for a in not_invoiced_posorders]
-            raise UserError(_('No link to an invoice for %s.') % ', '.join(not_invoiced_orders_names))
+            raise UserError(_("No link to an invoice for %s.") % ", ".join(not_invoiced_orders_names))
 
-        return {'docs': self.env['account.invoice'].sudo().browse(ids_to_print)}
+        return {"docs": self.env["account.invoice"].sudo().browse(ids_to_print)}

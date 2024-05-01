@@ -1047,7 +1047,7 @@
 			<field name="tag_ids" eval="[(6,0,[ref('tag_br_23'), ref('tag_br_24')])]"/>
 			<field name="tax_group_id" ref="tax_group_ipi_330"/>
        	</record>
-       	
+
        	<record id="tax_template_in_ipi" model="account.tax.template">
 			<field name="description">IPI</field>
 			<field name="name">IPI Entrada</field>
@@ -1521,7 +1521,7 @@
 			<field name="tag_ids" eval="[(6,0,[ref('l10n_br.tag_br_26'), ref('l10n_br.tag_br_27')])]"/>
 			<field name="tax_group_id" ref="tax_group_icms_26"/>
        	</record>
-       	
+
        	<record id="tax_template_in_icms_interno" model="account.tax.template">
 			<field name="description">ICMS Interno</field>
 			<field name="name">ICMS Entrada Interno</field>
@@ -1645,7 +1645,7 @@
 			<field name="tag_ids" eval="[(6,0,[ref('tag_br_20'), ref('tag_br_21')])]"/>
 			<field name="tax_group_id" ref="tax_group_pis_065"/>
        	</record>
-       	
+
        	<record id="tax_template_in_pis" model="account.tax.template">
 			<field name="description">PIS</field>
 			<field name="name">PIS Entrada</field>
@@ -1701,7 +1701,7 @@
 			<field name="tag_ids" eval="[(6,0,[ref('tag_br_17'), ref('tag_br_18')])]"/>
 			<field name="tax_group_id" ref="tax_group_cofins_3"/>
         </record>
-        
+
         <record id="tax_template_in_cofins" model="account.tax.template">
 			<field name="description">COFINS</field>
 			<field name="name">COFINS Entrada</field>
@@ -1765,7 +1765,7 @@
 			<field name="tag_ids" eval="[(6,0,[ref('tag_br_11'), ref('tag_br_12')])]"/>
 			<field name="tax_group_id" ref="tax_group_issqn_0"/>
         </record>
-        
+
         <record id="tax_template_out_issqn1" model="account.tax.template">
 			<field name="description">ISSQN 1%</field>
 			<field name="name">ISSQN Saida 1%</field>
@@ -1777,7 +1777,7 @@
 			<field name="tag_ids" eval="[(6,0,[ref('tag_br_11'), ref('tag_br_12')])]"/>
 			<field name="tax_group_id" ref="tax_group_issqn_1"/>
         </record>
-        
+
         <record id="tax_template_out_issqn2" model="account.tax.template">
 			<field name="description">ISSQN 2%</field>
 			<field name="name">ISSQN Saida 2%</field>
@@ -1812,7 +1812,7 @@
 			<field name="tag_ids" eval="[(6,0,[ref('tag_br_11'), ref('tag_br_12')])]"/>
 			<field name="tax_group_id" ref="tax_group_issqn_3"/>
         </record>
-        
+
         <record id="tax_template_out_issqn4" model="account.tax.template">
 			<field name="description">ISS 4%</field>
 			<field name="name">ISSQN Saida 4%</field>
@@ -1824,7 +1824,7 @@
 			<field name="tag_ids" eval="[(6,0,[ref('tag_br_11'), ref('tag_br_12')])]"/>
 			<field name="tax_group_id" ref="tax_group_issqn_4"/>
         </record>
-        
+
         <record id="tax_template_out_issqn5" model="account.tax.template">
 			<field name="description">ISSQN 5%</field>
 			<field name="name">ISSQN Saida 5%</field>

@@ -7,11 +7,11 @@ odoo.define('payment_stripe_sca.payment_form', function (require) {
     var rpc = require('web.rpc');
     var Dialog = require('web.Dialog');
     var PaymentForm = require('payment.payment_form');
-    
+
     var _t = core._t;
-    
+
     PaymentForm.include({
-    
+
         willStart: function () {
             var res = this._super.apply(this, arguments);
             if (this.$('[data-provider="stripe"]').length) {
@@ -21,11 +21,11 @@ odoo.define('payment_stripe_sca.payment_form', function (require) {
             }
             return res;
         },
-    
+
         //--------------------------------------------------------------------------
         // Private
         //--------------------------------------------------------------------------
-    
+
         /**
          * called when clicking on pay now or add payment event to create token for credit card/debit card.
          *
@@ -44,7 +44,7 @@ odoo.define('payment_stripe_sca.payment_form', function (require) {
             if (this.options.partnerId === undefined) {
                 console.warn('payment_form: unset partner_id when adding new token; things could go wrong');
             }
-    
+
             var formData = self.getFormData(inputsForm);
             var stripe = this.stripe;
             var card = this.stripe_card_element;
@@ -178,7 +178,7 @@ odoo.define('payment_stripe_sca.payment_form', function (require) {
         },
         /**
          * guess the json route to call for an interrupted payment flow
-         * 
+         *
          * @private
          */
         _guessJsonRoute: function () {
@@ -207,7 +207,7 @@ odoo.define('payment_stripe_sca.payment_form', function (require) {
          */
         updateNewPaymentDisplayStatus: function () {
             var $checkedRadio = this.$('input[type="radio"]:checked');
-    
+
             if ($checkedRadio.length) {
                 var provider = $checkedRadio.data('provider');
                 if (provider === 'stripe') {
@@ -220,18 +220,18 @@ odoo.define('payment_stripe_sca.payment_form', function (require) {
             }
             return this._super.apply(this, arguments);
         },
-    
+
         //--------------------------------------------------------------------------
         // Handlers
         //--------------------------------------------------------------------------
-    
+
         /**
          * @override
          */
         payEvent: function (ev) {
             ev.preventDefault();
             var $checkedRadio = this.$('input[type="radio"]:checked');
-    
+
             // first we check that the user has selected a stripe as s2s payment method
             if ($checkedRadio.length === 1 && this.isNewPaymentRadio($checkedRadio) && $checkedRadio.data('provider') === 'stripe') {
                 return this._createStripeToken(ev, $checkedRadio);
@@ -248,7 +248,7 @@ odoo.define('payment_stripe_sca.payment_form', function (require) {
             ev.stopPropagation();
             ev.preventDefault();
             var $checkedRadio = this.$('input[type="radio"]:checked');
-    
+
             // first we check that the user has selected a stripe as add payment method
             if ($checkedRadio.length === 1 && this.isNewPaymentRadio($checkedRadio) && $checkedRadio.data('provider') === 'stripe') {
                 return this._createStripeToken(ev, $checkedRadio, true);

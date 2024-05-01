@@ -34,7 +34,7 @@ var Notification = Widget.extend({
             return this._super.apply(this, arguments);
         }
 
-        var self = this, 
+        var self = this,
             superDestroy = this._super;
         this.$el.animate({opacity: 0.0}, 400, "swing", function() {
             self.$el.animate({height: 0}, 400, "swing", function() {

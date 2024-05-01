@@ -19,7 +19,7 @@
 -
   Create Delivery Order of 10 `product.product_product_3`
   from Output -> Customer
-- 
+-
   !record {model: stock.picking, id: pick_output}:
     name: Delivery order for procurement
     partner_id: base.res_partner_2
@@ -30,9 +30,9 @@
         - product_id: product.product_product_3
           product_uom_qty: 10.00
           procure_method: make_to_order
-- 
+-
   Confirm delivery order.
-- 
+-
   !python {model: stock.picking, id: pick_output}: |
     self.action_confirm()
 -
@@ -40,9 +40,9 @@
 -
   !python {model: procurement.group, id: False}: |
     self.run_scheduler()
-- 
+-
   Check that a picking was created from stock to output.
-- 
+-
   !python {model: stock.move, id: False}: |
     picking = self.env["stock.picking"].browse(ref("pick_output"))
     moves = self.search([

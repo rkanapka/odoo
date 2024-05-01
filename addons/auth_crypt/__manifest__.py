@@ -1,13 +1,12 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 {
-    'name': 'Password Encryption',
-    'version': '2.0',
-    'author': ['Odoo SA', 'FS3'],
-    'maintainer': 'Odoo SA',
-    'category': 'Extra Tools',
-    'description': """
+    "name": "Password Encryption",
+    "version": "2.0",
+    "author": ["Odoo SA", "FS3"],
+    "maintainer": "Odoo SA",
+    "category": "Extra Tools",
+    "description": """
 Encrypted passwords
 ===================
 
@@ -34,6 +33,6 @@ by the ``auth_signup`` module (signup for new users does not
 necessarily have to be enabled).
 
 """,
-    'depends': ['base'],
-    'auto_install': True,
+    "depends": ["base"],
+    "auto_install": True,
 }

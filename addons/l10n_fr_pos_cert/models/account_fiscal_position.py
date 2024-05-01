@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from odoo import _, models
 from odoo.exceptions import UserError
 
@@ -16,4 +14,4 @@ class AccountFiscalPosition(models.Model):
                         + "You should archive it and create a new one."
                     )
                 )
-        return super(AccountFiscalPosition, self).write(vals)
+        return super().write(vals)

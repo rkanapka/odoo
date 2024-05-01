@@ -10,16 +10,15 @@
 -
   !python {model: product.margin, id: False}: |
     self.browse(ref('product_margin_wiz0')).with_context({"lang": 'en_US',
-      "search_default_filter_to_sell": "1", "tz": False, "active_model": "product.product", "disable_log": True, 
+      "search_default_filter_to_sell": "1", "tz": False, "active_model": "product.product", "disable_log": True,
       "active_ids": [ref("product.product_product_5")], "active_id": ref("product.product_product_5")}).action_open_window()
 -
   I read the fields of the product.
 -
   !python {model: product.product, id: False}: |
-    fields = ['sale_avg_price', 'expected_margin_rate', 'total_margin_rate', 'total_cost', 'sale_num_invoiced', 
+    fields = ['sale_avg_price', 'expected_margin_rate', 'total_margin_rate', 'total_cost', 'sale_num_invoiced',
       'total_margin', 'sales_gap', 'purchase_num_invoiced', 'expected_margin', 'turnover']
     self.browse(ref('product_margin_wiz0')).with_context({"lang": 'en_US',
-      "search_default_filter_to_sell": "1", "tz": False, "active_model": "product.product", 
-      "bin_size": True, "active_ids": [ref("product.product_product_5")], 
+      "search_default_filter_to_sell": "1", "tz": False, "active_model": "product.product",
+      "bin_size": True, "active_ids": [ref("product.product_product_5")],
       "active_id": ref("product.product_product_5")}).read(fields)
-

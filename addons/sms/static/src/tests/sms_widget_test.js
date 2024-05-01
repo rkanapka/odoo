@@ -1,6 +1,6 @@
 odoo.define('sms.sms_widget_tests', function (require) {
 "use strict";
-    
+
 var FormView = require('web.FormView');
 var testUtils = require('web.test_utils');
 
@@ -21,7 +21,7 @@ QUnit.module('fields', {
         };
     }
 }, function () {
-    
+
     QUnit.module('SmsWidget');
 
     QUnit.test('Sms widgets are correctly rendered', function (assert) {
@@ -60,7 +60,7 @@ QUnit.module('fields', {
         text = Array(72).join('ê');
         form.$('.o_input').val(text).trigger('input');
         assert.strictEqual(form.$('.o_sms_count').text(), '71 / 2 SMS (UNICODE) ', 'Should be "71 / 2 SMS (UNICODE) " for 71 x "ê"');
-        
+
         form.destroy();
     });
 });

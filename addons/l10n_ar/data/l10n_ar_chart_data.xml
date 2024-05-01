@@ -20,7 +20,7 @@
       <field name="cash_account_code_prefix">12</field>
       <field name="currency_id" ref="base.ARS"/>
       <field name="transfer_account_id" ref="transfer_account_id"/>
-    </record>   
+    </record>
 
     <record id="transfer_account_id" model="account.account.template">
         <field name="chart_template_id" ref="ar_chart_template"/>
@@ -92,7 +92,7 @@
         <field ref="account.data_account_type_fixed_assets" name="user_type_id"/>
         <field name="chart_template_id" ref="ar_chart_template"/>
     </record>
-    
+
     <record id="134" model="account.account.template">
         <field name="name">Otros Créditos / Anticipo al Personal</field>
         <field name="code">134</field>
@@ -100,7 +100,7 @@
         <field ref="account.data_account_type_fixed_assets" name="user_type_id"/>
         <field name="chart_template_id" ref="ar_chart_template"/>
     </record>
-    
+
     <record id="135" model="account.account.template">
         <field name="name">Otros Créditos / Alquileres Pagados por Adelantado</field>
         <field name="code">135</field>
@@ -108,7 +108,7 @@
         <field ref="account.data_account_type_fixed_assets" name="user_type_id"/>
         <field name="chart_template_id" ref="ar_chart_template"/>
     </record>
-    
+
     <record id="136" model="account.account.template">
         <field name="name">Otros Créditos / Intereses Pagados por Adelantado</field>
         <field name="code">136</field>
@@ -116,7 +116,7 @@
         <field ref="account.data_account_type_fixed_assets" name="user_type_id"/>
         <field name="chart_template_id" ref="ar_chart_template"/>
     </record>
-    
+
     <record id="137" model="account.account.template">
         <field name="name">Otros Créditos / Accionistas</field>
         <field name="code">137</field>
@@ -124,7 +124,7 @@
         <field ref="account.data_account_type_fixed_assets" name="user_type_id"/>
         <field name="chart_template_id" ref="ar_chart_template"/>
     </record>
-    
+
     <record id="138" model="account.account.template">
         <field name="name">Otros Créditos / (-) Previsión para Descuentos</field>
         <field name="code">138</field>
@@ -132,7 +132,7 @@
         <field ref="account.data_account_type_fixed_assets" name="user_type_id"/>
         <field name="chart_template_id" ref="ar_chart_template"/>
     </record>
-    
+
     <record id="139" model="account.account.template">
         <field name="name">Otros Créditos / (-) Intereses (+) a Devengar</field>
         <field name="code">139</field>
@@ -257,7 +257,7 @@
         <field ref="account.data_account_type_fixed_assets" name="user_type_id"/>
         <field name="chart_template_id" ref="ar_chart_template"/>
     </record>
-    
+
     <record id="165" model="account.account.template">
         <field name="name">Bienes de Uso / (-) Depreciación Acumulada</field>
         <field name="code">165</field>
@@ -265,7 +265,7 @@
         <field ref="account.data_account_type_fixed_assets" name="user_type_id"/>
         <field name="chart_template_id" ref="ar_chart_template"/>
     </record>
-    
+
     <record id="171" model="account.account.template">
         <field name="name">Bienes Inmateriales / Marcas de Fábrica</field>
         <field name="code">171</field>
@@ -324,7 +324,7 @@
         <field name="reconcile">1</field>
         <field name="chart_template_id" ref="ar_chart_template"/>
     </record>
-    
+
     <record id="221" model="account.account.template">
         <field name="name">Deudas Bancarias y Financieras / Adelantos en Cuenta Corriente</field>
         <field name="code">221</field>
@@ -348,7 +348,7 @@
         <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
         <field name="chart_template_id" ref="ar_chart_template"/>
     </record>
-    
+
     <record id="224" model="account.account.template">
         <field name="name">Deudas Bancarias y Financieras / Intereses a Pagar</field>
         <field name="code">224</field>
@@ -372,7 +372,7 @@
         <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
         <field name="chart_template_id" ref="ar_chart_template"/>
     </record>
-    
+
     <record id="232" model="account.account.template">
         <field name="name">Deudas Fiscales / Impuesto a los Débitos y Créditos Bancarios a Pagar</field><field name="code">232</field>
         <field name="reconcile" eval="False"/>
@@ -613,7 +613,7 @@
         <field ref="account.data_account_type_equity" name="user_type_id"/>
         <field name="chart_template_id" ref="ar_chart_template"/>
     </record>
-    
+
     <record id="411_01" model="account.account.template">
         <field name="name">Ventas - Categoria de productos 01</field>
         <field name="code">411.01</field>
@@ -684,7 +684,7 @@
         <field ref="account.data_account_type_other_income" name="user_type_id"/>
         <field name="chart_template_id" ref="ar_chart_template"/>
     </record>
-    
+
     <record id="422" model="account.account.template">
         <field name="name">Recupero de Deudores Incobrables</field>
         <field name="code">422</field>
@@ -786,7 +786,7 @@
         <field ref="account.data_account_type_expenses" name="user_type_id"/>
         <field name="chart_template_id" ref="ar_chart_template"/>
     </record>
-    
+
     <record id="519" model="account.account.template">
         <field name="name">Gastos de Publicidad y Propaganda</field>
         <field name="code">519</field>
@@ -794,7 +794,7 @@
         <field ref="account.data_account_type_expenses" name="user_type_id"/>
         <field name="chart_template_id" ref="ar_chart_template"/>
     </record>
-    
+
     <record id="521" model="account.account.template">
         <field name="name">Gastos en Siniestros</field>
         <field name="code">521</field>
@@ -802,7 +802,7 @@
         <field ref="account.data_account_type_expenses" name="user_type_id"/>
         <field name="chart_template_id" ref="ar_chart_template"/>
     </record>
-    
+
     <record id="522" model="account.account.template">
         <field name="name">Donaciones Cedidas, Otorgadas</field>
         <field name="code">522</field>
@@ -810,7 +810,7 @@
         <field ref="account.data_account_type_expenses" name="user_type_id"/>
         <field name="chart_template_id" ref="ar_chart_template"/>
     </record>
-    
+
     <record id="523" model="account.account.template">
         <field name="name">Pérdida Venta Bienes de Uso</field>
         <field name="code">523</field>
@@ -834,7 +834,7 @@
         <field ref="account.data_account_type_expenses" name="user_type_id"/>
         <field name="chart_template_id" ref="ar_chart_template"/>
     </record>
-    
+
     <record id="62" model="account.account.template">
         <field name="name">Costos de Producción</field>
         <field name="code">62</field>
@@ -850,7 +850,7 @@
         <field ref="account.data_account_type_expenses" name="user_type_id"/>
         <field name="chart_template_id" ref="ar_chart_template"/>
     </record>
-    
+
     <record id="64" model="account.account.template">
         <field name="name">Gastos de Comercialización</field>
         <field name="code">64</field>
@@ -866,5 +866,5 @@
         <field name="property_account_income_categ_id" ref="411_01"/>
         <field name="expense_currency_exchange_account_id" ref="524"/>
         <field name="income_currency_exchange_account_id" ref="426"/>
-    </record>   
+    </record>
 </odoo>

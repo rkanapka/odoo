@@ -116,7 +116,7 @@
 
         <function
             id="mail_template_function_module_install_project"
-            model="mail.template" 
+            model="mail.template"
             name="send_mail"
             eval="[ref('mail_template_data_module_install_project'), ref('base.module_project')]"/>
     </data>

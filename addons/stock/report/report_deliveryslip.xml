@@ -105,7 +105,7 @@
                                                      </t>
                                                  </td>
                                                  <td name="lot_qty">
-                                                     <t t-if="move_line.product_qty"> 
+                                                     <t t-if="move_line.product_qty">
                                                         <span t-field="move_line.product_qty"/>
                                                     </t>
                                                 </td>

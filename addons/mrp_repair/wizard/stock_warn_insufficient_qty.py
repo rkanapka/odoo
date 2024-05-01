@@ -1,13 +1,13 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from odoo import fields, models
 
-class StockWarnInsufficientQtyRepair(models.TransientModel):
-    _name = 'stock.warn.insufficient.qty.repair'
-    _inherit = 'stock.warn.insufficient.qty'
 
-    repair_id = fields.Many2one('mrp.repair', string='Repair')
+class StockWarnInsufficientQtyRepair(models.TransientModel):
+    _name = "stock.warn.insufficient.qty.repair"
+    _inherit = "stock.warn.insufficient.qty"
+
+    repair_id = fields.Many2one("mrp.repair", string="Repair")
 
     def action_done(self):
         self.ensure_one()

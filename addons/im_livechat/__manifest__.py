@@ -1,14 +1,12 @@
-# -*- coding: utf-8 -*-
 {
-    'name' : 'Live Chat',
-    'version': '1.0',
-    'sequence': 170,
-    'summary': 'Live Chat with Visitors/Customers',
-    'category': 'Website',
-    'complexity': 'easy',
-    'website': 'https://www.odoo.com/page/live-chat',
-    'description':
-        """
+    "name": "Live Chat",
+    "version": "1.0",
+    "sequence": 170,
+    "summary": "Live Chat with Visitors/Customers",
+    "category": "Website",
+    "complexity": "easy",
+    "website": "https://www.odoo.com/page/live-chat",
+    "description": """
 Live Chat Support
 ==========================
 
@@ -18,7 +16,7 @@ chat operators.
 Help your customers with this chat, and analyse their feedback.
 
         """,
-    'data': [
+    "data": [
         "security/im_livechat_channel_security.xml",
         "security/ir.model.access.csv",
         "views/rating_views.xml",
@@ -27,15 +25,15 @@ Help your customers with this chat, and analyse their feedback.
         "views/im_livechat_channel_templates.xml",
         "report/im_livechat_report_channel_views.xml",
         "report/im_livechat_report_operator_views.xml",
-        "data/im_livechat_channel_data.xml"
+        "data/im_livechat_channel_data.xml",
     ],
-    'demo': [
+    "demo": [
         "data/im_livechat_channel_demo.xml",
-        'data/mail_shortcode_demo.xml',
+        "data/mail_shortcode_demo.xml",
     ],
-    'depends': ["mail", "rating"],
-    'qweb': ['static/src/xml/*.xml'],
-    'installable': True,
-    'auto_install': False,
-    'application': True,
+    "depends": ["mail", "rating"],
+    "qweb": ["static/src/xml/*.xml"],
+    "installable": True,
+    "auto_install": False,
+    "application": True,
 }

@@ -21,7 +21,7 @@
         </ul>
     </t>
     <t t-jquery="p:last" t-operation="replace">
-        <p> <!-- Keep wrong indent for translation --> 
+        <p> <!-- Keep wrong indent for translation -->
                             In this mode, you can translate texts or post texts to Gengo for translation.
                             To change the structure of the page, you must edit the
                             master page.

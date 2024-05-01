@@ -3,7 +3,7 @@
 -
   !record {model: res.users, id: res_users_account_voucher_user, view: False}:
     company_id: base.main_company
-    name: Voucher Accountant  
+    name: Voucher Accountant
     login: vacc
     email: accountant@yourcompany.com
 -

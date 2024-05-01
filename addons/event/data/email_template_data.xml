@@ -58,7 +58,7 @@
                         We are happy to confirm your registration to the event:
                     </p>
                     <ul>
-                        <li>Event: 
+                        <li>Event:
                         % if 'website_url' in object.event_id and object.event_id.website_url:
                             <a href="${object.event_id.website_url}" style="color:#875A7B;text-decoration:none;">${object.event_id.name}</a>
                         % else:

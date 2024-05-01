@@ -1,12 +1,11 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 
 {
-    'name': 'Just In Time Scheduling',
-    'version': '1.0',
-    'category': 'Warehouse',
-    'description': """
+    "name": "Just In Time Scheduling",
+    "version": "1.0",
+    "category": "Warehouse",
+    "description": """
 This module will automatically reserve the picking from stock when a sales order is confirmed
 =============================================================================================
 Upon confirmation of a sales order or when quantities are added,
@@ -21,11 +20,11 @@ will take into account the expected date and the priority.
 If this automatic reservation would reserve too much, you can
 still unreserve a picking.
     """,
-    'website': 'https://www.odoo.com/page/manufacturing',
-    'depends': ['sale_stock'],
-    'data': [],
-    'demo': [],
-    'test': [],
-    'installable': True,
-    'auto_install': True,
+    "website": "https://www.odoo.com/page/manufacturing",
+    "depends": ["sale_stock"],
+    "data": [],
+    "demo": [],
+    "test": [],
+    "installable": True,
+    "auto_install": True,
 }

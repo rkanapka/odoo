@@ -48,13 +48,13 @@
                                         </t>
                                     </td>
                                     <td>
-                                        <span t-field="line.name"/> 
+                                        <span t-field="line.name"/>
                                         <t t-if="line.analytic_account_id.name">
                                             (<span t-field="line.analytic_account_id.name"/>)
                                         </t>
                                     </td>
                                     <td>
-                                        <span t-field="line.unit_amount" 
+                                        <span t-field="line.unit_amount"
                                             t-options='{"widget": "monetary", "display_currency": line.currency_id}'/>
                                     </td>
                                     <td class="text-center">

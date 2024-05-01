@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from odoo import fields, models, tools
@@ -10,14 +9,15 @@ class HrHolidaysRemainingLeavesUser(models.Model):
     _description = "Total holidays by type"
     _auto = False
 
-    name = fields.Char('Employee', readonly=True)
-    no_of_leaves = fields.Integer('Remaining leaves', readonly=True)
-    user_id = fields.Many2one('res.users', string='User', readonly=True)
-    leave_type = fields.Char('Leave Type', readonly=True)
+    name = fields.Char("Employee", readonly=True)
+    no_of_leaves = fields.Integer("Remaining leaves", readonly=True)
+    user_id = fields.Many2one("res.users", string="User", readonly=True)
+    leave_type = fields.Char("Leave Type", readonly=True)
 
     def init(self):
-        tools.drop_view_if_exists(self._cr, 'hr_holidays_remaining_leaves_user')
-        self._cr.execute("""
+        tools.drop_view_if_exists(self._cr, "hr_holidays_remaining_leaves_user")
+        self._cr.execute(
+            """
             CREATE or REPLACE view hr_holidays_remaining_leaves_user as (
                  SELECT
                     min(hrs.id) as id,
@@ -35,4 +35,5 @@ class HrHolidaysRemainingLeavesUser(models.Model):
                 GROUP BY
                     rr.name,rr.user_id,hhs.name
             )
-        """)
+        """
+        )

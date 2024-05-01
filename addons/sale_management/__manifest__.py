@@ -1,13 +1,12 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 {
-    'name': 'Sales Management',
-    'version': '1.0',
-    'category': 'Sales',
-    'sequence': 15,
-    'summary': 'Quotations, Sales Orders, Invoicing',
-    'description': """
+    "name": "Sales Management",
+    "version": "1.0",
+    "category": "Sales",
+    "sequence": 15,
+    "summary": "Quotations, Sales Orders, Invoicing",
+    "description": """
 Manage sales quotations and orders
 ==================================
 
@@ -40,13 +39,13 @@ The Dashboard for the Sales Manager will include
 * My Quotations
 * Monthly Turnover (Graph)
     """,
-    'website': 'https://www.odoo.com/page/sales',
-    'depends': ['sale', 'account_invoicing'],
-    'data': [
-        'views/sale_management_views.xml',
-        'views/sale_management_templates.xml',
+    "website": "https://www.odoo.com/page/sales",
+    "depends": ["sale", "account_invoicing"],
+    "data": [
+        "views/sale_management_views.xml",
+        "views/sale_management_templates.xml",
     ],
-    'application': True,
-    'uninstall_hook': 'uninstall_hook',
-    'post_init_hook': 'post_init_hook',
+    "application": True,
+    "uninstall_hook": "uninstall_hook",
+    "post_init_hook": "post_init_hook",
 }

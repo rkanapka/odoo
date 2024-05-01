@@ -40,7 +40,7 @@
             <field name="usage">customer</field>
             <field name="company_id"></field>
         </record>
-        
+
 
         <!-- Resource: stock.inventory -->
 
@@ -181,4 +181,3 @@
 
     </data>
 </odoo>
-

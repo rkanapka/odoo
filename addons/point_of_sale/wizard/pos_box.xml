@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-        <act_window 
+        <act_window
             id="action_pos_box_in"
             name="Put Money In"
             res_model="cash.box.in"
@@ -9,7 +9,7 @@
             target="new"
             key2="client_action_multi"/>
 
-        <act_window 
+        <act_window
             id="action_pos_box_out"
             name="Take Money Out"
             res_model="cash.box.out"

@@ -143,7 +143,7 @@
                                 </tree>
                             </field>
                             <p attrs="{'invisible': [('finished_move_line_ids', '!=', [])]}">
-                                Use the Produce button or process the work orders to create some finished products. 
+                                Use the Produce button or process the work orders to create some finished products.
                             </p>
                         </page>
                         <page string="Miscellaneous">

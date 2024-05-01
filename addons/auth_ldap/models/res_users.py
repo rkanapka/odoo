@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
+from odoo import SUPERUSER_ID, api, models, registry
 from odoo.exceptions import AccessDenied
-
-from odoo import api, models, registry, SUPERUSER_ID
 
 
 class Users(models.Model):
@@ -11,7 +9,7 @@ class Users(models.Model):
 
     @classmethod
     def _login(cls, db, login, password):
-        user_id = super(Users, cls)._login(db, login, password)
+        user_id = super()._login(db, login, password)
         if user_id:
             return user_id
         with registry(db).cursor() as cr:
@@ -20,7 +18,7 @@ class Users(models.Model):
             if res:
                 return False
             env = api.Environment(cr, SUPERUSER_ID, {})
-            Ldap = env['res.company.ldap']
+            Ldap = env["res.company.ldap"]
             for conf in Ldap.get_ldap_dicts():
                 entry = Ldap.authenticate(conf, login, password)
                 if entry:
@@ -32,10 +30,10 @@ class Users(models.Model):
     @api.model
     def check_credentials(self, password):
         try:
-            super(Users, self).check_credentials(password)
+            super().check_credentials(password)
         except AccessDenied:
             if self.env.user.active:
-                Ldap = self.env['res.company.ldap']
+                Ldap = self.env["res.company.ldap"]
                 for conf in Ldap.get_ldap_dicts():
                     if Ldap.authenticate(conf, self.env.user.login, password):
                         return

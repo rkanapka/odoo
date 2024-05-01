@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from datetime import date, timedelta
@@ -6,17 +5,19 @@ from datetime import date, timedelta
 import requests
 import werkzeug
 
-from odoo import models, api, service
-from odoo.tools.translate import _
+from odoo import api, models, service
 from odoo.exceptions import UserError
 from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT, misc
+from odoo.tools.translate import _
 
 
 class MercuryTransaction(models.Model):
-    _name = 'pos_mercury.mercury_transaction'
+    _name = "pos_mercury.mercury_transaction"
 
     def _get_pos_session(self):
-        pos_session = self.env['pos.session'].search([('state', '=', 'opened'), ('user_id', '=', self.env.uid)], limit=1)
+        pos_session = self.env["pos.session"].search(
+            [("state", "=", "opened"), ("user_id", "=", self.env.uid)], limit=1
+        )
         if not pos_session:
             raise UserError(_("No opened point of sale session for user %s found") % self.env.user.name)
 
@@ -37,33 +38,37 @@ class MercuryTransaction(models.Model):
         pos_session = self._get_pos_session()
 
         config = pos_session.config_id
-        pos_mercury_config = self._get_pos_mercury_config_id(config, data['journal_id'])
+        pos_mercury_config = self._get_pos_mercury_config_id(config, data["journal_id"])
 
-        data['operator_id'] = pos_session.user_id.login
-        data['merchant_id'] = pos_mercury_config.sudo().merchant_id
-        data['merchant_pwd'] = pos_mercury_config.sudo().merchant_pwd
-        data['memo'] = "Odoo " + service.common.exp_version()['server_version']
+        data["operator_id"] = pos_session.user_id.login
+        data["merchant_id"] = pos_mercury_config.sudo().merchant_id
+        data["merchant_pwd"] = pos_mercury_config.sudo().merchant_pwd
+        data["memo"] = "Odoo " + service.common.exp_version()["server_version"]
 
     def _do_request(self, template, data):
         xml_transaction = self.env.ref(template).render(data).decode()
 
-        if not data['merchant_id'] or not data['merchant_pwd']:
+        if not data["merchant_id"] or not data["merchant_pwd"]:
             return "not setup"
 
         soap_header = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mer="http://www.mercurypay.com"><soapenv:Header/><soapenv:Body><mer:CreditTransaction><mer:tran>'
-        soap_footer = '</mer:tran><mer:pw>' + data['merchant_pwd'] + '</mer:pw></mer:CreditTransaction></soapenv:Body></soapenv:Envelope>'
+        soap_footer = (
+            "</mer:tran><mer:pw>"
+            + data["merchant_pwd"]
+            + "</mer:pw></mer:CreditTransaction></soapenv:Body></soapenv:Envelope>"
+        )
         xml_transaction = soap_header + misc.html_escape(xml_transaction) + soap_footer
 
-        response = ''
+        response = ""
 
         headers = {
-            'Content-Type': 'text/xml',
-            'SOAPAction': 'http://www.mercurypay.com/CreditTransaction',
+            "Content-Type": "text/xml",
+            "SOAPAction": "http://www.mercurypay.com/CreditTransaction",
         }
 
-        url = 'https://w1.mercurypay.com/ws/ws.asmx'
-        if self.env['ir.config_parameter'].sudo().get_param('pos_mercury.enable_test_env'):
-            url = 'https://w1.mercurycert.net/ws/ws.asmx'
+        url = "https://w1.mercurypay.com/ws/ws.asmx"
+        if self.env["ir.config_parameter"].sudo().get_param("pos_mercury.enable_test_env"):
+            url = "https://w1.mercurycert.net/ws/ws.asmx"
 
         try:
             r = requests.post(url, data=xml_transaction, headers=headers, timeout=65)
@@ -80,8 +85,8 @@ class MercuryTransaction(models.Model):
         except UserError:
             return "internal error"
 
-        data['is_voidsale'] = is_voidsale
-        response = self._do_request('pos_mercury.mercury_voidsale', data)
+        data["is_voidsale"] = is_voidsale
+        response = self._do_request("pos_mercury.mercury_voidsale", data)
         return response
 
     @api.model
@@ -91,7 +96,7 @@ class MercuryTransaction(models.Model):
         except UserError:
             return "internal error"
 
-        response = self._do_request('pos_mercury.mercury_transaction', data)
+        response = self._do_request("pos_mercury.mercury_transaction", data)
         return response
 
     @api.model
@@ -108,7 +113,7 @@ class MercuryTransaction(models.Model):
         except UserError:
             return "internal error"
 
-        response = self._do_request('pos_mercury.mercury_return', data)
+        response = self._do_request("pos_mercury.mercury_return", data)
         return response
 
     # One time (the ones we use) Mercury tokens are required to be
@@ -117,6 +122,6 @@ class MercuryTransaction(models.Model):
     def cleanup_old_tokens(self):
         expired_creation_date = (date.today() - timedelta(days=6 * 30)).strftime(DEFAULT_SERVER_DATETIME_FORMAT)
 
-        for order in self.env['pos.order'].search([('create_date', '<', expired_creation_date)]):
+        for order in self.env["pos.order"].search([("create_date", "<", expired_creation_date)]):
             order.ref_no = ""
             order.record_no = ""

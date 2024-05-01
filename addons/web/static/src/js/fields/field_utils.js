@@ -29,12 +29,12 @@ var _t = core._t;
 
 /**
  * Convert binary to bin_size
- * 
+ *
  * @param {string} [value] base64 representation of the binary (might be already a bin_size!)
  * @param {Object} [field]
- *        a description of the field (note: this parameter is ignored) 
+ *        a description of the field (note: this parameter is ignored)
  * @param {Object} [options] additional options (note: this parameter is ignored)
- * 
+ *
  * @returns {string} bin_size (which is human-readable)
  */
 function formatBinary(value, field, options) {

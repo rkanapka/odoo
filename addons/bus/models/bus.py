@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import datetime
 import json
 import logging
@@ -8,7 +7,7 @@ import threading
 import time
 
 import odoo
-from odoo import api, fields, models, SUPERUSER_ID
+from odoo import SUPERUSER_ID, api, fields, models
 from odoo.tools.misc import DEFAULT_SERVER_DATETIME_FORMAT
 
 _logger = logging.getLogger(__name__)
@@ -16,11 +15,13 @@ _logger = logging.getLogger(__name__)
 # longpolling timeout connection
 TIMEOUT = 50
 
-#----------------------------------------------------------
+
+# ----------------------------------------------------------
 # Bus
-#----------------------------------------------------------
+# ----------------------------------------------------------
 def json_dump(v):
-    return json.dumps(v, separators=(',', ':'))
+    return json.dumps(v, separators=(",", ":"))
+
 
 def hashable(key):
     if isinstance(key, list):
@@ -30,16 +31,16 @@ def hashable(key):
 
 class ImBus(models.Model):
 
-    _name = 'bus.bus'
+    _name = "bus.bus"
 
-    create_date = fields.Datetime('Create date')
-    channel = fields.Char('Channel')
-    message = fields.Char('Message')
+    create_date = fields.Datetime("Create date")
+    channel = fields.Char("Channel")
+    message = fields.Char("Message")
 
     @api.model
     def gc(self):
-        timeout_ago = datetime.datetime.utcnow()-datetime.timedelta(seconds=TIMEOUT*2)
-        domain = [('create_date', '<', timeout_ago.strftime(DEFAULT_SERVER_DATETIME_FORMAT))]
+        timeout_ago = datetime.datetime.utcnow() - datetime.timedelta(seconds=TIMEOUT * 2)
+        domain = [("create_date", "<", timeout_ago.strftime(DEFAULT_SERVER_DATETIME_FORMAT))]
         return self.sudo().search(domain).unlink()
 
     @api.model
@@ -47,10 +48,7 @@ class ImBus(models.Model):
         channels = set()
         for channel, message in notifications:
             channels.add(channel)
-            values = {
-                "channel": json_dump(channel),
-                "message": json_dump(message)
-            }
+            values = {"channel": json_dump(channel), "message": json_dump(message)}
             self.sudo().create(values)
             if random.random() < 0.01:
                 self.gc()
@@ -61,9 +59,10 @@ class ImBus(models.Model):
             # transaction is not commited yet, there will be nothing to fetch,
             # and the longpolling will return no notification.
             def notify():
-                with odoo.sql_db.db_connect('postgres').cursor() as cr:
+                with odoo.sql_db.db_connect("postgres").cursor() as cr:
                     cr.execute("notify imbus, %s", (json_dump(list(channels)),))
-            self._cr.after('commit', notify)
+
+            self._cr.after("commit", notify)
 
     @api.model
     def sendone(self, channel, message):
@@ -75,37 +74,43 @@ class ImBus(models.Model):
             options = {}
         # first poll return the notification in the 'buffer'
         if last == 0:
-            timeout_ago = datetime.datetime.utcnow()-datetime.timedelta(seconds=TIMEOUT)
-            domain = [('create_date', '>', timeout_ago.strftime(DEFAULT_SERVER_DATETIME_FORMAT))]
+            timeout_ago = datetime.datetime.utcnow() - datetime.timedelta(seconds=TIMEOUT)
+            domain = [("create_date", ">", timeout_ago.strftime(DEFAULT_SERVER_DATETIME_FORMAT))]
         else:  # else returns the unread notifications
-            domain = [('id', '>', last)]
+            domain = [("id", ">", last)]
         channels = [json_dump(c) for c in channels]
-        domain.append(('channel', 'in', channels))
+        domain.append(("channel", "in", channels))
         notifications = self.sudo().search_read(domain)
         # list of notification to return
         result = []
         for notif in notifications:
-            result.append({
-                'id': notif['id'],
-                'channel': json.loads(notif['channel']),
-                'message': json.loads(notif['message']),
-            })
+            result.append(
+                {
+                    "id": notif["id"],
+                    "channel": json.loads(notif["channel"]),
+                    "message": json.loads(notif["message"]),
+                }
+            )
 
         if result or force_status:
-            partner_ids = options.get('bus_presence_partner_ids')
+            partner_ids = options.get("bus_presence_partner_ids")
             if partner_ids:
-                partners = self.env['res.partner'].browse(partner_ids)
-                result += [{
-                    'id': -1,
-                    'channel': (self._cr.dbname, 'bus.presence'),
-                    'message': {'id': r.id, 'im_status': r.im_status}} for r in partners]
+                partners = self.env["res.partner"].browse(partner_ids)
+                result += [
+                    {
+                        "id": -1,
+                        "channel": (self._cr.dbname, "bus.presence"),
+                        "message": {"id": r.id, "im_status": r.im_status},
+                    }
+                    for r in partners
+                ]
         return result
 
 
-#----------------------------------------------------------
+# ----------------------------------------------------------
 # Dispatcher
-#----------------------------------------------------------
-class ImDispatch(object):
+# ----------------------------------------------------------
+class ImDispatch:
     def __init__(self):
         self.channels = {}
         self.started = False
@@ -118,8 +123,8 @@ class ImDispatch(object):
         # it will handle a longpolling request
         if not odoo.evented:
             current = threading.current_thread()
-            current._Thread__daemonic = True # PY2
-            current._daemonic = True         # PY3
+            current._Thread__daemonic = True  # PY2
+            current._daemonic = True  # PY3
             # rename the thread to avoid tests waiting for a longpolling
             current.setName("openerp.longpolling.request.%s" % current.ident)
 
@@ -128,10 +133,10 @@ class ImDispatch(object):
         # immediatly returns if past notifications exist
         with registry.cursor() as cr:
             env = api.Environment(cr, SUPERUSER_ID, {})
-            notifications = env['bus.bus'].poll(channels, last, options)
+            notifications = env["bus.bus"].poll(channels, last, options)
 
         # immediatly returns in peek mode
-        if options.get('peek'):
+        if options.get("peek"):
             return dict(notifications=notifications, channels=channels)
 
         # or wait for future ones
@@ -147,19 +152,19 @@ class ImDispatch(object):
                 event.wait(timeout=timeout)
                 with registry.cursor() as cr:
                     env = api.Environment(cr, SUPERUSER_ID, {})
-                    notifications = env['bus.bus'].poll(channels, last, options, force_status=True)
+                    notifications = env["bus.bus"].poll(channels, last, options, force_status=True)
             except Exception:
                 # timeout
                 pass
         return notifications
 
     def loop(self):
-        """ Dispatch postgres notifications to the relevant polling threads/greenlets """
+        """Dispatch postgres notifications to the relevant polling threads/greenlets"""
         _logger.info("Bus.loop listen imbus on db postgres")
-        with odoo.sql_db.db_connect('postgres').cursor() as cr:
+        with odoo.sql_db.db_connect("postgres").cursor() as cr:
             conn = cr._cnx
             cr.execute("listen imbus")
-            cr.commit();
+            cr.commit()
             while True:
                 if select.select([conn], [], [], TIMEOUT) == ([], [], []):
                     pass
@@ -179,7 +184,7 @@ class ImDispatch(object):
         while True:
             try:
                 self.loop()
-            except Exception as e:
+            except Exception:
                 _logger.exception("Bus.loop error, sleep and retry")
                 time.sleep(TIMEOUT)
 
@@ -187,6 +192,7 @@ class ImDispatch(object):
         if odoo.evented:
             # gevent mode
             import gevent
+
             self.Event = gevent.event.Event
             gevent.spawn(self.run)
         else:
@@ -197,6 +203,7 @@ class ImDispatch(object):
             t.start()
         self.started = True
         return self
+
 
 dispatch = None
 if not odoo.multi_process or odoo.evented:

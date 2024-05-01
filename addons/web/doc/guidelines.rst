@@ -84,7 +84,7 @@ is:
 
 * add "use strict"; on top of every odoo JS module
 
-* name all entities exported by a JS module. So, instead of 
+* name all entities exported by a JS module. So, instead of
 
   .. code-block:: javascript
 

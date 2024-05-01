@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from odoo import models
@@ -8,7 +7,7 @@ class AccountInvoiceLine(models.Model):
     _inherit = "account.invoice.line"
 
     def _get_anglo_saxon_price_unit(self):
-        price_unit = super(AccountInvoiceLine, self)._get_anglo_saxon_price_unit()
+        price_unit = super()._get_anglo_saxon_price_unit()
         if self.product_id._get_invoice_policy() == "delivery" and self.env.context.get("pos_picking_id"):
             moves = (
                 self.env.context["pos_picking_id"]

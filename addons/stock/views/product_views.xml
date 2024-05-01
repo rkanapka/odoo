@@ -239,7 +239,7 @@
                 </data>
             </field>
         </record>
-        
+
         <!-- view used for product.template only -->
         <record model="ir.ui.view" id="product_template_form_view_procurement_button">
             <field name="name">product.template_procurement</field>

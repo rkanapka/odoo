@@ -17,7 +17,7 @@
             <field name="categ_id" search="[]" model="product.category"/>
             <field name="image" type="base64" file="product_expiry/static/img/product_product_jambon-image.jpg"/>
         </record>
-        
+
         <record id="product_package_jambon" model="product.packaging">
             <field name="name">box of 10</field>
             <field name="qty">10</field>

@@ -263,7 +263,7 @@ var KanbanController = BasicController.extend({
                     // domInData: all domain fields are in the data
                     // activeInDomain: 'active' is already in the domain
                     // activeInData: 'active' is available in the data
-                    
+
                     var domain = (parent ? parent.domain : group.domain) || [];
                     var domInData = _.every(domain, function (d) {
                         return d[0] in data.data;

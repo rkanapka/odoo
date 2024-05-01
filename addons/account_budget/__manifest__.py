@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 {
-    'name': 'Budgets Management',
-    'category': 'Accounting',
-    'description': """
+    "name": "Budgets Management",
+    "category": "Accounting",
+    "description": """
 This module allows accountants to manage analytic and crossovered budgets.
 ==========================================================================
 
@@ -27,14 +26,14 @@ Three reports are available:
     3. The last one is available from the Analytic Chart of Accounts. It gives
        the spreading, for the selected Analytic Accounts of Budgets.
 """,
-    'website': 'https://www.odoo.com/page/accounting',
-    'depends': ['account'],
-    'data': [
-        'security/ir.model.access.csv',
-        'security/account_budget_security.xml',
-        'views/account_analytic_account_views.xml',
-        'views/account_budget_views.xml',
-        'views/res_config_settings_views.xml',
+    "website": "https://www.odoo.com/page/accounting",
+    "depends": ["account"],
+    "data": [
+        "security/ir.model.access.csv",
+        "security/account_budget_security.xml",
+        "views/account_analytic_account_views.xml",
+        "views/account_budget_views.xml",
+        "views/res_config_settings_views.xml",
     ],
-    'demo': ['data/account_budget_demo.xml'],
+    "demo": ["data/account_budget_demo.xml"],
 }

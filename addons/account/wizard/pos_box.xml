@@ -19,7 +19,7 @@
             </field>
         </record>
 
-        <act_window 
+        <act_window
             name="Put Money In"
             res_model="cash.box.in"
             src_model="account.bank.statement"
@@ -47,7 +47,7 @@
             </field>
         </record>
 
-        <act_window 
+        <act_window
             name="Take Money Out"
             res_model="cash.box.out"
             src_model="account.bank.statement"

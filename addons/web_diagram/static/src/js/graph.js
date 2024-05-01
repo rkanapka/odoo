@@ -11,7 +11,7 @@
         }
     }
 
-    // A close button, 
+    // A close button,
     // if entity_type == "node":
     //      GraphNode.destruction_callback(entity) is called where entity is a node.
     //      If it returns true the node and all connected edges are destroyed.
@@ -24,8 +24,8 @@
         var self = this;
         var visible = false;
         var close_button_radius = graph.style.close_button_radius || 8;
-        var close_circle = graph.r.circle(  entity.get_pos().x + pos_x, 
-                                            entity.get_pos().y + pos_y, 
+        var close_circle = graph.r.circle(  entity.get_pos().x + pos_x,
+                                            entity.get_pos().y + pos_y,
                                             close_button_radius           );
         //the outer gray circle
         close_circle.attr({ 'opacity':  0,
@@ -34,17 +34,17 @@
                             'stroke':   'none'  });
         close_circle.transform(graph.get_transform());
         graph.set_scrolling(close_circle);
-        
+
         //the 'x' inside the circle
         var close_label = graph.r.text( entity.get_pos().x + pos_x, entity.get_pos().y + pos_y,"x");
         close_label.attr({  'fill':         graph.style.close_button_x_color || "white",
                             'font-size':    close_button_radius,
                             'cursor':       'pointer'   });
-        
+
         close_label.transform(graph.get_transform());
         graph.set_scrolling(close_label);
-        
-        // the dummy_circle is used to catch events, and avoid hover in/out madness 
+
+        // the dummy_circle is used to catch events, and avoid hover in/out madness
         // between the 'x' and the button
         var dummy_circle = graph.r.circle(  entity.get_pos().x + pos_x,
                                             entity.get_pos().y + pos_y,
@@ -58,12 +58,12 @@
         };
 
         this.update_pos = function(){
-            var pos = self.get_pos(); 
+            var pos = self.get_pos();
             close_circle.attr({'cx':pos.x, 'cy':pos.y});
             dummy_circle.attr({'cx':pos.x, 'cy':pos.y});
             close_label.attr({'x':pos.x, 'y':pos.y});
         };
-        
+
         function hover_in(){
             if(!visible){ return; }
             close_circle.animate({'r': close_button_radius * 1.5}, 300, 'elastic');
@@ -132,7 +132,7 @@
     function Connector(graph,node,pos_x,pos_y){
         var visible = false;
         var conn_circle = graph.r.circle(node.get_pos().x + pos_x, node.get_pos().y + pos_y,4);
-        conn_circle.attr({  'opacity':  0, 
+        conn_circle.attr({  'opacity':  0,
                             'fill':     graph.style.node_outline_color,
                             'stroke':   'none' });
         conn_circle.transform(graph.get_transform());
@@ -153,7 +153,7 @@
             if(!visible){ return;}
             conn_circle.animate({'r':8},300,'elastic');
             if(graph.creating_edge){
-                graph.target_node = node; 
+                graph.target_node = node;
                 conn_circle.animate({   'fill':         graph.style.connector_active_color,
                                         'stroke':       graph.style.node_outline_color,
                                         'stroke-width': graph.style.node_selected_width,
@@ -162,8 +162,8 @@
         }
         function hover_out(){
             if(!visible){ return;}
-            conn_circle.animate({   'r':graph.style.connector_radius, 
-                                    'fill':graph.style.node_outline_color, 
+            conn_circle.animate({   'r':graph.style.connector_radius,
+                                    'fill':graph.style.node_outline_color,
                                     'stroke':'none'},400,'linear');
             graph.target_node = null;
         }
@@ -189,7 +189,7 @@
             if(!visible){ return; }
             graph.creating_edge = false;
             self.edge_tmp.remove();
-            if(graph.target_node){  
+            if(graph.target_node){
                 var edge_prop = GraphEdge.creation_callback(node,graph.target_node);
                 if(edge_prop){
                     var new_edge = new GraphEdge(graph,edge_prop.label, node,graph.target_node);
@@ -214,7 +214,7 @@
         this.show = show;
         this.hide = hide;
     }
-    
+
     //Creates a new graph on raphael document r.
     //style is a dictionary containing the style definitions
     //viewport (optional) is the dom element representing the viewport of the graph. It is used
@@ -227,8 +227,8 @@
         var graph = {};  // graph[n1.uid][n2.uid] -> list of all edges from n1 to n2
         var links = {};  // links[n.uid] -> list of all edges from or to n
         var uid = 1;     // all nodes and edges have an uid used to order their display when they are curved
-        var selected_entity = null; //the selected entity (node or edge) 
-        
+        var selected_entity = null; //the selected entity (node or edge)
+
         self.creating_edge = false; // true if we are dragging a new edge onto a node
         self.target_node = null;    // this holds the target node when creating an edge and hovering a connector
         self.r = r;                 // the raphael instance
@@ -236,21 +236,21 @@
         var tr_x = 0, tr_y = 0;         // global translation coordinate
 
         var background = r.rect(0,0,'100%','100%').attr({'fill':'white', 'stroke':'none', 'opacity':0, 'cursor':'move'});
-        
+
         // return the global transform of the scene
         this.get_transform = function(){
             return "T"+tr_x+","+tr_y
         };
 
-        
-        // translate every element of the graph except the background. 
-        // elements inserted in the graph after a translate_all() must manually apply transformation 
-        // via get_transform() 
+
+        // translate every element of the graph except the background.
+        // elements inserted in the graph after a translate_all() must manually apply transformation
+        // via get_transform()
         var translate_all = function(dx,dy){
             tr_x += dx;
             tr_y += dy;
             var tstr = self.get_transform();
-            
+
             r.forEach(function(el){
                 if(el != background){
                     el.transform(tstr);
@@ -263,7 +263,7 @@
             var miny = Number.MAX_VALUE;
             var maxx = Number.MIN_VALUE;
             var maxy = Number.MIN_VALUE;
-            
+
             for(var i = 0; i < nodes.length; i++){
                 var pos = nodes[i].get_pos();
                 minx = Math.min(minx,pos.x);
@@ -278,9 +278,9 @@
             maxy = maxy + style.node_size_y / 2 + tr_y;
 
             return { minx:minx, miny:miny, maxx:maxx, maxy:maxy };
-        
+
         };
-        // returns false if the translation dx,dy of the viewport 
+        // returns false if the translation dx,dy of the viewport
         // hides the graph (with optional margin)
         var translation_respects_viewport = function(dx,dy,margin){
             if(!viewport){
@@ -288,9 +288,9 @@
             }
             margin = margin || 0;
             var b = get_bounds();
-            var width = viewport.offsetWidth; 
+            var width = viewport.offsetWidth;
             var height = viewport.offsetHeight;
-            
+
             if( ( dy < 0 && b.maxy + dy < margin )   ||
                 ( dy > 0 && b.miny + dy > height - margin ) ||
                 ( dx < 0 && b.maxx + dx < margin ) ||
@@ -326,7 +326,7 @@
         };
         var bg_drag_up   = function(){};
         background.drag( bg_drag_move, bg_drag_down, bg_drag_up);
-        
+
         this.set_scrolling(background);
 
         //adds a node to the graph and sets its uid.
@@ -400,9 +400,9 @@
             var c12   = el_12.length;
             var el_21 = this.get_edge_list(n2,n1);
             var c21   = el_21.length;
-            if(c12 + c21 == 1){ // only one edge 
+            if(c12 + c21 == 1){ // only one edge
                 return 0;
-            }else{ 
+            }else{
                 var index = 0;
                 for(var i = 0; i < c12; i++){
                     if (el_12[i].uid < e.uid){
@@ -416,17 +416,17 @@
                 }
             }
         };
-        
+
 
         // Returns the angle in degrees of the edge loop. We do not support more than 8 loops on one node
         this.get_loop_angle = function(n,e){
             var loop_list = this.get_edge_list(n,n);
 
-            var slots = []; // the 8 angles where we can put the loops 
+            var slots = []; // the 8 angles where we can put the loops
             for(var angle = 0; angle < 360; angle += 45){
                 slots.push(Vec2.new_polar_deg(1,angle));
             }
-            
+
             //we assign to each slot a score. The higher the score, the closer it is to other edges.
             var links = this.get_linked_edge_list(n);
             for(var i = 0; i < links.length; i++){
@@ -455,7 +455,7 @@
             }
             //we want the loops with lower uid to get the slots with the lower score
             slots.sort(function(a,b){ return a.score < b.score ? -1: 1; });
-            
+
             var index = 0;
             for(var i = 0; i < links.length; i++){
                 var edge = links[i];
@@ -467,7 +467,7 @@
                 }
             }
             index %= slots.length;
-            
+
             return slots[index].angle_deg();
         }
 
@@ -490,7 +490,7 @@
         };
     }
 
-    // creates a new Graph Node on Raphael document r, centered on [pos_x,pos_y], with label 'label', 
+    // creates a new Graph Node on Raphael document r, centered on [pos_x,pos_y], with label 'label',
     // and of type 'circle' or 'rect', and of color 'color'
     function GraphNode(graph,pos_x, pos_y,label,type,color){
         var self = this;
@@ -502,7 +502,7 @@
         this.connectors = [];
         this.close_button = null;
         this.uid = 0;
-        
+
         graph.add_node(this);
 
         if(type == 'circle'){
@@ -510,7 +510,7 @@
         }else{
             node_fig = r.rect(pos_x-sx/2,pos_y-sy/2,sx,sy);
         }
-        node_fig.attr({ 'fill':         color, 
+        node_fig.attr({ 'fill':         color,
                         'stroke':       graph.style.node_outline_color,
                         'stroke-width': graph.style.node_outline_width,
                         'cursor':'pointer'  });
@@ -524,7 +524,7 @@
         node_label.transform(graph.get_transform());
         graph.set_scrolling(node_label);
 
-        // redraws all edges linked to this node 
+        // redraws all edges linked to this node
         var update_linked_edges = function(){
             var edges = graph.get_linked_edge_list(self);
             for(var i = 0; i < edges.length; i++){
@@ -554,10 +554,10 @@
         };
         // returns the center coordinates
         var get_pos = function(){
-            if(type == 'circle'){ 
-                return new Vec2(node_fig.attr('cx'), node_fig.attr('cy')); 
-            }else{ 
-                return new Vec2(node_fig.attr('x') + sx/2, node_fig.attr('y') + sy/2); 
+            if(type == 'circle'){
+                return new Vec2(node_fig.attr('cx'), node_fig.attr('cy'));
+            }else{
+                return new Vec2(node_fig.attr('x') + sx/2, node_fig.attr('y') + sy/2);
             }
         };
         // return the label string
@@ -579,7 +579,7 @@
         var set_selected = function(){
             if(!selected){
                 selected = true;
-                node_fig.attr({ 'stroke':       graph.style.node_selected_color, 
+                node_fig.attr({ 'stroke':       graph.style.node_selected_color,
                                 'stroke-width': graph.style.node_selected_width });
                 if(!self.close_button){
                     self.close_button = new CloseButton(graph,self, "node" ,sx/2 , - sy/2);
@@ -630,7 +630,7 @@
         this.update_linked_edges = update_linked_edges;
         this.remove = remove;
 
-       
+
         //select the node and play an animation when clicked
         var click_action = function(){
             if(type == 'circle'){
@@ -652,7 +652,7 @@
             this.opos = get_pos();
         };
         var drag_move = function(dx,dy){
-            // we disable labels when moving for performance reasons, 
+            // we disable labels when moving for performance reasons,
             // updating the label position is quite expensive
             // we put this here because drag_down is also called on simple clicks ... and this causes unwanted flicker
             var edges = graph.get_linked_edge_list(self);
@@ -665,7 +665,7 @@
             set_pos(this.opos.add_xy(dx,dy));
         };
         var drag_up = function(){
-            //we re-enable the 
+            //we re-enable the
             var edges = graph.get_linked_edge_list(self);
             for(var i = 0; i < edges.length; i++){
                 edges[i].label_enable();
@@ -680,7 +680,7 @@
         //allow the user to create edges by dragging onto the node
         function hover_in(){
             if(graph.creating_edge){
-                graph.target_node = self; 
+                graph.target_node = self;
             }
         }
         function hover_out(){
@@ -708,20 +708,20 @@
     };
 
     // this is the default node destruction callback. It is called before the node is removed from the graph
-    // and before the connected edges are destroyed 
+    // and before the connected edges are destroyed
     GraphNode.destruction_callback = function(node){ return true; };
 
-    // creates a new edge with label 'label' from start to end. start and end must implement get_pos_*, 
-    // if tmp is true, the edge is not added to the graph, used for drag edges. 
-    // replace tmp == false by graph == null 
+    // creates a new edge with label 'label' from start to end. start and end must implement get_pos_*,
+    // if tmp is true, the edge is not added to the graph, used for drag edges.
+    // replace tmp == false by graph == null
     function GraphEdge(graph,label,start,end,tmp){
         var self = this;
         var r = graph.r;
         var curvature = 0;  // 0 = straight, != 0 curved
         var s,e;            // positions of the start and end point of the line between start and end
-        var mc;             // position of the middle of the curve (bezier control point) 
+        var mc;             // position of the middle of the curve (bezier control point)
         var mc1,mc2;        // control points of the cubic bezier for the loop edges
-        var elfs =  graph.style.edge_label_font_size || 10 ; 
+        var elfs =  graph.style.edge_label_font_size || 10 ;
         var label_enabled = true;
         this.uid = 0;       // unique id used to order the curved edges
         var edge_path = ""; // svg definition of the edge vector path
@@ -730,7 +730,7 @@
         if(!tmp){
             graph.add_edge(start,end,this);
         }
-        
+
         //Return the position of the label
         function get_label_pos(path){
             var cpos = path.getTotalLength() * 0.5;
@@ -742,14 +742,14 @@
             var lpos = path.getPointAtLength(cpos + mod * verticality);
             return new Vec2(lpos.x,lpos.y - elfs *(1-verticality));
         }
-        
+
         //used by close_button
         this.get_pos = function(){
             if(!edge){
                 return start.get_pos().lerp(end.get_pos(),0.5);
             }
             return get_label_pos(edge);
-            /*  
+            /*
             var bbox = edge_label.getBBox(); Does not work... :(
             return new Vec2(bbox.x + bbox.width, bbox.y);*/
         }
@@ -764,10 +764,10 @@
         }
         //Curved line from s to e by mc1 mc2
         function make_loop(){
-            return "M" + s.x + " " + s.y + 
+            return "M" + s.x + " " + s.y +
                    "C" + mc1.x + " " + mc1.y + " " + mc2.x + " " + mc2.y + " " + e.x + " " + e.y;
         }
-            
+
         //computes new start and end line coordinates
         function update_curve(){
             if(start != end){
@@ -778,7 +778,7 @@
                 }
                 s = start.get_pos();
                 e = end.get_pos();
-                
+
                 mc = s.lerp(e,0.5); //middle of the line s->e
                 var se = e.sub(s);
                 se = se.normalize();
@@ -798,7 +798,7 @@
                         e = col[0];
                     }
                 }
-                
+
                 if(curvature != 0){
                     edge_path = make_curve();
                 }else{
@@ -814,7 +814,7 @@
                 var p = r.rotate_deg(90);
                 mc1 = mc.add(p.set_len(rad*0.5));
                 mc2 = mc.add(p.set_len(-rad*0.5));
-                
+
                 if(start.get_bound){
                     var col = start.get_bound().collide_segment(s,mc1);
                     if(col.length > 0){
@@ -828,16 +828,16 @@
                 edge_path = make_loop();
             }
         }
-        
+
         update_curve();
-        var edge = r.path(edge_path).attr({ 'stroke':       graph.style.edge_color, 
-                                            'stroke-width': graph.style.edge_width, 
-                                            'arrow-end':    'block-wide-long', 
-                                            'cursor':'pointer'  }).insertBefore(graph.get_node_list()[0].get_fig());       
+        var edge = r.path(edge_path).attr({ 'stroke':       graph.style.edge_color,
+                                            'stroke-width': graph.style.edge_width,
+                                            'arrow-end':    'block-wide-long',
+                                            'cursor':'pointer'  }).insertBefore(graph.get_node_list()[0].get_fig());
         var labelpos = get_label_pos(edge);
         var edge_label = r.text(labelpos.x, labelpos.y - elfs, label).attr({
-            'fill':         graph.style.edge_label_color, 
-            'cursor':       'pointer', 
+            'fill':         graph.style.edge_label_color,
+            'cursor':       'pointer',
             'font-size':    elfs    });
 
         edge.transform(graph.get_transform());
@@ -845,7 +845,7 @@
 
         edge_label.transform(graph.get_transform());
         graph.set_scrolling(edge_label);
-        
+
 
         //since we create an edge we need to recompute the edges that have the same start and end positions as this one
         if(!tmp){
@@ -877,7 +877,7 @@
                 }
             }
         }
-        //update the positions 
+        //update the positions
         function update(){
             update_curve();
             edge.attr({'path':edge_path});
@@ -886,7 +886,7 @@
                 edge_label.attr({'x':labelpos.x, 'y':labelpos.y - 14});
             }
         }
-        // removes the edge from the scene, disconnects it from linked        
+        // removes the edge from the scene, disconnects it from linked
         // nodes, destroy its drawable elements.
         function remove(){
             edge.remove();
@@ -908,7 +908,7 @@
         this.set_selected = function(){
             if(!selected){
                 selected = true;
-                edge.attr({ 'stroke': graph.style.node_selected_color, 
+                edge.attr({ 'stroke': graph.style.node_selected_color,
                             'stroke-width': graph.style.node_selected_width });
                 edge_label.attr({ 'fill': graph.style.node_selected_color });
                 if(!self.close_button){
@@ -969,11 +969,11 @@
     // as parameter
     GraphEdge.new_edge_callback = function(new_edge){};
 
-    // this is the default edge destruction callback. It is called before 
+    // this is the default edge destruction callback. It is called before
     // an edge is removed from the graph.
     GraphEdge.destruction_callback = function(edge){ return true; };
 
-    
+
 
     // returns a new string with the same content as str, but with lines of maximum 'width' characters.
     // lines are broken on words, or into words if a word is longer than 'width'
@@ -995,4 +995,3 @@
 
 
 })(window);
-

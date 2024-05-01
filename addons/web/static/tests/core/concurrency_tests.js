@@ -197,9 +197,9 @@ QUnit.module('core', {}, function () {
             done1 = false, done2 = false,
             fail1 = false, fail2 = false;
 
-        var d1 = $.Deferred(), 
+        var d1 = $.Deferred(),
             d2 = $.Deferred();
-        
+
         dm.add(d1).done(function () { done1 = true; })
                     .fail(function () { fail1 = true; });
         dm.add(d2).done(function () { done2 = true; })

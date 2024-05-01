@@ -703,7 +703,7 @@
             <field name="sequence">440</field>
             <field name="description">TVA 0% Cocont.</field>
             <field name="name">0% Cocont. M.</field>
-            <field name="refund_account_id" ref="a411059"/> 
+            <field name="refund_account_id" ref="a411059"/>
             <field name="account_id" ref="a411059"/>
             <field name="price_include" eval="0"/>
             <field name="amount">0</field>

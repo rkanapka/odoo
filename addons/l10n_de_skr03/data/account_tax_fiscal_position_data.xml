@@ -465,7 +465,7 @@
             <field name="l10n_de_datev_code">18</field>
             <field name="type_tax_use">purchase</field>
             <field name="tag_ids" eval="[(6,0,[ref('l10n_de.tag_de_66')])]"/>
-            <field name="tax_group_id" ref="tax_group_7"/>            
+            <field name="tax_group_id" ref="tax_group_7"/>
         </record>
         <record id="tax_vst_no_ustpflicht_skr03" model="account.tax.template">
             <field name="sequence">16</field>
@@ -503,7 +503,7 @@
             <field name="type_tax_use">purchase</field>
             <field name="tag_ids" eval="[(6,0,[ref('l10n_de.tag_de_66')])]"/>
             <field name="tax_group_id" ref="tax_group_7"/>
-            <field name="price_include" eval="True"/>            
+            <field name="price_include" eval="True"/>
         </record>
         <record id="tax_vst_55_farmer_skr03" model="account.tax.template">
             <field name="sequence">26</field>
@@ -516,7 +516,7 @@
             <field name="account_id" ref="account_1570"/>
             <field name="type_tax_use">purchase</field>
             <field name="tag_ids" eval="[(6,0,[ref('l10n_de.tag_de_66')])]"/>
-            <field name="tax_group_id" ref="tax_group_55"/>            
+            <field name="tax_group_id" ref="tax_group_55"/>
         </record>
         <record id="tax_vst_107_farmer_skr03" model="account.tax.template">
             <field name="sequence">27</field>
@@ -529,7 +529,7 @@
             <field name="account_id" ref="account_1570"/>
             <field name="type_tax_use">purchase</field>
             <field name="tag_ids" eval="[(6,0,[ref('l10n_de.tag_de_66')])]"/>
-            <field name="tax_group_id" ref="tax_group_107"/>            
+            <field name="tax_group_id" ref="tax_group_107"/>
         </record>
         <record id="tax_ust_19_eu_skr03" model="account.tax.template">
             <field name="sequence">21</field>

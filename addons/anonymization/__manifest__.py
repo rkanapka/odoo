@@ -1,12 +1,11 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 
 {
-    'name': 'Database Anonymization',
-    'version': '1.0',
-    'category': 'Extra Tools',
-    'description': """
+    "name": "Database Anonymization",
+    "version": "1.0",
+    "category": "Extra Tools",
+    "description": """
 This module allows you to anonymize a database.
 ===============================================
 
@@ -18,14 +17,14 @@ by ‘XXX’ characters). Then you can send the anonymized database to the migra
 team. Once you get back your migrated database, you restore it and reverse the
 anonymization process to recover your previous data.
     """,
-    'depends': ['base'],
-    'demo': ['data/anonymization_demo.xml'],
-    'data': [
-        'data/ir.model.fields.anonymization.csv',
-        'security/ir.model.access.csv',
-        'views/anonymization_views.xml',
-        'wizard/anonymize_wizard_views.xml'
+    "depends": ["base"],
+    "demo": ["data/anonymization_demo.xml"],
+    "data": [
+        "data/ir.model.fields.anonymization.csv",
+        "security/ir.model.access.csv",
+        "views/anonymization_views.xml",
+        "wizard/anonymize_wizard_views.xml",
     ],
-    'installable': True,
-    'auto_install': False,
+    "installable": True,
+    "auto_install": False,
 }

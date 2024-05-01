@@ -94,4 +94,3 @@ var Registry = Class.extend({
 return Registry;
 
 });
-

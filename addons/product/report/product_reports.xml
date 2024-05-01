@@ -21,12 +21,12 @@
             print_report_name="'Products Labels - %s' % (object.name)"
         />
 
-        <report 
-            id="action_report_pricelist" 
-            string="Pricelist" 
-            model="product.product" 
-            report_type="qweb-pdf" 
-            name="product.report_pricelist" 
+        <report
+            id="action_report_pricelist"
+            string="Pricelist"
+            model="product.product"
+            report_type="qweb-pdf"
+            name="product.report_pricelist"
             file="product.report_pricelist"
             menu="False"/>
     </data>

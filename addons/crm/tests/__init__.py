@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from . import test_crm_lead
 from . import test_new_lead_notification
 from . import test_lead2opportunity

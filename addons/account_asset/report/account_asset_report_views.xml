@@ -23,7 +23,7 @@
             </graph>
         </field>
     </record>
- 
+
     <record id="view_asset_asset_report_search" model="ir.ui.view">
         <field name="name">asset.asset.report.search</field>
         <field name="model">asset.asset.report</field>
@@ -71,7 +71,7 @@
           </p>
         </field>
     </record>
-    
+
     <menuitem name="Assets" action="action_asset_asset_report"
               id="menu_action_asset_asset_report"
               parent="account.account_reports_management_menu" sequence="21"/>

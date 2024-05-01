@@ -5,7 +5,7 @@
             <field name="subject">Online Training</field>
             <field name="model_id" ref="product.model_product_template"/>
             <field name="auto_delete" eval="True"/>
-            <field name="body_html"><![CDATA[ 
+            <field name="body_html"><![CDATA[
     <div style="height:auto;text-align: center;font-size : 40px;color: #333333;margin-top:30px;font-weight: 300;">
             Online Training
     </div>
@@ -580,12 +580,12 @@
                     With the live sessions, we learned a lot more than what was covered in the videos. Definitely a good start for building up a solid base of working knowledge of Odoo.
                 </td>
                 <td>
-                    The trainer did a wonderful job with the training! He was well informed and interactive online and offline. Thank you so much for the experience! 
+                    The trainer did a wonderful job with the training! He was well informed and interactive online and offline. Thank you so much for the experience!
                 </td>
             </tr>
             <tr>
                 <td>
-                    It would be very difficult to cover all of the possibilities of Odoo and I believe the major aspects were covered very well 
+                    It would be very difficult to cover all of the possibilities of Odoo and I believe the major aspects were covered very well
                 </td>
                 <td>
                     The trainer has a very good knowledge of the subject, he understands the issues of the trainees very fast and provided answers with the right level of illustration.

@@ -1,15 +1,15 @@
 -
-  Create a new stockable product 
-- 
+  Create a new stockable product
+-
   !record {model: product.product, id: product_wise}:
     name: Wise Unit
     type: product
     categ_id: product.product_category_1
     uom_id: product.product_uom_unit
     uom_po_id: product.product_uom_unit
-- 
+-
   Create an incoming picking for this product of 10 PCE from suppliers to stock
-- 
+-
   !record {model: stock.picking, id: pick1_wise}:
     name: Incoming picking (wise unit)
     partner_id: base.res_partner_2
@@ -19,15 +19,15 @@
         product_uom_qty: 10.00
         location_id: stock_location_suppliers
         location_dest_id: stock_location_stock
-- 
+-
   Confirm and assign picking and prepare partial
-- 
+-
   !python {model: stock.picking, id: pick1_wise}: |
     self.action_confirm()
     self.action_assign()
 -
   Put 4 pieces in shelf1 and 6 pieces in shelf2
-- 
+-
   !python {model: stock.picking, id: pick1_wise}: |
     stock_pack = self.env['stock.move.line']
     stock_quant_pack = self.env['stock.quant.package']
@@ -45,20 +45,20 @@
       'location_id': ref('stock_location_suppliers'),
       'location_dest_id': ref('stock_location_14')
     })
-- 
+-
   Transfer the receipt
-- 
+-
   !python {model: stock.picking, id: pick1_wise}: |
     self.do_transfer()
-- 
+-
   Check the system created 3 quants
-- 
+-
   !python {model: stock.quant, id: False}: |
     records = self.search([('product_id','=',ref('product_wise'))])
     assert len(records.ids) == 3, "The number of quants created is not correct"
-- 
+-
   Make a delivery order of 5 pieces to the customer
-- 
+-
   !record {model: stock.picking, id: delivery_order_wise1}:
     name: outgoing picking 1 (wise unit)
     partner_id: base.res_partner_4
@@ -68,16 +68,16 @@
         product_uom_qty: 5.0
         location_id: stock_location_stock
         location_dest_id: stock_location_customers
-- 
+-
   Assign and confirm
-- 
+-
   !python {model: stock.picking, id: delivery_order_wise1}: |
     self.action_confirm()
     self.action_assign()
     assert self.state == 'assigned'
-- 
+-
   Make a delivery order of 5 pieces to the customer
-- 
+-
   !record {model: stock.picking, id: delivery_order_wise2}:
     name: outgoing picking 2 (wise unit)
     partner_id: base.res_partner_4
@@ -87,16 +87,16 @@
         product_uom_qty: 5.0
         location_id: stock_location_stock
         location_dest_id: stock_location_customers
-- 
+-
   Assign and confirm
-- 
+-
   !python {model: stock.picking, id: delivery_order_wise2}: |
     self.action_confirm()
     self.action_assign()
     assert self.state == 'assigned'
-- 
+-
   The operator is a wise guy and decides to do the opposite of what Odoo proposes.  He uses the products reserved on picking 1 on picking 2 and vice versa
-- 
+-
   !python {model: stock.picking, id: False}: |
     picking1 = self.browse(ref('delivery_order_wise1'))
     picking2 = self.browse(ref('delivery_order_wise2'))
@@ -131,29 +131,29 @@
     assert new_move_lines.location_id.id == ref('stock_location_14')
 -
   Process this picking
-- 
+-
   !python {model: stock.picking, id: delivery_order_wise1}: |
     self.do_transfer()
-- 
+-
   Check there was no negative quant created by this picking
-- 
+-
   !python {model: stock.quant, id: False}: |
-    records = self.search([('product_id','=',ref('product_wise')), ('quantity', '<', 0.0), ('location_id.id', '=',                      
+    records = self.search([('product_id','=',ref('product_wise')), ('quantity', '<', 0.0), ('location_id.id', '=',
     ref('stock_location_stock'))])
     assert len(records.ids) == 0, 'This should not have created a negative quant'
-- 
+-
   Check the other delivery order has changed its state back to ready
-- 
+-
   !python {model: stock.picking, id: delivery_order_wise2}: |
     assert self.state == 'assigned', "Delivery order 2 should be back in ready state"
-- 
+-
   Process the second picking
-- 
+-
   !python {model: stock.picking, id: delivery_order_wise2}: |
     self.action_done()
-- 
+-
   Check all quants are in Customers and there are no negative quants anymore
-- 
+-
   !python {model: stock.quant, id: False}: |
     records = self.search([('product_id','=',ref('product_wise')), ('location_id', '!=', ref('stock_location_suppliers'))])
     assert all([x.location_id.id==ref('stock_location_customers') and x.quantity > 0.0 for x in records]), "Negative quant or wrong location detected"

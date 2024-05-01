@@ -90,7 +90,7 @@
         });
         $.fn.share.init(this);
     };
-    
+
     $.fn.share.defaults = {
         shareLink : "http://twitter.com/intent/tweet?text=",
         minLength  : 5,

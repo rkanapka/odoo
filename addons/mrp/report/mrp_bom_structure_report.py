@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from odoo import api, models
 
 
 class BomStructureReport(models.AbstractModel):
-    _name = 'report.mrp.mrp_bom_structure_report'
+    _name = "report.mrp.mrp_bom_structure_report"
 
     @api.model
     def _get_child_vals(self, record, level, qty, uom):
@@ -17,21 +16,21 @@ class BomStructureReport(models.AbstractModel):
         :param uom: unit of measurement of a product
         """
         child = {
-            'pname': record.product_id.name_get()[0][1],
-            'pcode': record.product_id.default_code,
-            'puom': record.product_uom_id,
-            'uname': record.product_uom_id.name,
-            'level': level,
-            'code': record.bom_id.code,
+            "pname": record.product_id.name_get()[0][1],
+            "pcode": record.product_id.default_code,
+            "puom": record.product_uom_id,
+            "uname": record.product_uom_id.name,
+            "level": level,
+            "code": record.bom_id.code,
         }
         qty_per_bom = record.bom_id.product_qty
         if uom:
             if uom != record.bom_id.product_uom_id:
                 qty = uom._compute_quantity(qty, record.bom_id.product_uom_id)
-            child['pqty'] = (record.product_qty * qty) / qty_per_bom
+            child["pqty"] = (record.product_qty * qty) / qty_per_bom
         else:
             # for the first case, the ponderation is right
-            child['pqty'] = (record.product_qty * qty)
+            child["pqty"] = record.product_qty * qty
         return child
 
     def get_children(self, records, level=0):
@@ -43,7 +42,7 @@ class BomStructureReport(models.AbstractModel):
                 result.append(child)
                 if l.child_line_ids:
                     level += 1
-                    _get_rec(l.child_line_ids, level, qty=child['pqty'], uom=child['puom'])
+                    _get_rec(l.child_line_ids, level, qty=child["pqty"], uom=child["puom"])
                     if level > 0:
                         level -= 1
             return result
@@ -55,9 +54,9 @@ class BomStructureReport(models.AbstractModel):
     @api.multi
     def get_report_values(self, docids, data=None):
         return {
-            'doc_ids': docids,
-            'doc_model': 'mrp.bom',
-            'docs': self.env['mrp.bom'].browse(docids),
-            'get_children': self.get_children,
-            'data': data,
+            "doc_ids": docids,
+            "doc_model": "mrp.bom",
+            "docs": self.env["mrp.bom"].browse(docids),
+            "get_children": self.get_children,
+            "data": data,
         }

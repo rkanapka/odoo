@@ -108,7 +108,7 @@
         <field name="tag_ids" eval="[(6,0,[ref('tag_ivat_03'), ref('tag_ivat_09')])]"/>
         <field name="tax_group_id" ref="tax_group_23"/>
     </record>
-    
+
     <!-- tax definitions for return VAT from purchases -->
 
     <record id="pvat19" model="account.tax.template">
