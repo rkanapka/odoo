@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "Odoo ERP"
+version = "1.0.0" # Just a placeholder; the real version is the git tag
+description = "Odoo ERP repository"
+authors = ["Rimvydas Kanapka"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.11.0"
+
+[tool.poetry.dev-dependencies]
+pre-commit = "*"
+
+[tool.ruff]
+fix = true
+
+[tool.ruff.lint]
+extend-select = [
+    "UP",  # pyupgrade
+    "I",  # isort
+]
