@@ -4,7 +4,7 @@
 <!--
 
      Copyright (C) 2012-2012 南京盈通 ccdos@intoerp.com <small business chart>
-
+     
 会计科目表模板( 小企业会计准则2011)
 
 科目表依据：
@@ -260,8 +260,8 @@ http://kjs.mof.gov.cn/zhengwuxinxi/zhengcefabu/201111/t20111107_605525.html
             <field name="user_type_id" ref="account.data_account_type_current_assets"/>
             <field name="chart_template_id" ref="l10n_chart_china_small_business"/>
         </record>
-
-
+        
+        
         <!-- 二、负债类 -->
         <record id="small_business_chart2001" model="account.account.template">
             <field name="code">2001</field>
@@ -553,7 +553,7 @@ http://kjs.mof.gov.cn/zhengwuxinxi/zhengcefabu/201111/t20111107_605525.html
         <record id="tax_tag4" model="account.account.tag">
             <field name="name">增值税16%进项税</field>
         </record>
-
+        
         <!-- 增值税 -->
         <record id="vats_small_business" model="account.tax.template">
             <field name="chart_template_id" ref="l10n_chart_china_small_business"/>

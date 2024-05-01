@@ -41,7 +41,7 @@
     <t t-name="TableWidget">
         <t t-if='!widget.selected'>
             <div class='table' t-att-style='widget.table_style_str()'>
-                <span
+                <span 
                     t-if="widget.table.shape"
                     t-att-class='"table-cover " + (widget.fill >= 1 ? "full" : "")'
                     t-att-style='"height: " + Math.ceil(widget.fill * 100) + "%;"'
@@ -124,7 +124,7 @@
                         <span class='edit-button shape needs-selection'>
                             <span class='button-option square'><i class='fa fa-square-o'></i></span>
                             <span class='button-option round oe_hidden'><i class='fa fa-circle-o'></i></span>
-                        </span>
+                        </span> 
                         <span class='edit-button color'>
                             <i class='fa fa-tint'></i>
                             <div class='color-picker fg-picker oe_hidden'>
@@ -160,7 +160,7 @@
                             <i class='fa fa-trash'></i>
                         </span>
                     </div>
-
+                    
                 </div>
             </div>
         </div>

@@ -4,10 +4,10 @@ Delivered-To: sales@my.com
 Received: by mail.my.com (Postfix, from userid xxx)
 	id 822ECBFB67; Mon, 24 Oct 2011 07:36:51 +0200 (CEST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on mail.my.com
-X-Spam-Level:
+X-Spam-Level: 
 X-Spam-Status: No, score=-1.0 required=5.0 tests=ALL_TRUSTED autolearn=ham
 	version=3.3.1
-Received: from [192.168.1.146]
+Received: from [192.168.1.146] 
 	(Authenticated sender: info@mail.customer.com)
 	by mail.customer.com (Postfix) with ESMTPSA id 07A30BFAB4
 	for <sales@my.com>; Mon, 24 Oct 2011 07:36:50 +0200 (CEST)

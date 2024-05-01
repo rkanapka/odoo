@@ -34,7 +34,7 @@ Then records follow. The records starts from the record header encoded as B, whe
 ## Metadata record
 
 The metadata record header bit 4-0 contain id of the metadata:
-  - 0 – comment, body of the record is encoded comment string (S)
+  - 0 – comment, body of the record is encoded comment string (S) 
   - 1 – UseCMap, body of the record is usecmap id string (S)
 
 ## Data records
@@ -168,3 +168,4 @@ Next record format is:
   - if sequence = 1, start = end + 1
   - endDelta as UB[ucs2Size], end = start + endDelta
   - code as B[dataSize]
+

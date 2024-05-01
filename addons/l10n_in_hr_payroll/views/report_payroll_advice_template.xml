@@ -48,7 +48,7 @@
                             <tr t-foreach="get_detail(o.line_ids)" t-as="l">
                                 <td>
                                     <span t-esc="l_index+1">.</span>
-                                </td>
+                                </td> 
                                 <td>
                                   <span t-esc="l['name']"/>
                                 </td>

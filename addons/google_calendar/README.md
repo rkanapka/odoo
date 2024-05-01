@@ -49,3 +49,4 @@ Google Calendar
 ---------------
 
 With the plugin Google\_calendar, you can synchronize your Odoo calendar with Google Calendar.
+

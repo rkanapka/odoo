@@ -97,3 +97,4 @@ Have Clear Pricing Strategies
 Use pricelists to record special conditions for a specific customer or to
 define prices for a segment of customers. Define promotions and have them
 applied automatically for all your sales channels.
+

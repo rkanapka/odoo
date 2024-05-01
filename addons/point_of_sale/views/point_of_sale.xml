@@ -79,11 +79,11 @@
                         </div>
                     </div>
                 </div>
-
+                
                 <div class="pos-payment_info">
                     <div class="pos-adv" style="background-image:url(http://placehold.it/300x350?text=ADV);"></div>
                     <div class="pos-company_logo"/>
-
+            
                     <div class="pos-payment_info_details">
                         <div class="pos-total">
                             <div>
@@ -113,7 +113,7 @@
                     </div>
                 </div>
             </div>
-        </t>
+        </t>                    
     </template>
 
 </odoo>

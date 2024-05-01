@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from . import models
@@ -15,8 +16,8 @@ def uninstall_hook(cr, registry):
         db_registry = odoo.modules.registry.Registry.new(dbname)
         with api.Environment.manage(), db_registry.cursor() as cr:
             env = api.Environment(cr, SUPERUSER_ID, {})
-            if "crm.team" in env:
-                recs = env["crm.team"].search([])
+            if 'crm.team' in env:
+                recs = env['crm.team'].search([])
                 for rec in recs:
                     rec._onchange_team_type()
 

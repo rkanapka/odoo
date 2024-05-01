@@ -18,7 +18,7 @@
             self.create(xml_record)
         #avoid the xml id and the associated resource being dropped by the orm by manually making a hit on it
         self._update_dummy(xml_record['model'], xml_record['module'], xml_record['name'])
-
+    
 -
   !python {model: res.company, id: False}: |
     #create the transit location for each company existing

@@ -75,3 +75,4 @@ var Loading = Widget.extend({
 
 return Loading;
 });
+

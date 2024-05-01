@@ -8,7 +8,7 @@
     cost_method: fifo
     valuation: real_time
     weight: 10
-    volume: 1
+    volume: 1 
     property_stock_account_input: o_expense
     property_stock_account_output: o_income
 -
@@ -68,19 +68,19 @@
     picking_ids: [picking_landed_cost_1, picking_landed_cost_2]
     account_journal_id: expenses_journal
     cost_lines:
-      - name: 'equal split'
+      - name: 'equal split' 
         split_method: 'equal'
         price_unit: 10
         product_id: product.product_product_2
-      - name: 'split by quantity'
+      - name: 'split by quantity' 
         split_method: 'by_quantity'
         price_unit: 150
         product_id: product.product_product_2
-      - name: 'split by weight'
+      - name: 'split by weight' 
         split_method: 'by_weight'
         price_unit: 250
         product_id: product.product_product_2
-      - name: 'split by volume'
+      - name: 'split by volume' 
         split_method: 'by_volume'
         price_unit: 20
         product_id: product.product_product_2

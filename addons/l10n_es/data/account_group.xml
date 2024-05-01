@@ -4,7 +4,7 @@
     <record id="account_group_1" model="account.group">
         <field name="code_prefix">1</field>
         <field name="name">Financiación Básica</field>
-    </record>
+    </record>        
     <record id="account_group_10" model="account.group">
         <field name="code_prefix">10</field>
         <field name="name">Capital</field>
@@ -548,7 +548,7 @@
     <record id="account_group_2" model="account.group">
         <field name="code_prefix">2</field>
         <field name="name">Activo no corriente</field>
-    </record>
+    </record>   
     <record id="account_group_20" model="account.group">
         <field name="code_prefix">20</field>
         <field name="name">Inmovilizaciones intangibles</field>
@@ -4641,6 +4641,6 @@
         <field name="code_prefix">994</field>
         <field name="name">Transferencia por deterioro de ajustes valorativos negativos previos, empresas asociadas</field>
         <field name="parent_id" ref="l10n_es.account_group_99"/>
-    </record>
+    </record>    
     </data>
 </odoo>

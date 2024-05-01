@@ -400,7 +400,7 @@ var SeoConfigurator = Dialog.extend({
     disableUnsavableFields: function () {
         var self = this;
         return this.loadMetaData().then(function (data) {
-            //If website.page, hide the google preview & tell user his page is currently unindexed
+            //If website.page, hide the google preview & tell user his page is currently unindexed 
             self.isIndexed = (data && ('website_indexed' in data)) ? data.website_indexed : true;
             self.canEditTitle = data && ('website_meta_title' in data);
             self.canEditDescription = data && ('website_meta_description' in data);

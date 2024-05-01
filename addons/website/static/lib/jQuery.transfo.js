@@ -165,7 +165,7 @@ OTHER DEALINGS IN THE SOFTWARE.
             },0);
 
             _bind($this, transfo);
-
+            
             _targetCss($this, transfo);
             _stop_animation($this[0]);
         }
@@ -285,7 +285,7 @@ OTHER DEALINGS IN THE SOFTWARE.
                 if (event.pageY >= center.top && event.pageX >= center.left) ang += 180;
                 else if (event.pageY >= center.top && event.pageX < center.left) ang += 180;
                 else if (event.pageY < center.top && event.pageX < center.left) ang += 360;
-
+                
                 ang -= dang;
                 if (settings.scaley < 0 && settings.scalex < 0) ang += 180;
 

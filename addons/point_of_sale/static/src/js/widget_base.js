@@ -7,8 +7,8 @@ var Widget = require('web.Widget');
 
 var round_di = utils.round_decimals;
 
-// This is a base class for all Widgets in the POS. It exposes relevant data to the
-// templates :
+// This is a base class for all Widgets in the POS. It exposes relevant data to the 
+// templates : 
 // - widget.currency : { symbol: '$' | '€' | ..., position: 'before' | 'after }
 // - widget.format_currency(amount) : this method returns a formatted string based on the
 //   symbol, the position, and the amount of money.
@@ -21,7 +21,7 @@ var PosBaseWidget = Widget.extend({
         options = options || {};
         this.pos    = options.pos    || (parent ? parent.pos : undefined);
         this.chrome = options.chrome || (parent ? parent.chrome : undefined);
-        this.gui    = options.gui    || (parent ? parent.gui : undefined);
+        this.gui    = options.gui    || (parent ? parent.gui : undefined); 
     },
     format_currency: function(amount,precision){
         var currency = (this.pos && this.pos.currency) ? this.pos.currency : {symbol:'$', position: 'after', rounding: 0.01, decimals: 2};

@@ -29,3 +29,4 @@ Name: content/rkioskxpinstallConfirm.xul
 Digest-Algorithms: MD5 SHA1
 MD5-Digest: SxN1YnRJiuood2WhU85v9g==
 SHA1-Digest: Msj21u4bTAKUi496xld5YCGdjiA=
+

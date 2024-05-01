@@ -247,7 +247,7 @@
             <field name="res_model">project.task</field>
             <field name="res_id" ref="project_task_data_8"/>
         </record>
-
+        
         <record forcecreate="False" id="msg_task_data_8" model="mail.message">
             <field name="subject">How to open the implementation guide ?</field>
             <field name="model">project.task</field>

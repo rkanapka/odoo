@@ -94,3 +94,4 @@ Assign clear goals to users to align them with the company objectives.
 ### Team Targets
 
 Compare revenues with forecasts and budgets in real time.
+

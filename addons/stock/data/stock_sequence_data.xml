@@ -6,7 +6,7 @@
         -->
 
 
-
+        
         <record id="seq_picking_internal" model="ir.sequence">
             <field name="name">Picking INT</field>
             <field name="code">stock.picking</field>

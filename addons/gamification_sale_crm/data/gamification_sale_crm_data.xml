@@ -35,7 +35,7 @@
             <field name="field_id" eval="ref('crm.field_crm_opportunity_report_delay_close')" />
             <field name="field_date_id" eval="ref('crm.field_crm_opportunity_report_date_closed')" />
             <field name="domain">[('user_id','=',user.id),('type', '=', 'lead')]</field>
-        </record>
+        </record> 
 
         <record model="gamification.goal.definition" id="definition_crm_lead_delay_close">
             <field name="name">Days to Close a Deal</field>
@@ -47,7 +47,7 @@
             <field name="field_id" eval="ref('crm.field_crm_opportunity_report_delay_open')" />
             <field name="field_date_id" eval="ref('crm.field_crm_opportunity_report_opening_date')" />
             <field name="domain">[('user_id','=',user.id)]</field>
-        </record>
+        </record> 
 
 
         <record model="gamification.goal.definition" id="definition_crm_nbr_new_opportunities">

@@ -151,7 +151,7 @@ var ReportAction = Widget.extend(ControlPanelMixin, {
 
     /**
      * Helper allowing to send a message to the `this.el` iframe's window and
-     * seting the `targetOrigin` as `this.trusted_origin` (which is the
+     * seting the `targetOrigin` as `this.trusted_origin` (which is the 
      * `web.base.url` ir.config_parameter key) - in other word, only when using
      * this method we only send the message to a trusted domain.
      */

@@ -51,7 +51,7 @@ var PrintBillButton = screens.ActionButtonWidget.extend({
 screens.define_action_button({
     'name': 'print_bill',
     'widget': PrintBillButton,
-    'condition': function(){
+    'condition': function(){ 
         return this.pos.config.iface_printbill;
     },
 });

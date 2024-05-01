@@ -47,7 +47,7 @@ var OrderSelectorWidget = PosBaseWidget.extend({
     },
     deleteorder_click_handler: function(event, $el) {
         var self  = this;
-        var order = this.pos.get_order();
+        var order = this.pos.get_order(); 
         if (!order) {
             return;
         } else if ( !order.is_empty() ){
@@ -120,7 +120,7 @@ var UsernameWidget = PosBaseWidget.extend({
 /* -------- The Header Button --------- */
 
 // Used to quickly add buttons with simple
-// labels and actions to the point of sale
+// labels and actions to the point of sale 
 // header.
 
 var HeaderButtonWidget = PosBaseWidget.extend({
@@ -146,7 +146,7 @@ var HeaderButtonWidget = PosBaseWidget.extend({
 
 /* --------- The Debug Widget --------- */
 
-// The debug widget lets the user control
+// The debug widget lets the user control 
 // and monitor the hardware and software status
 // without the use of the proxy, or to access
 // the raw locally stored db values, useful
@@ -171,7 +171,7 @@ var DebugWidget = PosBaseWidget.extend({
     init: function(parent,options){
         this._super(parent,options);
         var self = this;
-
+        
         // for dragging the debug widget around
         this.dragging  = false;
         this.dragpos = {x:0, y:0};
@@ -196,8 +196,8 @@ var DebugWidget = PosBaseWidget.extend({
                 var top = this.offsetTop;
                 var left = this.offsetLeft;
                 var pos  = eventpos(event);
-                var dx   = pos.x - self.dragpos.x;
-                var dy   = pos.y - self.dragpos.y;
+                var dx   = pos.x - self.dragpos.x; 
+                var dy   = pos.y - self.dragpos.y; 
 
                 self.dragpos = pos;
 
@@ -223,7 +223,7 @@ var DebugWidget = PosBaseWidget.extend({
     },
     start: function(){
         var self = this;
-
+        
         if (this.pos.debug) {
             this.show();
         }
@@ -304,19 +304,19 @@ var DebugWidget = PosBaseWidget.extend({
 
             if (file) {
                 var reader = new FileReader();
-
+                
                 reader.onload = function(event) {
                     var report = self.pos.import_orders(event.target.result);
                     self.gui.show_popup('orderimport',{report:report});
                 };
-
+                
                 reader.readAsText(file);
             }
         });
 
         _.each(this.events, function(name){
             self.pos.proxy.add_notification(name,function(){
-                self.$('.event.'+name).stop().clearQueue().css({'background-color':'#6CD11D'});
+                self.$('.event.'+name).stop().clearQueue().css({'background-color':'#6CD11D'}); 
                 self.$('.event.'+name).animate({'background-color':'#1E1E1E'},2000);
             });
         });
@@ -336,7 +336,7 @@ var StatusWidget = PosBaseWidget.extend({
             this.$('.js_'+this.status[i]).addClass('oe_hidden');
         }
         this.$('.js_'+status).removeClass('oe_hidden');
-
+        
         if(msg){
             this.$('.js_msg').removeClass('oe_hidden').html(msg);
         }else{
@@ -348,7 +348,7 @@ var StatusWidget = PosBaseWidget.extend({
 /* ------- Synch. Notifications ------- */
 
 // Displays if there are orders that could
-// not be submitted, and how many.
+// not be submitted, and how many. 
 
 var SynchNotificationWidget = StatusWidget.extend({
     template: 'SynchNotificationWidget',
@@ -381,7 +381,7 @@ var ProxyStatusWidget = StatusWidget.extend({
                     msg += _t('Scanner');
                 }
             }
-            if( this.pos.config.iface_print_via_proxy ||
+            if( this.pos.config.iface_print_via_proxy || 
                 this.pos.config.iface_cashdrawer ){
                 var printer = status.drivers.escpos ? status.drivers.escpos.status : false;
                 if( printer != 'connected' && printer != 'connecting'){
@@ -407,10 +407,10 @@ var ProxyStatusWidget = StatusWidget.extend({
     },
     start: function(){
         var self = this;
-
+        
         this.set_smart_status(this.pos.proxy.get('status'));
 
-        this.pos.proxy.on('change:status',this,function(eh,status){ //FIXME remove duplicate changes
+        this.pos.proxy.on('change:status',this,function(eh,status){ //FIXME remove duplicate changes 
             self.set_smart_status(status.newValue);
         });
 
@@ -483,7 +483,7 @@ var ClientScreenWidget = PosBaseWidget.extend({
                                 self.change_status_display('warning');
                               }
                         },
-
+                        
                         function(err) {
                             if (typeof err == "undefined") {
                                 self.change_status_display('failure');
@@ -492,12 +492,12 @@ var ClientScreenWidget = PosBaseWidget.extend({
                                 self.pos.proxy.posbox_supports_display = false;
                             }
                         })
-
+    
                     .always(function () {
                         setTimeout(loop,3000);
                     });
                 }
-            }
+            }   
         }
         loop();
     },
@@ -509,7 +509,7 @@ var ClientScreenWidget = PosBaseWidget.extend({
                 this.$el.click(function(){
                     self.pos.render_html_for_customer_facing_display().then(function(rendered_html) {
                         self.pos.proxy.take_ownership_over_client_screen(rendered_html).then(
-
+       
                         function(data) {
                             if (typeof data === 'string') {
                                 data = JSON.parse(data);
@@ -523,8 +523,8 @@ var ClientScreenWidget = PosBaseWidget.extend({
                                 self.pos.proxy.posbox_supports_display = true;
                                 self.status_loop();
                             }
-                        },
-
+                        }, 
+        
                         function(err) {
                             if (typeof err == "undefined") {
                                 self.change_status_display('failure');
@@ -547,7 +547,7 @@ var ClientScreenWidget = PosBaseWidget.extend({
  |             THE CHROME               |
 \*======================================*/
 
-// The Chrome is the main widget that contains
+// The Chrome is the main widget that contains 
 // all other widgets in the PointOfSale.
 //
 // It is the first object instanciated and the
@@ -555,18 +555,18 @@ var ClientScreenWidget = PosBaseWidget.extend({
 //
 // It is mainly composed of :
 // - a header, containing the list of orders
-// - a leftpane, containing the list of bought
-//   products (orderlines)
-// - a rightpane, containing the screens
+// - a leftpane, containing the list of bought 
+//   products (orderlines) 
+// - a rightpane, containing the screens 
 //   (see pos_screens.js)
 // - popups
 // - an onscreen keyboard
-// - .gui which controls the switching between
+// - .gui which controls the switching between 
 //   screens and the showing/closing of popups
 
 var Chrome = PosBaseWidget.extend({
     template: 'Chrome',
-    init: function() {
+    init: function() { 
         var self = this;
         this._super(arguments[0],{});
 
@@ -612,7 +612,7 @@ var Chrome = PosBaseWidget.extend({
         BarcodeEvents.start();
     },
 
-    build_chrome: function() {
+    build_chrome: function() { 
         var self = this;
         FastClick.attach(document.body);
 
@@ -702,7 +702,7 @@ var Chrome = PosBaseWidget.extend({
                 self.previous_touch_y_coordinate = event.touches[0].clientY;
             });
 
-        // prevent the pos body from being scrollable.
+        // prevent the pos body from being scrollable. 
         document.body.addEventListener('touchmove',function(event){
             var node = event.target;
                 var current_touch_y_coordinate = event.touches[0].clientY;
@@ -823,7 +823,7 @@ var Chrome = PosBaseWidget.extend({
             'append':  '.pos-rightheader',
             'args': {
                 label: _lt('Close'),
-                action: function(){
+                action: function(){ 
                     var self = this;
                     if (!this.confirmed) {
                         this.$el.addClass('confirm');
@@ -854,7 +854,7 @@ var Chrome = PosBaseWidget.extend({
         },
     ],
 
-    // This method instantiates all the screens, widgets, etc.
+    // This method instantiates all the screens, widgets, etc. 
     build_widgets: function() {
         var classe;
 
@@ -922,3 +922,4 @@ return {
     UsernameWidget: UsernameWidget,
 };
 });
+

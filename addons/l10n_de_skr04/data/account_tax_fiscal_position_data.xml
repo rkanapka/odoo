@@ -461,7 +461,7 @@
             <field name="account_id" ref="chart_skr04_1401"/>
             <field name="type_tax_use">purchase</field>
             <field name="tag_ids" eval="[(6,0,[ref('l10n_de.tag_de_66')])]"/>
-            <field name="tax_group_id" ref="tax_group_7"/>
+            <field name="tax_group_id" ref="tax_group_7"/>            
         </record>
         <record id="tax_vst_no_ustpflicht_skr04" model="account.tax.template">
             <field name="sequence">16</field>
@@ -499,7 +499,7 @@
             <field name="type_tax_use">purchase</field>
             <field name="tag_ids" eval="[(6,0,[ref('l10n_de.tag_de_66')])]"/>
             <field name="tax_group_id" ref="tax_group_7"/>
-            <field name="price_include" eval="True"/>
+            <field name="price_include" eval="True"/>            
         </record>
         <record id="tax_vst_55_farmer_skr04" model="account.tax.template">
             <field name="sequence">26</field>
@@ -512,7 +512,7 @@
             <field name="account_id" ref="chart_skr04_1400"/>
             <field name="type_tax_use">purchase</field>
             <field name="tag_ids" eval="[(6,0,[ref('l10n_de.tag_de_66')])]"/>
-            <field name="tax_group_id" ref="tax_group_55"/>
+            <field name="tax_group_id" ref="tax_group_55"/>            
         </record>
         <record id="tax_vst_107_farmer_skr04" model="account.tax.template">
             <field name="sequence">27</field>
@@ -525,7 +525,7 @@
             <field name="account_id" ref="chart_skr04_1400"/>
             <field name="type_tax_use">purchase</field>
             <field name="tag_ids" eval="[(6,0,[ref('l10n_de.tag_de_66')])]"/>
-            <field name="tax_group_id" ref="tax_group_107"/>
+            <field name="tax_group_id" ref="tax_group_107"/>            
         </record>
         <record id="tax_ust_19_eu_skr04" model="account.tax.template">
             <field name="sequence">21</field>
@@ -1332,11 +1332,11 @@
         <record id="chart_skr04_4130" model="account.account.template">
             <field name="tax_ids" eval="[(6, 0, [ref('tax_ust_19_3eck_first_skr04')])]"/>
             <field name="chart_template_id" ref="l10n_chart_de_skr04"/>
-        </record>
+        </record> 
         <record id="chart_skr04_4135" model="account.account.template">
             <field name="tax_ids" eval="[(6, 0, [ref('tax_free_newcar_skr04')])]"/>
             <field name="chart_template_id" ref="l10n_chart_de_skr04"/>
-        </record>
+        </record>   
         <record id="chart_skr04_4139" model="account.account.template">
             <field name="tax_ids" eval="[(6, 0, [ref('tax_free_skr04_mit_vst')])]"/>
             <field name="chart_template_id" ref="l10n_chart_de_skr04"/>
@@ -1356,7 +1356,7 @@
         <record id="chart_skr04_4165" model="account.account.template">
             <field name="tax_ids" eval="[(6, 0, [ref('tax_free_skr04_ohne_vst')])]"/>
             <field name="chart_template_id" ref="l10n_chart_de_skr04"/>
-        </record>
+        </record>   
         <record id="chart_skr04_4185" model="account.account.template">
             <field name="tax_ids" eval="[(6, 0, [ref('tax_free_eu_skr04')])]"/>
             <field name="chart_template_id" ref="l10n_chart_de_skr04"/>
@@ -1580,7 +1580,7 @@
         <record id="chart_skr04_4760" model="account.account.template">
             <field name="tax_ids" eval="[(6, 0, [ref('tax_ust_19_skr04')])]"/>
             <field name="chart_template_id" ref="l10n_chart_de_skr04"/>
-        </record>
+        </record>   
         <record id="chart_skr04_4780" model="account.account.template">
             <field name="tax_ids" eval="[(6, 0, [ref('tax_ust_7_skr04')])]"/>
             <field name="chart_template_id" ref="l10n_chart_de_skr04"/>
@@ -1588,7 +1588,7 @@
         <record id="chart_skr04_4790" model="account.account.template">
             <field name="tax_ids" eval="[(6, 0, [ref('tax_ust_19_skr04')])]"/>
             <field name="chart_template_id" ref="l10n_chart_de_skr04"/>
-        </record>
+        </record>   
         <record id="chart_skr04_4836" model="account.account.template">
             <field name="tax_ids" eval="[(6, 0, [ref('tax_ust_19_skr04')])]"/>
             <field name="chart_template_id" ref="l10n_chart_de_skr04"/>
@@ -1668,7 +1668,7 @@
         <record id="chart_skr04_5189" model="account.account.template">
             <field name="tax_ids" eval="[(6, 0, [ref('tax_vst_ust_19_purchase_3eck_last_skr04')])]"/>
             <field name="chart_template_id" ref="l10n_chart_de_skr04"/>
-        </record>
+        </record>       
         <record id="chart_skr04_5191" model="account.account.template">
             <field name="tax_ids" eval="[(6, 0, [ref('tax_vst_7_skr04')])]"/>
             <field name="chart_template_id" ref="l10n_chart_de_skr04"/>
@@ -1676,11 +1676,11 @@
         <record id="chart_skr04_5192" model="account.account.template">
             <field name="tax_ids" eval="[(6, 0, [ref('tax_vst_19_skr04')])]"/>
             <field name="chart_template_id" ref="l10n_chart_de_skr04"/>
-        </record>
+        </record>       
         <record id="chart_skr04_5300" model="account.account.template">
             <field name="tax_ids" eval="[(6, 0, [ref('tax_vst_7_skr04')])]"/>
             <field name="chart_template_id" ref="l10n_chart_de_skr04"/>
-        </record>
+        </record>       
         <record id="chart_skr04_5400" model="account.account.template">
             <field name="tax_ids" eval="[(6, 0, [ref('tax_vst_19_skr04')])]"/>
             <field name="chart_template_id" ref="l10n_chart_de_skr04"/>
@@ -1748,11 +1748,11 @@
         <record id="chart_skr04_5725" model="account.account.template">
             <field name="tax_ids" eval="[(6, 0, [ref('tax_eu_19_purchase_skr04')])]"/>
             <field name="chart_template_id" ref="l10n_chart_de_skr04"/>
-        </record>
+        </record>       
         <record id="chart_skr04_5731" model="account.account.template">
             <field name="tax_ids" eval="[(6, 0, [ref('tax_vst_7_skr04')])]"/>
             <field name="chart_template_id" ref="l10n_chart_de_skr04"/>
-        </record>
+        </record>       
         <record id="chart_skr04_5734" model="account.account.template">
             <field name="tax_ids" eval="[(6, 0, [ref('tax_vst_7_skr04')])]"/>
             <field name="chart_template_id" ref="l10n_chart_de_skr04"/>
@@ -1772,11 +1772,11 @@
         <record id="chart_skr04_5743" model="account.account.template">
             <field name="tax_ids" eval="[(6, 0, [ref('tax_eu_7_purchase_skr04')])]"/>
             <field name="chart_template_id" ref="l10n_chart_de_skr04"/>
-        </record>
+        </record>       
         <record id="chart_skr04_5750" model="account.account.template">
             <field name="tax_ids" eval="[(6, 0, [ref('tax_vst_7_skr04')])]"/>
             <field name="chart_template_id" ref="l10n_chart_de_skr04"/>
-        </record>
+        </record>       
         <record id="chart_skr04_5754" model="account.account.template">
             <field name="tax_ids" eval="[(6, 0, [ref('tax_vst_7_skr04')])]"/>
             <field name="chart_template_id" ref="l10n_chart_de_skr04"/>
@@ -1788,11 +1788,11 @@
         <record id="chart_skr04_5760" model="account.account.template">
             <field name="tax_ids" eval="[(6, 0, [ref('tax_vst_19_skr04')])]"/>
             <field name="chart_template_id" ref="l10n_chart_de_skr04"/>
-        </record>
+        </record>       
         <record id="chart_skr04_5780" model="account.account.template">
             <field name="tax_ids" eval="[(6, 0, [ref('tax_vst_7_skr04')])]"/>
             <field name="chart_template_id" ref="l10n_chart_de_skr04"/>
-        </record>
+        </record>       
         <record id="chart_skr04_5784" model="account.account.template">
             <field name="tax_ids" eval="[(6, 0, [ref('tax_vst_7_skr04')])]"/>
             <field name="chart_template_id" ref="l10n_chart_de_skr04"/>
@@ -1812,7 +1812,7 @@
         <record id="chart_skr04_5792" model="account.account.template">
             <field name="tax_ids" eval="[(6, 0, [ref('tax_vst_ust_19_purchase_3eck_last_skr04')])]"/>
             <field name="chart_template_id" ref="l10n_chart_de_skr04"/>
-        </record>
+        </record>       
         <record id="chart_skr04_5794" model="account.account.template">
             <field name="tax_ids" eval="[(6, 0, [ref('tax_vst_55_farmer_skr04')])]"/>
             <field name="chart_template_id" ref="l10n_chart_de_skr04"/>
@@ -1832,7 +1832,7 @@
         <record id="chart_skr04_5908" model="account.account.template">
             <field name="tax_ids" eval="[(6, 0, [ref('tax_vst_7_skr04')])]"/>
             <field name="chart_template_id" ref="l10n_chart_de_skr04"/>
-        </record>
+        </record>       
         <record id="chart_skr04_5910" model="account.account.template">
             <field name="tax_ids" eval="[(6, 0, [ref('tax_ust_vst_7_purchase_13b_bau_skr04')])]"/>
             <field name="chart_template_id" ref="l10n_chart_de_skr04"/>
@@ -1856,7 +1856,7 @@
         <record id="chart_skr04_5925" model="account.account.template">
             <field name="tax_ids" eval="[(6, 0, [ref('tax_vst_ust_19_purchase_13b_werk_ausland_skr04')])]"/>
             <field name="chart_template_id" ref="l10n_chart_de_skr04"/>
-        </record>
+        </record>       
         <record id="chart_skr04_5951" model="account.account.template">
             <field name="tax_ids" eval="[(6, 0, [ref('tax_vst_ust_19_purchase_13b_werk_ausland_skr04')])]"/>
             <field name="chart_template_id" ref="l10n_chart_de_skr04"/>
@@ -1890,7 +1890,7 @@
         <record id="chart_skr04_6892" model="account.account.template">
             <field name="tax_ids" eval="[(6, 0, [ref('tax_free_skr04_ohne_vst')])]"/>
             <field name="chart_template_id" ref="l10n_chart_de_skr04"/>
-        </record>
+        </record>   
         <record id="chart_skr04_6931" model="account.account.template">
             <field name="tax_ids" eval="[(6, 0, [ref('tax_ust_7_skr04')])]"/>
             <field name="chart_template_id" ref="l10n_chart_de_skr04"/>
@@ -1910,5 +1910,5 @@
         <record id="chart_skr04_6938" model="account.account.template">
             <field name="tax_ids" eval="[(6, 0, [ref('tax_ust_19_eu_skr04')])]"/>
             <field name="chart_template_id" ref="l10n_chart_de_skr04"/>
-        </record>
+        </record>       
 </odoo>

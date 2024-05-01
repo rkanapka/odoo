@@ -1,6 +1,5 @@
 from odoo.addons.account.tests.account_test_classes import AccountingTestCase
 
-
 class TestManualReconciliation(AccountingTestCase):
 
     def test_reconciliation_proposition(self):

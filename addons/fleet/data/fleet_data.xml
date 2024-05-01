@@ -381,12 +381,12 @@
        <record id="type_contract_repairing" model="fleet.service.type">
           <field name="name">Repairing</field>
           <field name="category">service</field>
-      </record>
+      </record>  
 
       <record id="type_service_refueling" model="fleet.service.type">
           <field name="name">Refueling</field>
           <field name="category">service</field>
-      </record>
+      </record> 
 
       <record id="vehicle_tag_junior" model="fleet.vehicle.tag" >
         <field name="name">Junior</field>

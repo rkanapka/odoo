@@ -1,12 +1,13 @@
+# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 {
-    "name": "Gamification",
-    "version": "1.0",
-    "sequence": 160,
-    "category": "Human Resources",
-    "website": "https://www.odoo.com/page/gamification",
-    "depends": ["mail", "web_kanban_gauge"],
-    "description": """
+    'name': 'Gamification',
+    'version': '1.0',
+    'sequence': 160,
+    'category': 'Human Resources',
+    'website' : 'https://www.odoo.com/page/gamification',
+    'depends': ['mail', 'web_kanban_gauge'],
+    'description': """
 Gamification process
 ====================
 The Gamification module provides ways to evaluate and motivate the users of Odoo.
@@ -18,17 +19,18 @@ For non-numerical achievements, **badges** can be granted to users. From a simpl
 
 Both goals and badges are flexibles and can be adapted to a large range of modules and actions. When installed, this module creates easy goals to help new users to discover Odoo and configure their user profile.
 """,
-    "data": [
-        "wizard/update_goal.xml",
-        "wizard/grant_badge.xml",
-        "views/badge.xml",
-        "views/challenge.xml",
-        "views/goal.xml",
-        "data/cron.xml",
-        "security/gamification_security.xml",
-        "security/ir.model.access.csv",
-        "data/goal_base.xml",
-        "data/badge.xml",
-        "views/gamification.xml",
+
+    'data': [
+        'wizard/update_goal.xml',
+        'wizard/grant_badge.xml',
+        'views/badge.xml',
+        'views/challenge.xml',
+        'views/goal.xml',
+        'data/cron.xml',
+        'security/gamification_security.xml',
+        'security/ir.model.access.csv',
+        'data/goal_base.xml',
+        'data/badge.xml',
+        'views/gamification.xml',
     ],
 }

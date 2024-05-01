@@ -36,7 +36,7 @@
                             <field name="trg_date_range" attrs="{'required': [('trigger','=','on_time')]}"/>
                             <field name="trg_date_range_type" attrs="{'required': [('trigger','=','on_time')]}"/>
                         </div>
-                        <field name="trg_date_calendar_id"
+                        <field name="trg_date_calendar_id" 
                             attrs="{'invisible': ['|', ('trg_date_id','=',False), ('trg_date_range_type', '!=', 'day')]}"/>
                     </group>
                 </xpath>
@@ -77,7 +77,7 @@
             <field name="view_id" ref="view_base_automation_tree"/>
             <field name="help" type="html">
               <p class="oe_view_nocontent_create">
-                Click to setup a new automated automation.
+                Click to setup a new automated automation. 
               </p><p>
                 Use automated actions to automatically trigger actions for
                 various screens. Example: a lead created by a specific user may

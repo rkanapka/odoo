@@ -327,7 +327,7 @@ define([
 
       $dimensionDisplay.html(dim.c + ' x ' + dim.r);
     };
-
+    
     /**
      * bind KeyMap on keydown
      *
@@ -513,7 +513,7 @@ define([
       $editable.on('scroll', bindCustomEvent($holder, callbacks, 'scroll'));
 
       $editable.on('paste', bindCustomEvent($holder, callbacks, 'paste'));
-
+      
       // [workaround] IE doesn't have input events for contentEditable
       //  - see: https://goo.gl/4bfIvA
       var changeEventName = agent.isMSIE ? 'DOMCharacterDataModified DOMSubtreeModified DOMNodeInserted' : 'input';
@@ -551,7 +551,7 @@ define([
         }
       }
     };
-
+      
     this.detach = function (layoutInfo, options) {
       layoutInfo.holder().off();
       layoutInfo.editable().off();

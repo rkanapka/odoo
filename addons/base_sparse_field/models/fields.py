@@ -1,17 +1,17 @@
+# -*- coding: utf-8 -*-
+
 import json
 
 from odoo import fields
 
 
 def monkey_patch(cls):
-    """Return a method decorator to monkey-patch the given class."""
-
+    """ Return a method decorator to monkey-patch the given class. """
     def decorate(func):
         name = func.__name__
         func.super = getattr(cls, name, None)
         setattr(cls, name, func)
         return func
-
     return decorate
 
 
@@ -33,19 +33,17 @@ fields.Field.__doc__ += """
             be stored.
 """
 
-
 @monkey_patch(fields.Field)
 def _get_attrs(self, model, name):
     attrs = _get_attrs.super(self, model, name)
-    if attrs.get("sparse"):
+    if attrs.get('sparse'):
         # by default, sparse fields are not stored and not copied
-        attrs["store"] = False
-        attrs["copy"] = attrs.get("copy", False)
-        attrs["compute"] = self._compute_sparse
-        if not attrs.get("readonly"):
-            attrs["inverse"] = self._inverse_sparse
+        attrs['store'] = False
+        attrs['copy'] = attrs.get('copy', False)
+        attrs['compute'] = self._compute_sparse
+        if not attrs.get('readonly'):
+            attrs['inverse'] = self._inverse_sparse
     return attrs
-
 
 @monkey_patch(fields.Field)
 def _compute_sparse(self, records):
@@ -55,7 +53,6 @@ def _compute_sparse(self, records):
     if self.relational:
         for record in records:
             record[self.name] = record[self.name].exists()
-
 
 @monkey_patch(fields.Field)
 def _inverse_sparse(self, records):
@@ -76,15 +73,13 @@ def _inverse_sparse(self, records):
 # Definition and implementation of serialized fields
 #
 
-
 class Serialized(fields.Field):
-    """Serialized fields provide the storage for sparse fields."""
-
-    type = "serialized"
+    """ Serialized fields provide the storage for sparse fields. """
+    type = 'serialized'
     _slots = {
-        "prefetch": False,  # not prefetched by default
+        'prefetch': False,              # not prefetched by default
     }
-    column_type = ("text", "text")
+    column_type = ('text', 'text')
 
     def convert_to_column(self, value, record, values=None):
         return json.dumps(value)
@@ -93,6 +88,5 @@ class Serialized(fields.Field):
         # cache format: dict
         value = value or {}
         return value if isinstance(value, dict) else json.loads(value)
-
 
 fields.Serialized = Serialized

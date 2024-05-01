@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from odoo import fields, models, tools
@@ -6,43 +7,37 @@ from odoo import fields, models, tools
 class ReportProjectTaskUser(models.Model):
     _name = "report.project.task.user"
     _description = "Tasks by user and project"
-    _order = "name desc, project_id"
+    _order = 'name desc, project_id'
     _auto = False
 
-    name = fields.Char(string="Task Title", readonly=True)
-    user_id = fields.Many2one("res.users", string="Assigned To", readonly=True)
-    date_start = fields.Datetime(string="Assignation Date", readonly=True)
-    date_end = fields.Datetime(string="Ending Date", readonly=True)
-    date_deadline = fields.Date(string="Deadline", readonly=True)
-    date_last_stage_update = fields.Datetime(string="Last Stage Update", readonly=True)
-    project_id = fields.Many2one("project.project", string="Project", readonly=True)
-    working_days_close = fields.Float(
-        string="# Working Days to Close",
-        digits=(16, 2),
-        readonly=True,
-        group_operator="avg",
-        help="Number of Working Days to close the task",
-    )
-    working_days_open = fields.Float(
-        string="# Working Days to Assign",
-        digits=(16, 2),
-        readonly=True,
-        group_operator="avg",
-        help="Number of Working Days to Open the task",
-    )
-    delay_endings_days = fields.Float(string="# Days to Deadline", digits=(16, 2), readonly=True)
-    nbr = fields.Integer("# of Tasks", readonly=True)  # TDE FIXME master: rename into nbr_tasks
-    priority = fields.Selection(
-        [("0", "Low"), ("1", "Normal"), ("2", "High")], size=1, readonly=True, string="Priority"
-    )
-    state = fields.Selection(
-        [("normal", "In Progress"), ("blocked", "Blocked"), ("done", "Ready for next stage")],
-        string="Kanban State",
-        readonly=True,
-    )
-    company_id = fields.Many2one("res.company", string="Company", readonly=True)
-    partner_id = fields.Many2one("res.partner", string="Contact", readonly=True)
-    stage_id = fields.Many2one("project.task.type", string="Stage", readonly=True)
+    name = fields.Char(string='Task Title', readonly=True)
+    user_id = fields.Many2one('res.users', string='Assigned To', readonly=True)
+    date_start = fields.Datetime(string='Assignation Date', readonly=True)
+    date_end = fields.Datetime(string='Ending Date', readonly=True)
+    date_deadline = fields.Date(string='Deadline', readonly=True)
+    date_last_stage_update = fields.Datetime(string='Last Stage Update', readonly=True)
+    project_id = fields.Many2one('project.project', string='Project', readonly=True)
+    working_days_close = fields.Float(string='# Working Days to Close',
+        digits=(16,2), readonly=True, group_operator="avg",
+        help="Number of Working Days to close the task")
+    working_days_open = fields.Float(string='# Working Days to Assign',
+        digits=(16,2), readonly=True, group_operator="avg",
+        help="Number of Working Days to Open the task")
+    delay_endings_days = fields.Float(string='# Days to Deadline', digits=(16,2), readonly=True)
+    nbr = fields.Integer('# of Tasks', readonly=True)  # TDE FIXME master: rename into nbr_tasks
+    priority = fields.Selection([
+        ('0', 'Low'),
+        ('1', 'Normal'),
+        ('2', 'High')
+        ], size=1, readonly=True, string="Priority")
+    state = fields.Selection([
+            ('normal', 'In Progress'),
+            ('blocked', 'Blocked'),
+            ('done', 'Ready for next stage')
+        ], string='Kanban State', readonly=True)
+    company_id = fields.Many2one('res.company', string='Company', readonly=True)
+    partner_id = fields.Many2one('res.partner', string='Contact', readonly=True)
+    stage_id = fields.Many2one('project.task.type', string='Stage', readonly=True)
 
     def _select(self):
         select_str = """
@@ -89,13 +84,10 @@ class ReportProjectTaskUser(models.Model):
 
     def init(self):
         tools.drop_view_if_exists(self._cr, self._table)
-        self._cr.execute(
-            """
+        self._cr.execute("""
             CREATE view %s as
               %s
               FROM project_task t
                 WHERE t.active = 'true'
                 %s
-        """
-            % (self._table, self._select(), self._group_by())
-        )
+        """ % (self._table, self._select(), self._group_by()))

@@ -13,6 +13,6 @@
             <field name="code">stock.landed.cost</field>
             <field name="prefix">LC/%(year)s/</field>
             <field name="padding">4</field>
-        </record>
+        </record>    
     </data>
 </odoo>

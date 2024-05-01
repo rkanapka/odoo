@@ -158,3 +158,4 @@ accessing an invalid key on a ``dict``, ``py.js`` will throw
 ``Error("KeyError: 'foo'")``.
 
 .. _Python Data Model: http://docs.python.org/reference/datamodel.html
+

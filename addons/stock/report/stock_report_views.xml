@@ -20,11 +20,11 @@
             print_report_name="'Delivery Slip - %s - %s' % (object.partner_id.name or '', object.name)"
         />
         <report
-            string="Inventory"
-            id="action_report_inventory"
-            model="stock.inventory"
+            string="Inventory" 
+            id="action_report_inventory" 
+            model="stock.inventory" 
             report_type="qweb-pdf"
-            name="stock.report_inventory"
+            name="stock.report_inventory" 
             file="stock.report_inventory"
             print_report_name="'Inventory - %s' % (object.name)"
         />
@@ -47,7 +47,7 @@
             id="action_report_location_barcode"
             model="stock.location"
             report_type="qweb-pdf"
-            name="stock.report_location_barcode"
+            name="stock.report_location_barcode" 
             file="stock.report_location_barcode"
             print_report_name="'Location - %s' % object.name"
         />

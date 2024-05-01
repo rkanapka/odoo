@@ -35,7 +35,7 @@
         <field name="unit_amount">1.00</field>
         <field name="project_id" ref='project.project_project_2'/>
         <field name="amount">-30.00</field>
-    </record>
+    </record>   
 
     <record id="working_hours_maintenance" model="account.analytic.line">
         <field name="name">Delivery and maintenance</field>
@@ -44,6 +44,6 @@
         <field name="unit_amount">1.00</field>
         <field name="project_id" ref='project.project_project_2'/>
         <field name="amount">-30.00</field>
-    </record>
+    </record>   
 
 </odoo>

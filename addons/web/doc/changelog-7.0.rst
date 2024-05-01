@@ -119,3 +119,5 @@ are used to.
 
 But as ``DataGroup`` users in 6.1 were rare (and there really was little reason
 to use it), it has been removed as a public API.
+
+

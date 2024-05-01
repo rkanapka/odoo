@@ -181,7 +181,7 @@
                             icon="fa-pencil-square-o" attrs="{'invisible':[('state', 'in', ('draft','sent','to approve')),('invoice_ids','=',[])]}">
                             <field name="invoice_count" widget="statinfo" string="Vendor Bills"/>
                             <field name='invoice_ids' invisible="1"/>
-                        </button>
+                        </button> 
                     </div>
                     <div class="oe_title">
                         <label string="Request for Quotation " attrs="{'invisible': [('state','not in',('draft','sent'))]}"/>
@@ -446,7 +446,7 @@
             <field name="search_view_id" ref="view_purchase_order_filter"/>
             <field name="help" type="html">
               <p class="oe_view_nocontent_create">
-                Click to create a quotation that will be converted into a purchase order.
+                Click to create a quotation that will be converted into a purchase order. 
               </p><p>
                 Use this menu to search within your purchase orders by
                 references, vendor, products, etc. For each purchase order,
@@ -537,7 +537,7 @@
         </record>
 
         <!-- Product Suppliers-->
-
+        
         <record id="view_product_supplier_inherit" model="ir.ui.view">
             <field name="name">product.template.supplier.form.inherit</field>
             <field name="model">product.template</field>
@@ -607,7 +607,7 @@
                 </field>
             </field>
         </record>
-
+        
         <record id="view_product_template_purchase_buttons_from" model="ir.ui.view">
             <field name="name">product.template.purchase.button.inherit</field>
             <field name="model">product.template</field>

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 # SKR03
@@ -31,24 +32,24 @@
 
 
 {
-    "name": "Deutschland SKR03 - Accounting",
-    "version": "3.0",
-    "author": "openbig.org",
-    "website": "http://www.openbig.org",
-    "category": "Localization",
-    "description": """
+    'name': 'Deutschland SKR03 - Accounting',
+    'version': '3.0',
+    'author': 'openbig.org',
+    'website': 'http://www.openbig.org',
+    'category': 'Localization',
+    'description': """
 Dieses  Modul beinhaltet einen deutschen Kontenrahmen basierend auf dem SKR03.
 ==============================================================================
 
 German accounting chart and localization.
     """,
-    "depends": ["l10n_de"],
-    "data": [
-        "data/l10n_de_skr03_chart_data.xml",
-        "data/account_data.xml",
-        "data/account_tax_fiscal_position_data.xml",
-        "data/account_reconcile_model_template.xml",
-        "data/account_chart_template_data.yml",
+    'depends': ['l10n_de'],
+    'data': [
+        'data/l10n_de_skr03_chart_data.xml',
+        'data/account_data.xml',
+        'data/account_tax_fiscal_position_data.xml', 
+        'data/account_reconcile_model_template.xml',
+        'data/account_chart_template_data.yml',
     ],
-    "auto_install": True,
+    'auto_install': True
 }

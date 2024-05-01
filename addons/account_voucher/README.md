@@ -38,3 +38,4 @@ Integration With Other Apps
 
 Bill automatically based on sales orders, delivery orders, contracts or on time
 and material. Define recurrencies to produce recurring invoice automatically.
+

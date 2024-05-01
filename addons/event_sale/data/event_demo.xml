@@ -69,7 +69,7 @@
         <field name="price">1500.0</field>
         <field name="seats_max">10</field>
     </record>
-
+    
 
     <record id="event_1_ticket_1" model="event.event.ticket">
         <field name="name">Standard</field>
@@ -204,7 +204,7 @@
                 </tr>
             </table>
         ]]></field>
-        <field name="badge_innerright"><![CDATA[
+        <field name="badge_innerright"><![CDATA[ 
             <div>
                 <h2>Exhibition Hall</h2>
             </div>

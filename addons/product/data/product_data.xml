@@ -11,7 +11,7 @@
             <field name="parent_id" ref="product_category_all"/>
             <field name="name">Saleable</field>
         </record>
-
+        
         <record id="product_uom_categ_unit" model="product.uom.categ">
             <field name="name">Unit</field>
         </record>

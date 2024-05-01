@@ -91,7 +91,7 @@
                 </section>
             </field>
         </record>
-
+        
         <record id="confirmation_mail" model="mail.template">
             <field name="name">Online Quote: confirmation e-mail</field>
             <field name="email_from">${(object.user_id.email or object.company_id.email or 'noreply@localhost')|safe}</field>
@@ -123,7 +123,7 @@
             <td style="padding:0px 10px 5px 5px;font-size: 14px;">
                 <p>Dear ${object.partner_id.name},</p><br/>
                 <p>Your order <a href="/quote/${object.id}/${object.access_token}">${object.name}</a> has been validated!</p><br/>
-
+                
                 % if object.partner_id.user_ids
                 <p>You can view your quotes, sales orders and invoices online by going to our <a style="text-decoration:none; color: #875A7B;" href="/my/home">Online Portal</a>.</p><br/>
                 % endif

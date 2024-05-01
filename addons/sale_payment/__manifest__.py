@@ -1,9 +1,11 @@
+# -*- coding: utf-8 -*-
+
 {
-    "name": "Payment - Sale",
-    "category": "Sales",
-    "summary": "Link Sales and Payment",
-    "version": "1.0",
-    "description": """Link Sales and Payment
+    'name': 'Payment - Sale',
+    'category': 'Sales',
+    'summary': 'Link Sales and Payment',
+    'version': '1.0',
+    'description': """Link Sales and Payment
 
 Provide tools for sale-related payment
 
@@ -12,14 +14,14 @@ Provide tools for sale-related payment
  * JS code to handle a payment form (eCommerce
  * add payment-related fields on SO
 """,
-    "depends": ["payment", "sale"],
-    "data": [
-        "views/payment_views.xml",
-        "views/crm_team_views.xml",
-        "views/sale_order_views.xml",
-        "views/sale_portal_templates.xml",
-        "views/settings.xml",
+    'depends': ['payment', 'sale'],
+    'data': [
+        'views/payment_views.xml',
+        'views/crm_team_views.xml',
+        'views/sale_order_views.xml',
+        'views/sale_portal_templates.xml',
+        'views/settings.xml',
     ],
-    "installable": True,
-    "auto_install": False,
+    'installable': True,
+    'auto_install': False,
 }

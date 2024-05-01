@@ -1,13 +1,14 @@
+# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 {
-    "name": "Leave Management",
-    "version": "1.5",
-    "category": "Human Resources",
-    "sequence": 27,
-    "summary": "Leave allocations and leave requests",
-    "website": "https://www.odoo.com/page/employees",
-    "description": """
+    'name': 'Leave Management',
+    'version': '1.5',
+    'category': 'Human Resources',
+    'sequence': 27,
+    'summary': 'Leave allocations and leave requests',
+    'website': 'https://www.odoo.com/page/employees',
+    'description': """
 Manage leave requests and allocations
 =====================================
 
@@ -23,29 +24,33 @@ You can keep track of leaves in different ways by following reports:
 
 A synchronization with an internal agenda (Meetings of the CRM module) is also possible in order to automatically create a meeting when a leave request is accepted by setting up a type of meeting in Leave Type.
 """,
-    "depends": ["hr", "calendar", "resource"],
-    "data": [
-        "data/report_paperformat.xml",
-        "data/hr_holidays_data.xml",
-        "security/hr_holidays_security.xml",
-        "security/ir.model.access.csv",
-        "views/resource_views.xml",
-        "views/hr_holidays_views.xml",
-        "views/hr_views.xml",
-        "wizard/hr_holidays_summary_department_views.xml",
-        "wizard/hr_holidays_summary_employees_views.xml",
-        "report/hr_holidays_templates.xml",
-        "report/hr_holidays_reports.xml",
-        "report/hr_holidays_leaves_report_views.xml",
-        "report/hr_holidays_views.xml",
+    'depends': ['hr', 'calendar', 'resource'],
+    'data': [
+        'data/report_paperformat.xml',
+        'data/hr_holidays_data.xml',
+
+        'security/hr_holidays_security.xml',
+        'security/ir.model.access.csv',
+
+        'views/resource_views.xml',
+        'views/hr_holidays_views.xml',
+        'views/hr_views.xml',
+
+        'wizard/hr_holidays_summary_department_views.xml',
+        'wizard/hr_holidays_summary_employees_views.xml',
+
+        'report/hr_holidays_templates.xml',
+        'report/hr_holidays_reports.xml',
+        'report/hr_holidays_leaves_report_views.xml',
+        'report/hr_holidays_views.xml',
     ],
-    "demo": [
-        "data/hr_holidays_demo.xml",
+    'demo': [
+        'data/hr_holidays_demo.xml',
     ],
-    "qweb": [
-        "static/src/xml/*.xml",
+    'qweb': [
+        'static/src/xml/*.xml',
     ],
-    "installable": True,
-    "application": True,
-    "auto_install": False,
+    'installable': True,
+    'application': True,
+    'auto_install': False,
 }

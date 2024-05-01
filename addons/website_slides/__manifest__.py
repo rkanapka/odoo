@@ -1,10 +1,11 @@
+# -*- coding: utf-8 -*-
 {
-    "name": "Slides",
-    "version": "1.0",
-    "sequence": 145,
-    "summary": "Share and Publish Videos, Presentations and Documents",
-    "category": "Website",
-    "description": """
+    'name': 'Slides',
+    'version': '1.0',
+    'sequence': 145,
+    'summary': 'Share and Publish Videos, Presentations and Documents',
+    'category': 'Website',
+    'description': """
 Share and Publish Videos, Presentations and Documents'
 ======================================================
 
@@ -15,17 +16,19 @@ Share and Publish Videos, Presentations and Documents'
  * Channel Subscription
  * Supported document types : PDF, images, YouTube videos and Google Drive documents)
 """,
-    "depends": ["website", "website_mail"],
-    "data": [
-        "views/res_config_settings_views.xml",
-        "views/website_slides.xml",
-        "views/website_slides_embed.xml",
-        "views/website_slides_backend.xml",
-        "data/website_slides_data.xml",
-        "security/ir.model.access.csv",
-        "security/website_slides_security.xml",
+    'depends': ['website', 'website_mail'],
+    'data': [
+        'views/res_config_settings_views.xml',
+        'views/website_slides.xml',
+        'views/website_slides_embed.xml',
+        'views/website_slides_backend.xml',
+        'data/website_slides_data.xml',
+        'security/ir.model.access.csv',
+        'security/website_slides_security.xml'
     ],
-    "demo": ["data/website_slides_demo.xml"],
-    "installable": True,
-    "application": True,
+    'demo': [
+        'data/website_slides_demo.xml'
+    ],
+    'installable': True,
+    'application': True,
 }

@@ -17,7 +17,7 @@
                         <group>
                             <field name="name"/>
                             <field name="move_type"/>
-                        </group>
+                        </group>                        
                     </sheet>
                 </form>
             </field>

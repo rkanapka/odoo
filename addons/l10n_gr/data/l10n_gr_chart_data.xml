@@ -705,7 +705,7 @@
        <record id="chartgr_14_00" model="account.account.template">
             <field name="code">14.00</field>
             <field name="name">Έπιπλα</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_current_assets"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -1956,7 +1956,7 @@
        <record id="chartgr_30_01" model="account.account.template">
             <field name="code">30.01</field>
             <field name="name">Πελάτες εξωτερικού</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_current_assets"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -2090,7 +2090,7 @@
        <record id="chartgr_31_00" model="account.account.template">
             <field name="code">31.00</field>
             <field name="name">Γραμμάτια στο χαρτοφυλάκιο</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_current_assets"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -3061,7 +3061,7 @@
        <record id="chartgr_39_30" model="account.account.template">
             <field name="code">39.30</field>
             <field name="name">Πελάτες </field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_current_assets"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -3124,7 +3124,7 @@
        <record id="chartgr_39_38" model="account.account.template">
             <field name="code">39.38</field>
             <field name="name">Χρηματικά Διαθέσιμα</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_current_assets"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -3808,7 +3808,7 @@
        <record id="chartgr_50_01" model="account.account.template">
             <field name="code">50.01</field>
             <field name="name">Προμηθευτές εξωτερικού</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -3817,7 +3817,7 @@
        <record id="chartgr_50_02" model="account.account.template">
             <field name="code">50.02</field>
             <field name="name">Ελληνικό Δημόσιο</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -3826,7 +3826,7 @@
        <record id="chartgr_50_03" model="account.account.template">
             <field name="code">50.03</field>
             <field name="name">ΝΠΔΔ και Δημόσιες Επιχειρήσεις</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -3844,7 +3844,7 @@
        <record id="chartgr_50_05" model="account.account.template">
             <field name="code">50.05</field>
             <field name="name">Προκαταβολές σε προμηθευτές</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -3961,7 +3961,7 @@
        <record id="chartgr_52_00" model="account.account.template">
             <field name="code">52.00</field>
             <field name="name">Τράπεζα Α'</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -3996,7 +3996,7 @@
        <record id="chartgr_53_01" model="account.account.template">
             <field name="code">53.01</field>
             <field name="name">Μερίσματα πληρωτέα</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -4014,7 +4014,7 @@
        <record id="chartgr_53_03" model="account.account.template">
             <field name="code">53.03</field>
             <field name="name">Οφειλόμενες αμοιβές προσωπικού</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -4185,7 +4185,7 @@
        <record id="chartgr_54_00" model="account.account.template">
             <field name="code">54.00</field>
             <field name="name">Φόρος Προστιθέμενης Αξίας</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -4194,7 +4194,7 @@
        <record id="chartgr_54_01" model="account.account.template">
             <field name="code">54.01</field>
             <field name="name">Ειδικός φόρος κατανάλωσης</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -4203,7 +4203,7 @@
        <record id="chartgr_54_03_00" model="account.account.template">
             <field name="code">54.03.00</field>
             <field name="name">Φόρος μισθωτών υπηρεσιών</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -4221,7 +4221,7 @@
        <record id="chartgr_54_03_04" model="account.account.template">
             <field name="code">54.03.04</field>
             <field name="name">Φόρος αποζημιώσεων απολυομένων</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -4239,7 +4239,7 @@
        <record id="chartgr_54_04_00" model="account.account.template">
             <field name="code">54.04.00</field>
             <field name="name">Φόρος αμοιβών ελευθέρων επαγγελματιών</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -4266,7 +4266,7 @@
        <record id="chartgr_54_05" model="account.account.template">
             <field name="code">54.05</field>
             <field name="name">Φόροι - Τέλη κυκλοφορίας μεταφορικών μέσων</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -4275,7 +4275,7 @@
        <record id="chartgr_54_06" model="account.account.template">
             <field name="code">54.06</field>
             <field name="name">Φόροι - Τέλη τιμολογιών αγοράς</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -4428,7 +4428,7 @@
        <record id="chartgr_54_99" model="account.account.template">
             <field name="code">54.99</field>
             <field name="name">Φόροι - Τέλη πρηγούμενων χρήσεων</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -4473,7 +4473,7 @@
        <record id="chartgr_55_01" model="account.account.template">
             <field name="code">55.01</field>
             <field name="name">Λοιπά Ταμεία κύριας ασφάλισης</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -4482,7 +4482,7 @@
        <record id="chartgr_55_02" model="account.account.template">
             <field name="code">55.02</field>
             <field name="name">Επικουρικά Ταμεία</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -4509,7 +4509,7 @@
        <record id="chartgr_56_00" model="account.account.template">
             <field name="code">56.00</field>
             <field name="name">Έσοδα επομένων χρήσεων</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -4518,7 +4518,7 @@
        <record id="chartgr_56_01" model="account.account.template">
             <field name="code">56.01</field>
             <field name="name">Έξοδα χρήσης δεδουλευμένα (πληρωτέα)</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -4527,7 +4527,7 @@
        <record id="chartgr_56_02" model="account.account.template">
             <field name="code">56.02</field>
             <field name="name">Αγορές υπό τακτοποίηση</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -4536,7 +4536,7 @@
        <record id="chartgr_56_03" model="account.account.template">
             <field name="code">56.03</field>
             <field name="name">Εκπτώσεις επί πωλήσεων χρήσης υπό διακανονισμό</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -4554,7 +4554,7 @@
        <record id="chartgr_59_50" model="account.account.template">
             <field name="code">59.50</field>
             <field name="name">Προμηθευτές</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -4742,7 +4742,7 @@
        <record id="chartgr_60_01_00" model="account.account.template">
             <field name="code">60.01.00</field>
             <field name="name">Τακτικές αποδοχές</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_expenses"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -5039,7 +5039,7 @@
        <record id="chartgr_61_00_00" model="account.account.template">
             <field name="code">61.00.00</field>
             <field name="name">Αμοιβές και έξοδα δικηγόρων</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_expenses"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -5048,7 +5048,7 @@
        <record id="chartgr_61_00_01" model="account.account.template">
             <field name="code">61.00.01</field>
             <field name="name">Αμοιβές και έξοδα συμβολαιογράφων</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_expenses"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -5057,7 +5057,7 @@
        <record id="chartgr_61_00_02" model="account.account.template">
             <field name="code">61.00.02</field>
             <field name="name">Αμοιβές και έξοδα τεχνικών</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_expenses"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -5093,7 +5093,7 @@
        <record id="chartgr_61_00_06" model="account.account.template">
             <field name="code">61.00.06</field>
             <field name="name">Αμοιβές και έξοδα λογιστών</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_expenses"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -5102,7 +5102,7 @@
        <record id="chartgr_61_00_99" model="account.account.template">
             <field name="code">61.00.99</field>
             <field name="name">Αμοιβές και έξοδα λοιπών ελευθέρων επαγγελματιών</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_expenses"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -5111,7 +5111,7 @@
        <record id="chartgr_61_01_00" model="account.account.template">
             <field name="code">61.01.00</field>
             <field name="name">Αμοιβές συνεδριάσεων μελών διοικιτικού συμβουλίου</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_expenses"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -5120,7 +5120,7 @@
        <record id="chartgr_61_01_01" model="account.account.template">
             <field name="code">61.01.01</field>
             <field name="name">Αμοιβές και έξοδα διαφόρων τρίτων</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_expenses"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -5309,7 +5309,7 @@
        <record id="chartgr_62_00" model="account.account.template">
             <field name="code">62.00</field>
             <field name="name">Ηλεκτρικό ρεύμα παραγωγής</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_expenses"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -5318,7 +5318,7 @@
        <record id="chartgr_62_01" model="account.account.template">
             <field name="code">62.01</field>
             <field name="name">Φωταέριο παραγωγικής διαδικασίας</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_expenses"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -5327,7 +5327,7 @@
        <record id="chartgr_62_02" model="account.account.template">
             <field name="code">62.02</field>
             <field name="name">Ύδρευση  παραγωγικής διαδικασίας</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_expenses"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -5336,7 +5336,7 @@
        <record id="chartgr_62_03_00" model="account.account.template">
             <field name="code">62.03.00</field>
             <field name="name">Τηλεφωνικά - Τηλεγραφικά</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_expenses"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -5354,7 +5354,7 @@
        <record id="chartgr_62_03_02" model="account.account.template">
             <field name="code">62.03.02</field>
             <field name="name">Ταχυδρομικά</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_expenses"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>
@@ -5363,7 +5363,7 @@
        <record id="chartgr_62_03_03" model="account.account.template">
             <field name="code">62.03.03</field>
             <field name="name">Διάφορα έξοδα τηλεπικοινωνιών</field>
-
+            
             <field name="user_type_id" ref="account.data_account_type_expenses"/>
             <field name="note"></field>
             <field name="chart_template_id" ref="l10n_gr_chart_template"/>

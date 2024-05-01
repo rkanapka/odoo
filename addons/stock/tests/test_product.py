@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 # Author: Leonardo Pistone
@@ -9,67 +10,49 @@ from odoo.addons.stock.tests.common2 import TestStockCommon
 class TestVirtualAvailable(TestStockCommon):
 
     def setUp(self):
-        super().setUp()
+        super(TestVirtualAvailable, self).setUp()
 
         # Make `product3` a stockable product for this test. Indeed, creating quants
         # and playing with owners is not possible for consumables.
-        self.product_3.type = "product"
+        self.product_3.type = 'product'
 
-        self.env["stock.quant"].create(
-            {
-                "product_id": self.product_3.id,
-                "location_id": self.env.ref("stock.stock_location_stock").id,
-                "quantity": 30.0,
-            }
-        )
+        self.env['stock.quant'].create({
+            'product_id': self.product_3.id,
+            'location_id': self.env.ref('stock.stock_location_stock').id,
+            'quantity': 30.0})
 
-        self.env["stock.quant"].create(
-            {
-                "product_id": self.product_3.id,
-                "location_id": self.env.ref("stock.stock_location_stock").id,
-                "quantity": 10.0,
-                "owner_id": self.user_stock_user.partner_id.id,
-            }
-        )
+        self.env['stock.quant'].create({
+            'product_id': self.product_3.id,
+            'location_id': self.env.ref('stock.stock_location_stock').id,
+            'quantity': 10.0,
+            'owner_id': self.user_stock_user.partner_id.id})
 
-        self.picking_out = self.env["stock.picking"].create(
-            {
-                "picking_type_id": self.ref("stock.picking_type_out"),
-                "location_id": self.env.ref("stock.stock_location_stock").id,
-                "location_dest_id": self.env.ref("stock.stock_location_customers").id,
-            }
-        )
-        self.env["stock.move"].create(
-            {
-                "name": "a move",
-                "product_id": self.product_3.id,
-                "product_uom_qty": 3.0,
-                "product_uom": self.product_3.uom_id.id,
-                "picking_id": self.picking_out.id,
-                "location_id": self.env.ref("stock.stock_location_stock").id,
-                "location_dest_id": self.env.ref("stock.stock_location_customers").id,
-            }
-        )
+        self.picking_out = self.env['stock.picking'].create({
+            'picking_type_id': self.ref('stock.picking_type_out'),
+            'location_id': self.env.ref('stock.stock_location_stock').id,
+            'location_dest_id': self.env.ref('stock.stock_location_customers').id})
+        self.env['stock.move'].create({
+            'name': 'a move',
+            'product_id': self.product_3.id,
+            'product_uom_qty': 3.0,
+            'product_uom': self.product_3.uom_id.id,
+            'picking_id': self.picking_out.id,
+            'location_id': self.env.ref('stock.stock_location_stock').id,
+            'location_dest_id': self.env.ref('stock.stock_location_customers').id})
 
-        self.picking_out_2 = self.env["stock.picking"].create(
-            {
-                "picking_type_id": self.ref("stock.picking_type_out"),
-                "location_id": self.env.ref("stock.stock_location_stock").id,
-                "location_dest_id": self.env.ref("stock.stock_location_customers").id,
-            }
-        )
-        self.env["stock.move"].create(
-            {
-                "restrict_partner_id": self.user_stock_user.partner_id.id,
-                "name": "another move",
-                "product_id": self.product_3.id,
-                "product_uom_qty": 5.0,
-                "product_uom": self.product_3.uom_id.id,
-                "picking_id": self.picking_out_2.id,
-                "location_id": self.env.ref("stock.stock_location_stock").id,
-                "location_dest_id": self.env.ref("stock.stock_location_customers").id,
-            }
-        )
+        self.picking_out_2 = self.env['stock.picking'].create({
+            'picking_type_id': self.ref('stock.picking_type_out'),
+            'location_id': self.env.ref('stock.stock_location_stock').id,
+            'location_dest_id': self.env.ref('stock.stock_location_customers').id})
+        self.env['stock.move'].create({
+            'restrict_partner_id': self.user_stock_user.partner_id.id,
+            'name': 'another move',
+            'product_id': self.product_3.id,
+            'product_uom_qty': 5.0,
+            'product_uom': self.product_3.uom_id.id,
+            'picking_id': self.picking_out_2.id,
+            'location_id': self.env.ref('stock.stock_location_stock').id,
+            'location_dest_id': self.env.ref('stock.stock_location_customers').id})
 
     def test_without_owner(self):
         self.assertAlmostEqual(40.0, self.product_3.virtual_available)

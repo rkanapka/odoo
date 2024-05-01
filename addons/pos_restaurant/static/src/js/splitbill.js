@@ -25,9 +25,9 @@ var SplitbillScreenWidget = screens.ScreenWidget.extend({
         var orderlines = order.get_orderlines();
         for(var i = 0; i < orderlines.length; i++){
             var line = orderlines[i];
-            linewidget = $(QWeb.render('SplitOrderline',{
-                widget:this,
-                line:line,
+            linewidget = $(QWeb.render('SplitOrderline',{ 
+                widget:this, 
+                line:line, 
                 selected: false,
                 quantity: 0,
                 id: line.id,
@@ -43,7 +43,7 @@ var SplitbillScreenWidget = screens.ScreenWidget.extend({
     lineselect: function($el,order,neworder,splitlines,line_id){
         var split = splitlines[line_id] || {'quantity': 0, line: null};
         var line  = order.get_orderline(line_id);
-
+        
         if( !line.get_unit().is_pos_groupable ){
             if( split.quantity !== line.get_quantity()){
                 split.quantity = line.get_quantity();
@@ -71,7 +71,7 @@ var SplitbillScreenWidget = screens.ScreenWidget.extend({
             neworder.remove_orderline(split.line);
             split.line = null;
         }
-
+ 
         splitlines[line_id] = split;
         $el.replaceWith($(QWeb.render('SplitOrderline',{
             widget: this,
@@ -102,7 +102,7 @@ var SplitbillScreenWidget = screens.ScreenWidget.extend({
                 }
             }
         }
-
+        
         if(empty){
             return;
         }
@@ -124,13 +124,13 @@ var SplitbillScreenWidget = screens.ScreenWidget.extend({
             neworder.set_screen_data('screen','payment');
 
             // for the kitchen printer we assume that everything
-            // has already been sent to the kitchen before splitting
-            // the bill. So we save all changes both for the old
-            // order and for the new one. This is not entirely correct
-            // but avoids flooding the kitchen with unnecessary orders.
+            // has already been sent to the kitchen before splitting 
+            // the bill. So we save all changes both for the old 
+            // order and for the new one. This is not entirely correct 
+            // but avoids flooding the kitchen with unnecessary orders. 
             // Not sure what to do in this case.
 
-            if ( neworder.saveChanges ) {
+            if ( neworder.saveChanges ) { 
                 order.saveChanges();
                 neworder.saveChanges();
             }
@@ -169,9 +169,9 @@ var SplitbillScreenWidget = screens.ScreenWidget.extend({
 });
 
 gui.define_screen({
-    'name': 'splitbill',
+    'name': 'splitbill', 
     'widget': SplitbillScreenWidget,
-    'condition': function(){
+    'condition': function(){ 
         return this.pos.config.iface_splitbill;
     },
 });
@@ -194,3 +194,4 @@ screens.define_action_button({
 });
 
 });
+

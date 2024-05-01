@@ -1,10 +1,11 @@
+# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 {
-    "name": "Cancel Journal Entries",
-    "version": "1.1",
-    "category": "Accounting",
-    "description": """
+    'name': 'Cancel Journal Entries',
+    'version': '1.1',
+    'category': 'Accounting',
+    'description': """
 Allows canceling accounting entries.
 ====================================
 
@@ -20,10 +21,10 @@ It also operates on invoices, bank statements, payments ...
 
 Be careful with this module as it has audit implications. Cancelling accounting entries is not authorized in all countries.
 """,
-    "website": "https://www.odoo.com/page/accounting",
-    "depends": ["account"],
-    "data": ["views/account_views.xml"],
-    "demo": [],
-    "installable": True,
-    "auto_install": False,
+    'website': 'https://www.odoo.com/page/accounting',
+    'depends': ['account'],
+    'data': ['views/account_views.xml'],
+    'demo': [],
+    'installable': True,
+    'auto_install': False,
 }

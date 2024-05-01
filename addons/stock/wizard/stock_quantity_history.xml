@@ -29,3 +29,4 @@
     </record>
     <menuitem id="menu_valuation" name="Inventory" parent="stock.menu_warehouse_report" sequence="100" action="action_stock_quantity_history"/>
 </odoo>
+

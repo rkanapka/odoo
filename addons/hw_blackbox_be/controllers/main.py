@@ -1,29 +1,33 @@
+# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 import logging
-from os import listdir
-from os.path import isfile
-from threading import Lock, Thread
-
 import serial
-from odoo.addons.hw_proxy.controllers import main as hw_proxy
+import subprocess
+from os.path import isfile
+from os import listdir
+from threading import Thread, Lock
 
 from odoo import http
 
+from odoo.addons.hw_proxy.controllers import main as hw_proxy
+
 _logger = logging.getLogger(__name__)
 
-DRIVER_NAME = "fiscal_data_module"
-
+DRIVER_NAME = 'fiscal_data_module'
 
 class Blackbox(Thread):
     def __init__(self):
         Thread.__init__(self)
         self.blackbox_lock = Lock()
-        self.set_status("connecting")
+        self.set_status('connecting')
         self.device_path = self._find_device_path_by_probing()
 
     def set_status(self, status, messages=[]):
-        self.status = {"status": status, "messages": messages}
+        self.status = {
+            'status': status,
+            'messages': messages
+        }
 
     def get_status(self):
         return self.status
@@ -88,7 +92,7 @@ class Blackbox(Thread):
 
     def _send_and_wait_for_ack(self, packet, serial):
         ack = 0
-        MAX_RETRIES = 1  # no more than 9
+        MAX_RETRIES = 1 # no more than 9
 
         while ack != 0x06 and int(chr(packet[4])) < MAX_RETRIES:
             serial.write(packet)
@@ -111,16 +115,16 @@ class Blackbox(Thread):
         if ack == 0x06:
             return True
         else:
-            _logger.error(
-                "retried " + str(MAX_RETRIES) + " times without receiving ACK, is blackbox properly connected?"
-            )
+            _logger.error("retried " + str(MAX_RETRIES) + " times without receiving ACK, is blackbox properly connected?")
             return False
 
     def _send_to_blackbox(self, packet, response_size, device_path, just_wait_for_ack=False):
         if not device_path:
             return ""
 
-        ser = serial.Serial(port=device_path, baudrate=19200, timeout=3)
+        ser = serial.Serial(port=device_path,
+                            baudrate=19200,
+                            timeout=3)
         MAX_NACKS = 1
         got_response = False
         sent_nacks = 0
@@ -135,12 +139,7 @@ class Blackbox(Thread):
                 etx = ser.read(1)
                 bcc = ser.read(1)
 
-                if (
-                    stx == chr(0x02).encode()
-                    and etx == chr(0x03).encode()
-                    and bcc
-                    and self._lrc(response.decode()) == ord(bcc)
-                ):
+                if stx == chr(0x02).encode() and etx == chr(0x03).encode() and bcc and self._lrc(response.decode()) == ord(bcc):
                     got_response = True
                     ser.write(chr(0x06).encode())
                 else:
@@ -158,13 +157,12 @@ class Blackbox(Thread):
             ser.close()
             return ""
 
-
 if isfile("/home/pi/registered_blackbox_be"):
     blackbox_thread = Blackbox()
     hw_proxy.drivers[DRIVER_NAME] = blackbox_thread
 
     class BlackboxDriver(hw_proxy.Proxy):
-        @http.route("/hw_proxy/request_blackbox/", type="json", auth="none", cors="*")
+        @http.route('/hw_proxy/request_blackbox/', type='json', auth='none', cors='*')
         def request_blackbox(self, high_level_message, response_size):
             to_send = blackbox_thread._wrap_low_level_message_around(high_level_message)
 
@@ -173,11 +171,11 @@ if isfile("/home/pi/registered_blackbox_be"):
 
             return response
 
-        @http.route("/hw_proxy/request_serial/", type="json", auth="none", cors="*")
+        @http.route('/hw_proxy/request_serial/', type='json', auth='none', cors='*')
         def request_serial(self):
             try:
-                with open("/sys/class/net/eth0/address", "rb") as f:
-                    return f.read().rstrip().replace(b":", b"")[-7:]
-            except OSError:
+                with open('/sys/class/net/eth0/address', 'rb') as f:
+                    return f.read().rstrip().replace(b':', b'')[-7:]
+            except IOError as e:
                 _logger.warning("eth0 network interface MAC address could not be found")
-                return b""
+                return b''

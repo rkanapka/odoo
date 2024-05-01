@@ -15,7 +15,7 @@
                             <table class="table table-bordered" style="border: 2px solid black;">
                                 <tr>
                                     <td>
-                                        <div t-field="o.employee_id.company_id.partner_id"
+                                        <div t-field="o.employee_id.company_id.partner_id"  
                                     t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />SIRET:
                                         <span t-esc="o.employee_id.company_id.siret or '_'"/> APE:
                                         <span t-esc="o.employee_id.company_id.ape or '_'"/>
@@ -84,7 +84,7 @@
                                 <td>
                                     <t t-if="p.amount_select== 'percentage'">
                                         <span t-esc="p.amount or ''"/>
-                                    </t>
+                                    </t> 
                                     <t t-if="p.amount_select== 'fix'">
                                         <span t-esc="p.quantity or ''"/>
                                     </t>
@@ -111,22 +111,22 @@
                             <table class="table  table-round-border">
                                 <tr>
                                     <td>
-                                        <div class="pull-right">
+                                        <div class="pull-right">         
                                         <strong>Net à payer </strong>: <span t-esc="get_total_by_rule_category(o, 'NET')"/>
                                         <strong>Total Charges Patronales</strong> : <span t-esc="get_total_by_rule_category(o, 'COMP')"/>
                                         </div>
                                         <div class="mt15">
-                                             <strong>Mode de réglement</strong> : <span t-esc="o.payment_mode or ''"/>
+                                             <strong>Mode de réglement</strong> : <span t-esc="o.payment_mode or ''"/> 
                                         </div>
                                         <div class="mt15">
                                              <t t-if="o.paid is True"><strong>Payé</strong></t>
                                         </div>
-
+                                        
                                    </td>
-                                </tr>
+                                </tr>   
                             </table>
                         </div>
-                     </div>
+                     </div>   
                     <table class="table table-bordered text-center">
                         <thead>
                             <tr>
@@ -150,7 +150,7 @@
                         </tbody>
                     </table>
 
-                    <p class="mt32">DANS VOTRE INTERET ET POUR VOUS AIDER A FAIRE VALOIR VOS DROITS, CONSERVEZ CE
+                    <p class="mt32">DANS VOTRE INTERET ET POUR VOUS AIDER A FAIRE VALOIR VOS DROITS, CONSERVEZ CE 
 BULLETIN DE PAIE SANS LIMITATION DE DUREE</p>
                 </div>
             </t>

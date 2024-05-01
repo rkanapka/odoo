@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 # Author: Goran Kliska
@@ -39,20 +40,21 @@ Izvori podataka:
 """,
     "version": "13.0",
     "author": "OpenERP Croatian Community",
-    "category": "Localization",
+    'category': 'Localization',
     "website": "https://code.launchpad.net/openobject-croatia",
-    "depends": [
-        "account",
+
+    'depends': [
+        'account',
     ],
-    "data": [
-        "data/l10n_hr_chart_data.xml",
-        "data/account.account.type.csv",
-        "data/account.account.template.csv",
-        "data/account_chart_tag_data.xml",
-        "data/account.tax.group.csv",
-        "data/account.tax.template.csv",
-        "data/account_tax_fiscal_position_data.xml",
-        "data/account_chart_template_data.yml",
+    'data': [
+        'data/l10n_hr_chart_data.xml',
+        'data/account.account.type.csv',
+        'data/account.account.template.csv',
+        'data/account_chart_tag_data.xml',
+        'data/account.tax.group.csv',
+        'data/account.tax.template.csv',
+        'data/account_tax_fiscal_position_data.xml',
+        'data/account_chart_template_data.yml',
     ],
     "active": False,
 }

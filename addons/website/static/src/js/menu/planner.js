@@ -31,7 +31,7 @@ var WebsitePlannerLauncher = planner.PlannerLauncher.extend({
 
 var PlannerMenu = Widget.extend({
     xmlDependencies: ['/web_planner/static/src/xml/web_planner.xml'],
-
+    
     /**
      * Instantiates the planner launcher and adds it to the DOM.
      *

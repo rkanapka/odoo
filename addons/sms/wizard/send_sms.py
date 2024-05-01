@@ -1,14 +1,16 @@
+# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 import logging
 
-from odoo import _, api, fields, models
+
+from odoo import api, fields, models, _
 from odoo.exceptions import UserError
+from odoo.addons.iap.models import iap
 
 _logger = logging.getLogger(__name__)
 
 try:
     import phonenumbers
-
     _sms_phonenumbers_lib_imported = True
 
 except ImportError:
@@ -21,13 +23,13 @@ except ImportError:
 
 
 class SendSMS(models.TransientModel):
-    _name = "sms.send_sms"
+    _name = 'sms.send_sms'
 
-    recipients = fields.Char("Recipients", required=True)
-    message = fields.Text("Message", required=True)
+    recipients = fields.Char('Recipients', required=True)
+    message = fields.Text('Message', required=True)
 
     def _phone_get_country(self, partner):
-        if "country_id" in partner:
+        if 'country_id' in partner:
             return partner.country_id
         return self.env.user.company_id.country_id
 
@@ -48,49 +50,45 @@ class SendSMS(models.TransientModel):
             return number
 
     def _get_records(self, model):
-        if self.env.context.get("active_domain"):
-            records = model.search(self.env.context.get("active_domain"))
-        elif self.env.context.get("active_ids"):
-            records = model.browse(self.env.context.get("active_ids", []))
+        if self.env.context.get('active_domain'):
+            records = model.search(self.env.context.get('active_domain'))
+        elif self.env.context.get('active_ids'):
+            records = model.browse(self.env.context.get('active_ids', []))
         else:
-            records = model.browse(self.env.context.get("active_id", []))
+            records = model.browse(self.env.context.get('active_id', []))
         return records
 
     @api.model
     def default_get(self, fields):
-        result = super().default_get(fields)
-        active_model = self.env.context.get("active_model")
+        result = super(SendSMS, self).default_get(fields)
+        active_model = self.env.context.get('active_model')
 
-        if (
-            not self.env.context.get("default_recipients")
-            and active_model
-            and hasattr(self.env[active_model], "_get_default_sms_recipients")
-        ):
+        if not self.env.context.get('default_recipients') and active_model and hasattr(self.env[active_model], '_get_default_sms_recipients'):
             model = self.env[active_model]
             records = self._get_records(model)
             partners = records._get_default_sms_recipients()
             phone_numbers = []
             no_phone_partners = []
             for partner in partners:
-                number = self._sms_sanitization(partner, self.env.context.get("field_name") or "mobile")
+                number = self._sms_sanitization(partner, self.env.context.get('field_name') or 'mobile')
                 if number:
                     phone_numbers.append(number)
                 else:
                     no_phone_partners.append(partner.name)
             if len(partners) > 1:
                 if no_phone_partners:
-                    raise UserError(_("Missing mobile number for %s.") % ", ".join(no_phone_partners))
-            result["recipients"] = ", ".join(phone_numbers)
+                    raise UserError(_('Missing mobile number for %s.') % ', '.join(no_phone_partners))
+            result['recipients'] = ', '.join(phone_numbers)
         return result
 
     def action_send_sms(self):
-        numbers = [number.strip() for number in self.recipients.split(",") if number.strip()]
+        numbers = [number.strip() for number in self.recipients.split(',') if number.strip()]
 
-        active_model = self.env.context.get("active_model")
-        if active_model and hasattr(self.env[active_model], "message_post_send_sms"):
+        active_model = self.env.context.get('active_model')
+        if active_model and hasattr(self.env[active_model], 'message_post_send_sms'):
             model = self.env[active_model]
             records = self._get_records(model)
             records.message_post_send_sms(self.message, numbers=numbers)
         else:
-            self.env["sms.api"]._send_sms(numbers, self.message)
+            self.env['sms.api']._send_sms(numbers, self.message)
         return True

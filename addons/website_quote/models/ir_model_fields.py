@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from odoo import api, models
@@ -27,7 +28,8 @@ class IrModelFields(models.Model):
         # Prevent the deletion of the field "website_description"
         self = self.filtered(
             lambda rec: not (
-                rec.model in ("product.product", "product.template") and rec.name == "website_description"
+                rec.model in ('product.product', 'product.template') and
+                rec.name == 'website_description'
             )
         )
-        return super().unlink()
+        return super(IrModelFields, self).unlink()

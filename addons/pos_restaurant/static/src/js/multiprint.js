@@ -91,17 +91,17 @@ models.Orderline = models.Orderline.extend({
             // mp dirty is true if this orderline has changed
             // since the last kitchen print
             // it's left undefined if the orderline does not
-            // need to be printed to a printer.
+            // need to be printed to a printer. 
 
             this.mp_dirty = this.printable() || undefined;
-        }
+        } 
         if (!this.mp_skip) {
             // mp_skip is true if the cashier want this orderline
             // not to be sent to the kitchen
             this.mp_skip  = false;
         }
     },
-    // can this orderline be potentially printed ?
+    // can this orderline be potentially printed ? 
     printable: function() {
         return this.pos.db.is_product_in_category(this.pos.printers_categories, this.get_product().id);
     },
@@ -122,8 +122,8 @@ models.Orderline = models.Orderline.extend({
         }
         _super_orderline.set_quantity.apply(this,arguments);
     },
-    can_be_merged_with: function(orderline) {
-        return (!this.mp_skip) &&
+    can_be_merged_with: function(orderline) { 
+        return (!this.mp_skip) && 
                (!orderline.mp_skip) &&
                _super_orderline.can_be_merged_with.apply(this,arguments);
     },
@@ -264,7 +264,7 @@ models.Order = models.Order.extend({
                     'name':     this.pos.db.get_product_by_id(old.product_id).display_name,
                     'name_wrapped': old.product_name_wrapped,
                     'note':     old.note,
-                    'qty':      old.qty,
+                    'qty':      old.qty, 
                 });
             }
         }
@@ -277,7 +277,7 @@ models.Order = models.Order.extend({
 
             var _add = [];
             var _rem = [];
-
+            
             for(var i = 0; i < add.length; i++){
                 if(self.pos.db.is_product_in_category(categories,add[i].id)){
                     _add.push(add[i]);
@@ -310,7 +310,7 @@ models.Order = models.Order.extend({
                 'minutes': minutes,
             },
         };
-
+        
     },
     printChanges: function(){
         var printers = this.pos.printers;

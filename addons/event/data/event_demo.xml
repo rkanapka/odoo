@@ -107,7 +107,7 @@
 </div>
 ]]></field>
     </record>
-
+    
     <record id="event_2" model="event.event">
         <field name="name">Conference on Business Apps</field>
         <field eval="(DateTime.today()+ timedelta(days=5)).strftime('%Y-%m-%d 7:00:00')" name="date_begin"/>

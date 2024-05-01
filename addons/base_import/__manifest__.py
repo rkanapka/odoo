@@ -1,6 +1,6 @@
 {
-    "name": "Base import",
-    "description": """
+    'name': 'Base import',
+    'description': """
 New extensible file import for Odoo
 ======================================
 
@@ -21,13 +21,13 @@ Re-implement Odoo's file import system:
 * In a module, so that administrators and users of Odoo who do not
   need or want an online import can avoid it being available to users.
 """,
-    "depends": ["web"],
-    "category": "Extra Tools",
-    "installable": True,
-    "auto_install": True,
-    "data": [
-        "security/ir.model.access.csv",
-        "views/base_import_templates.xml",
+    'depends': ['web'],
+    'category': 'Extra Tools',
+    'installable': True,
+    'auto_install': True,
+    'data': [
+        'security/ir.model.access.csv',
+        'views/base_import_templates.xml',
     ],
-    "qweb": ["static/src/xml/base_import.xml"],
+    'qweb': ['static/src/xml/base_import.xml'],
 }

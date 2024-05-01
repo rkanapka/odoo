@@ -62,7 +62,7 @@ var FieldTimezoneMismatch = FieldSelection.extend({
     },
     /**
      * Display the timezone alert
-     *
+     * 
      * Note: timezone alert is a span that is added after $el, and $el is now a
      * set of two elements
      *

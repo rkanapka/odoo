@@ -42,7 +42,7 @@
                 </t>
                 <t t-if="line.get_discount_str() !== '0'">
                     <li class="info">
-                        With a
+                        With a 
                         <em>
                             <t t-esc="line.get_discount_str()" />%
                         </em>

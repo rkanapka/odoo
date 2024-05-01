@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 import base64
@@ -7,17 +8,17 @@ from odoo.tools import pycompat
 
 
 class MailTemplate(models.Model):
-    _inherit = "mail.template"
+    _inherit = 'mail.template'
 
     @api.multi
     def generate_email(self, res_ids, fields=None):
-        """Method overridden in order to add an attachment containing the ISR
+        """ Method overridden in order to add an attachment containing the ISR
         to the draft message when opening the 'send by mail' wizard on an invoice.
         This attachment generation will only occur if all the required data are
         present on the invoice. Otherwise, no ISR attachment will be created, and
         the mail will only contain the invoice (as defined in the mother method).
         """
-        rslt = super().generate_email(res_ids, fields)
+        rslt = super(MailTemplate, self).generate_email(res_ids, fields)
 
         multi_mode = True
         if isinstance(res_ids, pycompat.integer_types):
@@ -28,14 +29,14 @@ class MailTemplate(models.Model):
         for res_id in res_ids:
             related_model = self.env[self.model_id.model].browse(res_id)
 
-            if related_model._name == "account.invoice" and related_model.l10n_ch_isr_valid:
-                # We add an attachment containing the ISR
+            if related_model._name == 'account.invoice' and related_model.l10n_ch_isr_valid:
+                #We add an attachment containing the ISR
                 template = res_ids_to_templates[res_id]
-                report_name = "ISR-" + self.render_template(template.report_name, template.model, res_id) + ".pdf"
+                report_name = 'ISR-' + self.render_template(template.report_name, template.model, res_id) + '.pdf'
 
-                pdf = self.env.ref("l10n_ch.l10n_ch_isr_report").render_qweb_pdf([res_id])[0]
+                pdf = self.env.ref('l10n_ch.l10n_ch_isr_report').render_qweb_pdf([res_id])[0]
                 pdf = base64.b64encode(pdf)
 
-                attachments_list = multi_mode and rslt[res_id]["attachments"] or rslt["attachments"]
+                attachments_list = multi_mode and rslt[res_id]['attachments'] or rslt['attachments']
                 attachments_list.append((report_name, pdf))
         return rslt

@@ -82,7 +82,7 @@
                                     <th width="20%" class="text-center">
                                         <t t-if="has_barcode">Barcode</t>
                                     </th>
-                                    <th width="15%">
+                                    <th width="15%"> 
                                         <t t-if="o.picking_type_id.code != 'incoming'" align="left">Source</t>
                                     </th>
                                     <th width="20%">

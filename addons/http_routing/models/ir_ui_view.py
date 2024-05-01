@@ -1,8 +1,8 @@
+# -*- coding: ascii -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo.addons.http_routing.models.ir_http import slug, unslug_url
-
 from odoo import api, models
+from odoo.addons.http_routing.models.ir_http import slug, unslug_url
 
 
 class IrUiView(models.Model):
@@ -10,7 +10,7 @@ class IrUiView(models.Model):
 
     @api.model
     def _prepare_qcontext(self):
-        qcontext = super()._prepare_qcontext()
-        qcontext["slug"] = slug
-        qcontext["unslug_url"] = unslug_url
+        qcontext = super(IrUiView, self)._prepare_qcontext()
+        qcontext['slug'] = slug
+        qcontext['unslug_url'] = unslug_url
         return qcontext

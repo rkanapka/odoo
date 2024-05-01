@@ -1,13 +1,15 @@
-from odoo.addons.web_planner.models.web_planner import Planner
-from werkzeug import urls
+# -*- coding: utf-8 -*-
+
 
 from odoo.tests.common import TransactionCase
+from odoo.addons.web_planner.models.web_planner import Planner
+from werkzeug import urls
 
 
 class TestWebPlanner(TransactionCase):
 
     def test_00(self):
-        # default view
+        #default view
         action = self.env["ir.actions.act_window"].create(
             {
                 "name": "test_web_planner_00",
@@ -27,10 +29,10 @@ class TestWebPlanner(TransactionCase):
 
         backend_url = Planner.prepare_backend_url(self, "web_planner.test_00")
         parameters = urls.url_decode(urls.url_parse(backend_url).fragment).to_dict(flat=False)
-        self.assertEqual(parameters, {"view_type": ["list"], "action": [str(action.id)]})
+        self.assertEqual(parameters, {'view_type': ['list'], 'action': [str(action.id)]})
 
     def test_01(self):
-        # bad choise of view_type
+        #bad choise of view_type
         action = self.env["ir.actions.act_window"].create(
             {
                 "name": "test_web_planner_01",
@@ -48,12 +50,12 @@ class TestWebPlanner(TransactionCase):
             }
         )
 
-        backend_url = Planner.prepare_backend_url(self, "web_planner.test_01", "form")
+        backend_url = Planner.prepare_backend_url(self, "web_planner.test_01", 'form')
         parameters = urls.url_decode(urls.url_parse(backend_url).fragment).to_dict(flat=False)
-        self.assertEqual(parameters, {"view_type": ["list"], "action": [str(action.id)]})
-
+        self.assertEqual(parameters, {'view_type': ['list'], 'action': [str(action.id)]})
+    
     def test_02(self):
-        # choose the second view_mode
+        #choose the second view_mode
         action = self.env["ir.actions.act_window"].create(
             {
                 "name": "test_web_planner_02",
@@ -71,12 +73,12 @@ class TestWebPlanner(TransactionCase):
             }
         )
 
-        backend_url = Planner.prepare_backend_url(self, "web_planner.test_02", "form")
+        backend_url = Planner.prepare_backend_url(self, "web_planner.test_02", 'form')
         parameters = urls.url_decode(urls.url_parse(backend_url).fragment).to_dict(flat=False)
-        self.assertEqual(parameters, {"view_type": ["form"], "action": [str(action.id)]})
-
+        self.assertEqual(parameters, {'view_type': ['form'], 'action': [str(action.id)]})
+    
     def test_03(self):
-        # bad xml_id
+        #bad xml_id
         action = self.env["ir.actions.act_window"].create(
             {
                 "name": "test_web_planner_03",
@@ -94,6 +96,6 @@ class TestWebPlanner(TransactionCase):
             }
         )
 
-        backend_url = Planner.prepare_backend_url(self, "web_planner.bad_xml_id", "form")
+        backend_url = Planner.prepare_backend_url(self, "web_planner.bad_xml_id", 'form')
         parameters = urls.url_decode(urls.url_parse(backend_url).fragment).to_dict(flat=False)
-        self.assertEqual(parameters, {"view_type": ["list"], "model": ["ir.module.module"]})
+        self.assertEqual(parameters, {'view_type': ['list'], 'model': ['ir.module.module']})

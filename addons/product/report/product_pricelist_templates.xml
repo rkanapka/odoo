@@ -43,7 +43,7 @@
                                 <td>
                                     <t t-if="product.code">
                                         [<span t-esc="product.code"/>]
-                                    </t>
+                                    </t> 
                                     <span t-esc="product.name"/>
                                     <span t-foreach="product.attribute_value_ids" t-as="attribute_value">
                                         <span t-if="attribute_value_first">-</span>

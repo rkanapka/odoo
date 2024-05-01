@@ -930,7 +930,7 @@
             (0, 0, {'view_mode': 'graph', 'view_id': ref('hr_applicant_view_graph')})]"/>
         <field name="context">{}</field>  <!-- force empty -->
     </record>
-    <menuitem name="Reports" id="report_hr_recruitment" parent="menu_hr_recruitment_root"
+    <menuitem name="Reports" id="report_hr_recruitment" parent="menu_hr_recruitment_root" 
     sequence="99" action="hr_applicant_action_analysis"/>
     <record id="action_hr_recruitment_report_filtered_department" model="ir.actions.act_window">
         <field name="name">Recruitment Analysis</field>

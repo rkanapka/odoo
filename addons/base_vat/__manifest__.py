@@ -1,10 +1,11 @@
+# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 {
-    "name": "VAT Number Validation",
-    "version": "1.0",
-    "category": "Accounting",
-    "description": """
+    'name': 'VAT Number Validation',
+    'version': '1.0',
+    'category': 'Accounting',
+    'description': """
 VAT validation for Partner's VAT numbers.
 =========================================
 
@@ -16,7 +17,7 @@ will be validated using the Belgian rules.
 There are two different levels of VAT number validation:
 --------------------------------------------------------
     * By default, a simple off-line check is performed using the known validation
-      rules for the country, usually a simple check digit. This is quick and
+      rules for the country, usually a simple check digit. This is quick and 
       always available, but allows numbers that are perhaps not truly allocated,
       or not valid anymore.
 
@@ -33,10 +34,10 @@ Supported countries currently include EU countries, and a few non-EU countries
 such as Chile, Colombia, Mexico, Norway or Russia. For unsupported countries,
 only the country code will be validated.
     """,
-    "depends": ["account"],
-    "website": "https://www.odoo.com/page/accounting",
-    "data": [
-        "views/res_partner_views.xml",
-        "views/res_config_settings_views.xml",
+    'depends': ['account'],
+    'website': 'https://www.odoo.com/page/accounting',
+    'data': [
+        'views/res_partner_views.xml',
+        'views/res_config_settings_views.xml',
     ],
 }

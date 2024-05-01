@@ -521,7 +521,7 @@ QUnit.test('barcode_scanned only trigger error for active view', function (asser
 
     form.$('.o_data_row:first').click();
 
-    // We do not trigger on the body since modal and
+    // We do not trigger on the body since modal and 
     // form view are both inside it.
     function modalTriggerKeypressEvent(char) {
         var keycode;
