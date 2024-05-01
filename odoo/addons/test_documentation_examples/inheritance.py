@@ -1,10 +1,10 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo import models, fields
+from odoo import fields, models
+
 
 class Inheritance0(models.Model):
-    _name = 'inheritance.0'
+    _name = "inheritance.0"
 
     name = fields.Char()
 
@@ -14,9 +14,10 @@ class Inheritance0(models.Model):
     def check(self, s):
         return "This is {} record {}".format(s, self.name)
 
+
 class Inheritance1(models.Model):
-    _name = 'inheritance.1'
-    _inherit = 'inheritance.0'
+    _name = "inheritance.1"
+    _inherit = "inheritance.0"
 
     def call(self):
         return self.check("model 1")

@@ -1,8 +1,7 @@
 from odoo import api, models
 
+TEST_PRE_COMMIT = {"foo": 123}
 
-
-TEST_PRE_COMMIT ={'foo': 123}
 
 class ResCompany(models.Model):
     _inherit = "res.company"

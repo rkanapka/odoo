@@ -1,7 +1,8 @@
 from odoo import api, models
 
+
 class TestModel(models.Model):
-    _name = 'test_convert.test_model'
+    _name = "test_convert.test_model"
 
     @api.model
     def action_test_date(self, today_date):

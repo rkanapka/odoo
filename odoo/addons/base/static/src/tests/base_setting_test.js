@@ -39,10 +39,10 @@ QUnit.module('base_settings_tests', {
             model: 'project',
             data: this.data,
             arch: '<form string="Settings" class="oe_form_configuration o_base_settings" js_class="base_settings">' +
-                    '<div class="o_panel">' + 
-                        '<div class="setting_search">' + 
+                    '<div class="o_panel">' +
+                        '<div class="setting_search">' +
                             '<input type="text" class="searchInput" placeholder="Search..."/>' +
-                        '</div> ' + 
+                        '</div> ' +
                     '</div> ' +
                     '<header>' +
                         '<button string="Save" type="object" name="execute" class="oe_highlight" />' +
