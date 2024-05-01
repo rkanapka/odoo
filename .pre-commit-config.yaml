@@ -1,4 +1,6 @@
-files: addons/
+default_language_version:
+    python: python3.11
+files: '(addons|odoo/addons)/.*'
 repos:
   - repo: https://github.com/pre-commit/mirrors-prettier
     rev: v2.4.1
