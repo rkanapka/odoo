@@ -33,7 +33,6 @@ class ImportWarning(Warning):
     """Used to send warnings upwards the stack during the import process"""
 
 
-
 class ConversionNotFound(ValueError):
     pass
 

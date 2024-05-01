@@ -398,9 +398,7 @@ class Users(models.Model):
         groupby_fields = set([groupby] if isinstance(groupby, pycompat.string_types) else groupby)
         if groupby_fields.intersection(USER_PRIVATE_FIELDS):
             raise AccessError(_("Invalid 'group by' parameter"))
-        return super().read_group(
-            domain, fields, groupby, offset=offset, limit=limit, orderby=orderby, lazy=lazy
-        )
+        return super().read_group(domain, fields, groupby, offset=offset, limit=limit, orderby=orderby, lazy=lazy)
 
     @api.model
     def _search(self, args, offset=0, limit=None, order=None, count=False, access_rights_uid=None):

@@ -237,9 +237,9 @@ class IrMailServer(models.Model):
 
         if not smtp_server:
             raise UserError(
-                    _("Missing SMTP Server")
-                    + "\n"
-                    + _("Please define at least one SMTP server, " "or provide the SMTP parameters explicitly.")
+                _("Missing SMTP Server")
+                + "\n"
+                + _("Please define at least one SMTP server, " "or provide the SMTP parameters explicitly.")
             )
 
         if smtp_encryption == "ssl":
