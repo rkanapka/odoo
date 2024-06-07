@@ -42,7 +42,7 @@ jobs:
           python -m pip install --upgrade pip wheel
           pip install -r requirements.txt
       - name: Run Unit Tests
-        run: python odoo-bin --test-enable -d test_db_1 --db_host localhost
+        run: python odoo-bin --test-enable -d test_db_1 --db_host localhost --db_pass postgres
         env:
           # The hostname used to communicate with the PostgreSQL service container
           POSTGRES_HOST: postgres
