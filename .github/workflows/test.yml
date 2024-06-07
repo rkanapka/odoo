@@ -40,7 +40,5 @@ jobs:
           sudo apt-get install -y libsasl2-dev python-dev libldap2-dev libssl-dev
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-      - name: Show deps
-        run: pip freeze
       - name: Run Unit Tests
-        run: odoo-bin --test-enable -d test_db_1
+        run: python odoo-bin --test-enable -d test_db_1
