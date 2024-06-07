@@ -125,7 +125,7 @@
             <field name="website">http://www.chinaexport.com/</field>
             <field name="image" type="base64" file="base/static/img/res_partner_3-image.png"/>
         </record>
-        
+
         <record id="res_partner_4" model="res.partner">
             <field name="name">Delta PC</field>
             <field eval="[(6, 0, [ref('res_partner_category_13'), ref('res_partner_category_12')])]" name="category_id"/>
@@ -156,7 +156,7 @@
             <field name="street">3203 Lamberts Branch Road</field>
             <field name="image" type="base64" file="base/static/img/res_partner_10-image.jpg"/>
         </record>
-  
+
         <record id="res_partner_12" model="res.partner">
             <field name="name">Camptocamp</field>
             <field eval="[(6, 0, [ref('res_partner_category_11'), ref('res_partner_category_4')])]" name="category_id"/>
@@ -248,4 +248,3 @@
         </record>
     </data>
 </odoo>
-

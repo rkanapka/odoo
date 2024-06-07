@@ -1,17 +1,17 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 import unittest
 
 from odoo.tests import common
 
-
 #: Stores state information across multiple test classes
 test_state = None
+
 
 def setUpModule():
     global test_state
     test_state = {}
+
 
 def tearDownModule():
     global test_state
@@ -22,20 +22,20 @@ class TestPhaseInstall00(unittest.TestCase):
     """
     WARNING: Relies on tests being run in alphabetical order
     """
+
     @classmethod
     def setUpClass(cls):
         cls.state = None
 
     def test_00_setup(self):
-        type(self).state = 'init'
+        type(self).state = "init"
 
     @common.at_install(False)
     def test_01_no_install(self):
-        type(self).state = 'error'
+        type(self).state = "error"
 
     def test_02_check(self):
-        self.assertEqual(self.state, 'init',
-                         "Testcase state should not have been transitioned from 00")
+        self.assertEqual(self.state, "init", "Testcase state should not have been transitioned from 00")
 
 
 class TestPhaseInstall01(unittest.TestCase):
@@ -46,7 +46,7 @@ class TestPhaseInstall01(unittest.TestCase):
 
     @common.at_install(True)
     def test_set_run(self):
-        test_state['set_at_install'] = True
+        test_state["set_at_install"] = True
 
 
 class TestPhaseInstall02(unittest.TestCase):
@@ -59,6 +59,6 @@ class TestPhaseInstall02(unittest.TestCase):
     Warning: relies on *classes* being run in alphabetical order in test
     modules
     """
+
     def test_check_state(self):
-        self.assertTrue(test_state.get('set_at_install'),
-                        "The flag should be set if local overriding of runstate")
+        self.assertTrue(test_state.get("set_at_install"), "The flag should be set if local overriding of runstate")

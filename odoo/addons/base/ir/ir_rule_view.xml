@@ -39,7 +39,7 @@
                         <label colspan="2"
                             string="Example: GLOBAL_RULE_1 AND GLOBAL_RULE_2 AND ( (GROUP_A_RULE_1 OR GROUP_A_RULE_2) OR (GROUP_B_RULE_1 OR GROUP_B_RULE_2) )"/>
                     </group>
-                   </sheet> 
+                   </sheet>
                 </form>
             </field>
         </record>

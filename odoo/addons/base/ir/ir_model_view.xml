@@ -539,7 +539,7 @@
                         <field name="perm_create"/>
                         <field name="perm_unlink"/>
                     </group>
-                   </sheet> 
+                   </sheet>
                 </form>
             </field>
         </record>

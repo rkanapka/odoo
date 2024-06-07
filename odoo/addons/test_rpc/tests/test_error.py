@@ -1,19 +1,17 @@
-# -*- coding: utf-8 -*-
-
 from odoo.tests import common
 from odoo.tools.misc import mute_logger
 
 
 class TestError(common.HttpCase):
     def setUp(self):
-        super(TestError, self).setUp()
+        super().setUp()
         self.o = self.xmlrpc_object
         self.db_name = common.get_db_name()
         # Reset the admin's lang to avoid breaking tests due to admin not in English
         self.o.execute(self.db_name, 1, "admin", "res.users", "write", [1], {"lang": False})
 
     def test_01_create(self):
-        """ Create: mandatory field not provided """
+        """Create: mandatory field not provided"""
         self.o.execute(self.db_name, 1, "admin", "test_rpc.model_b", "create", {"name": "B1"})
         try:
             with mute_logger("odoo.sql_db"):
@@ -29,7 +27,7 @@ class TestError(common.HttpCase):
             self.assertIn("Model: Model B (test_rpc.model_b), Field: Name (name)", e.faultString)
 
     def test_02_delete(self):
-        """ Delete: NOT NULL and ON DELETE RESTRICT constraints """
+        """Delete: NOT NULL and ON DELETE RESTRICT constraints"""
         b1 = self.o.execute(self.db_name, 1, "admin", "test_rpc.model_b", "create", {"name": "B1"})
         b2 = self.o.execute(self.db_name, 1, "admin", "test_rpc.model_b", "create", {"name": "B2"})
         self.o.execute(

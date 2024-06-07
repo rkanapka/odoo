@@ -1,16 +1,16 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 import time
-import sys
 
-from odoo import models, api
+from odoo import api, models
+
 
 class m(models.Model):
-    """ This model exposes a few methods that will consume between 'almost no
-        resource' and 'a lot of resource'.
+    """This model exposes a few methods that will consume between 'almost no
+    resource' and 'a lot of resource'.
     """
-    _name = 'test.limits.model'
+
+    _name = "test.limits.model"
 
     @api.model
     def consume_nothing(self):
@@ -18,12 +18,12 @@ class m(models.Model):
 
     @api.model
     def consume_memory(self, size):
-        l = [0] * size
+        [0] * size
         return True
 
     @api.model
     def leak_memory(self, size):
-        if not hasattr(self, 'l'):
+        if not hasattr(self, "l"):
             type(self).l = []
         self.l.append([0] * size)
         return True
@@ -39,6 +39,6 @@ class m(models.Model):
         t1 = time.clock()
         while t1 - t0 < seconds:
             for i in range(10000000):
-                x = i * i
+                i * i
             t1 = time.clock()
         return True
