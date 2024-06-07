@@ -1,0 +1,19 @@
+name: Unit Tests
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        # This is the version of the action for setting up Python, not the Python version.
+        uses: actions/setup-python@v5.1.0
+        with:
+          python-version: '3.11'
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)"
+
