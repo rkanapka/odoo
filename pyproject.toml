@@ -1,8 +1,8 @@
 [tool.poetry]
 name = "Odoo ERP"
-version = "1.0.0" # Just a placeholder; the real version is the git tag
+version = "1.0.0"
 description = "Odoo ERP repository"
-authors = ["Rimvydas Kanapka"]
+authors = ["Robolabs"]
 license = "MIT"
 
 [tool.poetry.dependencies]
