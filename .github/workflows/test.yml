@@ -5,7 +5,7 @@ on: [push]
 jobs:
   build:
 
-    runs-on: self-hosted
+    runs-on: [self-hosted, linux]
 
     services:
       # Label used to access the service container
