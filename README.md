@@ -32,4 +32,4 @@ from the documentation.
 
 Then follow <a href="https://www.odoo.com/documentation/11.0/tutorials.html">the developer tutorials</a>
 
-Test 26
+Test 27
