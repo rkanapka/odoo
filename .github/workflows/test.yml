@@ -38,7 +38,7 @@ jobs:
         run: |
           pip install -r requirements.txt
       - name: Run Unit Tests
-        run: python3.5 odoo-bin --test-enable -d test_db_1 --db_host localhost --db_pass postgres --stop-after-init
+        run: python3.5 odoo-bin --test-enable -d test_db_1 --db_host localhost --db_pass postgres --stop-after-init --log-level debug
         env:
           POSTGRES_HOST: postgres
           POSTGRES_PORT: 5432
