@@ -12,7 +12,7 @@ jobs:
       postgres:
         image: postgres:11
         env:
-          POSTGRES_USER: runner
+          POSTGRES_USER: ubuntu
           POSTGRES_PASSWORD: postgres
         # Set health checks to wait until postgres has started
         options: >-
