@@ -26,14 +26,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Python
-        # This is the version of the action for setting up Python, not the Python version.
-        uses: actions/setup-python@v5.1.0
-        with:
-          python-version: '3.5.10'
-          cache: 'pip'
-        env:
-          PIP_TRUSTED_HOST: "pypi.python.org pypi.org files.pythonhosted.org"
+#      - name: Set up Python
+#        # This is the version of the action for setting up Python, not the Python version.
+#        uses: actions/setup-python@v5.1.0
+#        with:
+#          python-version: '3.5.10'
+#          cache: 'pip'
+#        env:
+#          PIP_TRUSTED_HOST: "pypi.python.org pypi.org files.pythonhosted.org"
       - name: Install dependencies
         run: |
           sudo apt-get install -y libsasl2-dev python-dev libldap2-dev libssl-dev node-less
