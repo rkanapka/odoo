@@ -36,9 +36,7 @@ jobs:
 #          PIP_TRUSTED_HOST: "pypi.python.org pypi.org files.pythonhosted.org"
       - name: Install dependencies
         run: |
-#          sudo apt-get install -y libsasl2-dev python-dev libldap2-dev libssl-dev node-less
-#          python -m pip install --upgrade pip wheel
-          python 3.5 -m pip install -r requirements.txt
+          python3.5 -m pip install -r requirements.txt
       - name: Run Unit Tests
         run: python3.5 odoo-bin --test-enable -d test_db_1 --db_host localhost --db_pass postgres --stop-after-init
         env:
